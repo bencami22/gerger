@@ -1,0 +1,161 @@
+body {
+  font-family: 'Lato', georgia;
+  font-size: 25px;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(83, 223, 232, 0.95);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-align: center
+  
+}
+
+.form{
+	margin:0 auto;
+}
+/*label {*/
+/*  font-weight: 400;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*textarea,*/
+/*input {*/
+/*  border: none;*/
+/*  outline: none;*/
+/*  border-radius: 0;*/
+/*  text-align: center;*/
+/*  background: none;*/
+/*  font-weight: 700;*/
+/*  font-family: 'Lato', georgia;*/
+/*  font-size: 25px;*/
+/*  color: rgba(255, 255, 255, 1);*/
+/*  max-width: 90%;*/
+/*  padding: 1rem;*/
+/*  border: 2px dashed rgba(255, 255, 255, 0);*/
+/*  box-sizing: border-box;*/
+/*  cursor: text;*/
+/*}*/
+
+/*textarea {*/
+/*  text-align: left;*/
+  /* overflow:hidden; */
+  
+/*  resize: none;*/
+/*  width: 90%;*/
+/*  border-color: rgba(255, 255, 255, 0)*/
+/*}*/
+
+/*textarea:focus {*/
+/*  background-color: rgba(255, 255, 255, 0.2);*/
+/*  border: 2px dashed rgba(255, 255, 255, 1);*/
+/*}*/
+
+/*textarea:focus:required:valid {*/
+/*  border: 2px solid rgba(255, 255, 255, 0);*/
+/*  border-bottom: 2px solid rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+/*textarea:required:valid {*/
+/*  border-bottom: 2px solid rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+/*input {*/
+/*  border-bottom: 2px dashed rgba(255, 255, 255, 0.5);*/
+/*}*/
+
+/*input:required,*/
+/*textarea:required {*/
+/*  border-bottom: 2px dashed rgba(255, 255, 255, 0.5);*/
+/*}*/
+
+/*input:focus {*/
+/*  border-bottom: 2px dashed rgba(255, 255, 255, 1);*/
+/*  background-color: rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+/*input:required:valid {*/
+/*  border-bottom: 2px solid rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+/*input:required:invalid {*/
+/*  color: rgba(255, 255, 255, 0.5);*/
+/*}*/
+
+/*::-webkit-input-placeholder {*/
+/*  text-align: center;*/
+/*  color: rgba(255, 255, 255, 0.4);*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*:-moz-placeholder {*/
+  /* Firefox 18- */
+  
+/*  text-align: center;*/
+/*  color: rgba(255, 255, 255, 0.4);*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*::-moz-placeholder {*/
+  /* Firefox 19+ */
+  
+/*  text-align: center;*/
+/*  color: rgba(255, 255, 255, 0.4);*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*:-ms-input-placeholder {*/
+/*  text-align: center;*/
+/*  color: rgba(255, 255, 255, 0.4);*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*.expanding {*/
+/*  vertical-align: top;*/
+/*}*/
+
+/*.send-icn {*/
+/*  fill: rgba(255, 255, 255, 1)*/
+/*}*/
+
+/*.send-icn:hover {*/
+/*  fill: rgba(0, 0, 0, 1);*/
+/*  cursor: pointer;*/
+/*}*/
+
+.myButton {
+	-moz-box-shadow: 3px 4px 0px 0px #294d6b;
+	-webkit-box-shadow: 3px 4px 0px 0px #294d6b;
+	box-shadow: 3px 4px 0px 0px #294d6b;
+	background-color:rgba(83, 223, 232, 0.95);
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #495159;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:21px;
+	letter-spacing: 1px;
+	padding:11px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+.myButton:hover {
+	background-color:#14a3c7;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
+/*small {*/
+/*  display: block;*/
+/*  opacity: 0;*/
+/*}*/
+
