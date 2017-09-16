@@ -1,22 +1,26 @@
+# gerger
+'Gerger'- Maltese for Grumble, is a small project providing basic functionality to base complaints about anything.
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Technologies:
 
+Node.js
+Socket.io
+React
+SCSS
+mongodb
+npm
+webpack
 
-Welcome to your Node.js project on Cloud9 IDE!
+A simple application where the user can sign up, submit a comment and see comments.
 
-This chat example showcases how to use `socket.io` with a static `express` server.
+The application is lightweight, real time and quick. 
 
-## Running the server
+Node.js - HTTP server, back end code code.
+MongoDB - Data source, nosql database using mongoose for integration.
+Socket.IO- Web socket communication between the front end and the back.
+React- Front end code, components, react-router used for navigation.
+SCSS- Styling- giving it a splash of retro colour and feel.
+npm- package manager used
+webpack- module bundler
 
-1) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
-
-2) Alternatively you can launch the app from the Terminal:
-
-    $ node server.js
-
-Once the server is running, open the project in the shape of 'https://projectname-username.c9users.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
+Project started with the intention of experimenting with technologies I don't use in my every day job. 
