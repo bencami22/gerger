@@ -1,0 +1,52 @@
+$font-stack:    'Lato', georgia;
+$primary-color: #333;
+$menu-styling: none !important;
+
+.menu-styling{
+	list-style: $menu-styling;
+}
+body {
+  font-family: $font-stack;
+  font-size: 25px;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(83, 223, 232, 0.95);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-align: center
+  
+}
+
+.form{
+	margin:0 auto;
+}
+
+.myButton {
+	-moz-box-shadow: 3px 4px 0px 0px #294d6b;
+	-webkit-box-shadow: 3px 4px 0px 0px #294d6b;
+	box-shadow: 3px 4px 0px 0px #294d6b;
+	background-color:rgba(83, 223, 232, 0.95);
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #495159;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:21px;
+	letter-spacing: 1px;
+	padding:11px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+
+.myButton:hover {
+	background-color:#14a3c7;
+}
+
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+

@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCSS from 'reactcss';
 import ComplaintViewComponent from './ComplaintViewComponent.jsx';
 
 const socket=io.connect();

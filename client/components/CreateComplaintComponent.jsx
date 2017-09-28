@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCSS from 'reactcss';
 
 const socket=io.connect();
 
@@ -15,17 +14,8 @@ class CreateComplaintComponent extends React.Component{
   
  
   render() {
-    const styles = reactCSS({
-      'default': {
-        mainForm: {
-          
-          
-        },
-      },
-    });
-    
     return (
-     <form id="sendComplaint" style={styles.mainForm}  onSubmit={this.handleSubmit}>
+     <form id="sendComplaint" onSubmit={this.handleSubmit}>
             Title: <input value={this.state.title} onChange={this.handleTitleChange} />
             Content: <input value={this.state.content} onChange={this.handleContentChange} />
             <button type="submit" className="myButton">Click me!</button>

@@ -1,5 +1,4 @@
 import React from 'react'
-import reactCSS from 'reactcss';
 import { Switch, Route } from 'react-router-dom'
 import Home from './HomeComponent.jsx'
 
@@ -18,15 +17,6 @@ class MainComponent extends React.Component{
   
 
 render() {
-    const styles = reactCSS({
-      'default': {
-        mainForm: {
-          
-          
-        },
-      },
-    });
-    
     return (
        <main>
     <Switch>

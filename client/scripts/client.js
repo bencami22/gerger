@@ -7,8 +7,8 @@ import router from 'react-router-dom';
 // import LoginComponent from './client/components/LoginComponent.jsx';
 // import CreateComplaintComponent from './client/components/CreateComplaintComponent.jsx';
 // import ComplaintsViewComponent from './client/components/ComplaintsViewComponent.jsx';
-import Register from './client/components/Register.jsx';
-import App from './client/components/AppComponent.jsx';
+import Register from '../components/Register.jsx';
+import App from '../components/AppComponent.jsx';
 
 // ReactDOM.render(
 //     React.createElement(RegistrationComponent), document.getElementById("registrationComponent"));

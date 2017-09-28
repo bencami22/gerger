@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCSS from 'reactcss';
 
 const socket=io.connect();
 
@@ -16,21 +15,12 @@ class RegistrationComponent extends React.Component{
   
  
   render() {
-    const styles = reactCSS({
-      'default': {
-        mainForm: {
-          
-          
-        },
-      },
-    });
-    
     return (
-     <form id="registration" style={styles.mainForm}  onSubmit={this.handleSubmit}>
+     <form id="registration" onSubmit={this.handleSubmit}>
             Email: <input value={this.state.email} onChange={this.handleEmailChange} />
             Username: <input value={this.state.username} onChange={this.handleUsernameChange} />
             Password: <input value={this.state.password} onChange={this.handlePasswordChange} />
-            <button type="submit" className="myButton">Register</button>
+            <button type="submit">Register</button>
         </form>
     );
   };

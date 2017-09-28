@@ -1,5 +1,4 @@
 import React from 'react'
-import reactCSS from 'reactcss';
 import { BrowserRouter } from 'react-router-dom'
 import NavigationComponent from './NavigationComponent.jsx'
 import MainComponent from './MainComponent.jsx'
@@ -11,15 +10,6 @@ class AppComponent extends React.Component{
   }
   
   render() {
-    const styles = reactCSS({
-      'default': {
-        mainForm: {
-          
-          
-        },
-      },
-    });
-    
     return (
       <BrowserRouter>
         <div>
