@@ -11822,10 +11822,6 @@ var _reactRouterDom = __webpack_require__(38);
 
 var _reactRouterDom2 = _interopRequireDefault(_reactRouterDom);
 
-var _Register = __webpack_require__(103);
-
-var _Register2 = _interopRequireDefault(_Register);
-
 var _AppComponent = __webpack_require__(233);
 
 var _AppComponent2 = _interopRequireDefault(_AppComponent);
@@ -11850,12 +11846,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ReactDOM.render(
 //    React.createElement(Register), document.getElementById("registerComponent"));
 
+_reactDom2.default.render(_react2.default.createElement(_AppComponent2.default), document.getElementById("appComponent"));
+
 // import RegistrationComponent from './client/components/RegistrationComponent.jsx';
 // import ForgotPasswordComponent from './client/components/ForgotPasswordComponent.jsx';
 // import LoginComponent from './client/components/LoginComponent.jsx';
 // import CreateComplaintComponent from './client/components/CreateComplaintComponent.jsx';
 // import ComplaintsViewComponent from './client/components/ComplaintsViewComponent.jsx';
-_reactDom2.default.render(_react2.default.createElement(_AppComponent2.default), document.getElementById("appComponent"));
+// import Register from '../components/Register.jsx';
 
 /***/ }),
 /* 106 */
@@ -27087,6 +27085,10 @@ var _MainComponent = __webpack_require__(235);
 
 var _MainComponent2 = _interopRequireDefault(_MainComponent);
 
+var _Register = __webpack_require__(103);
+
+var _Register2 = _interopRequireDefault(_Register);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27158,37 +27160,59 @@ var NavigationComponent = function (_React$Component) {
   function NavigationComponent() {
     _classCallCheck(this, NavigationComponent);
 
-    return _possibleConstructorReturn(this, (NavigationComponent.__proto__ || Object.getPrototypeOf(NavigationComponent)).call(this));
+    var _this = _possibleConstructorReturn(this, (NavigationComponent.__proto__ || Object.getPrototypeOf(NavigationComponent)).call(this));
+
+    _this.state = { showNavigation: false };
+    return _this;
   }
 
   _createClass(NavigationComponent, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var showNavigation = this.state.showNavigation;
+
       return _react2.default.createElement(
         'header',
         null,
         _react2.default.createElement(
-          'nav',
-          { className: 'menu-styling' },
+          'div',
+          { className: 'cursor' },
           _react2.default.createElement(
-            'ul',
+            'span',
+            { onClick: function onClick() {
+                return _this2.setState({ showNavigation: !showNavigation });
+              } },
+            _react2.default.createElement(
+              'i',
+              { className: 'material-icons' },
+              'keyboard_arrow_down'
+            )
+          ),
+          showNavigation && _react2.default.createElement(
+            'nav',
             null,
             _react2.default.createElement(
-              'li',
-              null,
+              'ul',
+              { className: 'menu-styling' },
               _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/' },
-                'Home'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/' },
+                  'Home'
+                )
+              ),
               _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/register' },
-                'Register'
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/register' },
+                  'Register'
+                )
               )
             )
           )
@@ -27312,12 +27336,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HomeComponent = function HomeComponent() {
   return _react2.default.createElement(
-    'div',
+    "div",
     null,
     _react2.default.createElement(
-      'h1',
-      null,
-      'Welcome to the FraBen\'s react website!'
+      "p",
+      { className: "homeScrnTitle" },
+      "Welcome to the FraBen's react website!"
     )
   );
 };

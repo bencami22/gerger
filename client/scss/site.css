@@ -32,16 +32,13 @@ nav ul {
   margin-left: 2.5rem;
   padding: 0;
   list-style: none; }
-
 nav li {
   display: inline-block; }
-
 nav a {
   font-size: 14px;
   display: block;
   padding: 6px 12px;
   text-decoration: none; }
-
 nav a:hover {
   color: #e80b0b; }
 
@@ -69,3 +66,5 @@ nav a:hover {
 .myButton:active {
   position: relative;
   top: 1px; }
+
+/*# sourceMappingURL=site.css.map */

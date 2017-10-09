@@ -1,15 +1,10 @@
-$font-stack:    'Lato', georgia;
-$primary-color: #333;
-$menu-styling: none !important;
+@import 'variables.scss';
 
-.menu-styling{
-	list-style: $menu-styling;
-}
 body {
   font-family: $font-stack;
   font-size: 25px;
-  color: rgba(255, 255, 255, 1);
-  background-color: rgba(83, 223, 232, 0.95);
+  color: black;
+  background-color: #fafafa;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   text-align: center
@@ -18,6 +13,62 @@ body {
 
 .form{
 	margin:0 auto;
+}
+
+.cursor{
+	cursor: $cursor-pointer;
+}
+
+.text-styling{
+	font-family: Avantgarde, sans-serif;
+	letter-spacing: 2px;
+	color: black;
+	text-transform: uppercase;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+.homeScrnTitle { 
+	@include font-size(28px); 
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+.menu-styling{
+	list-style: $menu-styling-none;
+}
+
+nav {
+  ul {
+    margin-left: 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+  	@include font-size(14px);
+  	@extend .text-styling;
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+  
+  a:hover{
+  	color: $dark-red;
+  }
 }
 
 .myButton {
@@ -31,7 +82,7 @@ body {
 	border:1px solid #495159;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color: black;
 	font-size:21px;
 	letter-spacing: 1px;
 	padding:11px 32px;
