@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Registration from '../components/RegistrationComponent.jsx';
+import ForgotPassword from '../components/ForgotPasswordComponent.jsx';
 
 class NavigationComponent extends React.Component{
   
@@ -24,6 +26,7 @@ class NavigationComponent extends React.Component{
                 <ul className="menu-styling">
                   <li><Link to='/'>Home</Link></li>
                   <li><Link to='/register'>Register</Link></li>
+                  <li><Link to='/forgotpassword'>Forgot Password</Link></li>
                 </ul>
               </nav>
             )}

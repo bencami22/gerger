@@ -15,8 +15,12 @@ class ForgotPasswordComponent extends React.Component{
   render() {
     return (
      <form id="forgotPassword" onSubmit={this.handleSubmit}>
-            Email: <input value={this.state.email} onChange={this.handleEmailChange} />
-            <button type="submit" className="myButton">Forgot Password</button>
+            <div className="textDv">Email: 
+              <input value={this.state.email} className="inputField" onChange={this.handleEmailChange} />
+              <button type="submit" className="myButton">Submit</button>
+            </div>
+            
+            <div className="smallText">we will send you the updated password on this email</div>
         </form>
     );
   };

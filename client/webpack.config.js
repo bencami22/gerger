@@ -14,7 +14,8 @@ module.exports = {
     ,
     output: {
         filename:'compiled_js/bundle.js',
-        path: __dirname
+        path: __dirname,
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -38,7 +39,10 @@ module.exports = {
                 loaders: "file?name=[name].[ext]"
             }
         ]
-    },
+    }, 
+    devServer: {
+    historyApiFallback: true,
+  },
     plugins: [
         extractSass
     ]

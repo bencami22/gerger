@@ -1,14 +1,9 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+
 import Home from './HomeComponent.jsx'
-
-// import RegistrationComponent from './client/components/RegistrationComponent.jsx';
-// import ForgotPasswordComponent from './client/components/ForgotPasswordComponent.jsx';
-// import LoginComponent from './client/components/LoginComponent.jsx';
-// import CreateComplaintComponent from './client/components/CreateComplaintComponent.jsx';
-// import ComplaintsViewComponent from './client/components/ComplaintsViewComponent.jsx';
-
-import Register from './Register.jsx';
+import Registration from './RegistrationComponent.jsx'
+import ForgotPassword from './ForgotPasswordComponent.jsx'
 
 class MainComponent extends React.Component{
   constructor() {
@@ -19,11 +14,12 @@ class MainComponent extends React.Component{
 render() {
     return (
        <main>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path='/Register' component={Register}/>
-    </Switch>
-  </main>
+         <Switch>
+           <Route exact path='/' component={Home}/>
+            <Route path='/Register' component={Registration}/>
+            <Route path='/ForgotPassword' component={ForgotPassword}/>
+        </Switch>
+      </main>
     );
   };
 }
