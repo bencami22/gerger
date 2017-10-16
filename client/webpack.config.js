@@ -2,7 +2,7 @@ require('webpack');
 //const path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractSass = new ExtractTextPlugin({ // define where to save the file (css)
-      filename: '/compiled_css/[name].bundle.css',
+      filename: 'public/compiled_css/[name].bundle.css',
       allChunks: true
     })
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
     //}
     ,
     output: {
-        filename:'compiled_js/bundle.js',
+        filename:'public/compiled_js/bundle.js',
         path: __dirname,
         publicPath: '/'
     },
