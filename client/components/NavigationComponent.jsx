@@ -25,6 +25,7 @@ class NavigationComponent extends React.Component{
               <nav>
                 <ul className="menu-styling">
                   <li><Link to='/'>Home</Link></li>
+                  <li><Link to='/login'>Login</Link></li>
                   <li><Link to='/register'>Register</Link></li>
                   <li><Link to='/forgotpassword'>Forgot Password</Link></li>
                 </ul>

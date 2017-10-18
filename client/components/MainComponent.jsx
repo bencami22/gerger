@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Home from './HomeComponent.jsx'
+import Login from './LoginComponent.jsx'
 import Registration from './RegistrationComponent.jsx'
 import ForgotPassword from './ForgotPasswordComponent.jsx'
 
@@ -16,6 +17,7 @@ render() {
        <main>
          <Switch>
            <Route exact path='/' component={Home}/>
+           <Route path='/Login' component={Login}/>
             <Route path='/Register' component={Registration}/>
             <Route path='/ForgotPassword' component={ForgotPassword}/>
         </Switch>

@@ -1,4 +1,5 @@
 import React from 'react';
+import session from 'express-session';
 
 const socket=io.connect();
 
@@ -22,16 +23,17 @@ class LoginComponent extends React.Component{
      <form id="login" onSubmit={this.handleSubmit}>
             Username: <input value={this.state.username} onChange={this.handleUsernameChange} />
             Password: <input value={this.state.password} onChange={this.handlePasswordChange} />
-            <button type="submit" class="myButton">Login</button>
+            <button type="submit" className="myButton">Login</button>
         </form>
     );
   };
   
   handleSubmit(e) {
     e.preventDefault();
+    
     socket.emit('authentication', {username: this.state.username, password: this.state.password}, function(data)
     {
-      alert(data?'Success':'fail');
+      alert(data==true?'Success':data=='alreadyloggedin'?'AlreadyLoggedIn':'fail');
     });
   }
   

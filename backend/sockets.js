@@ -3,7 +3,7 @@ var async = require('async');
 var mongoose = require('mongoose');
 var complaintModel = mongoose.model('Complaint'); 
 var userModel = mongoose.model('User'); 
- 
+var session = require('express-session');
 module.exports.listen = function(server){
 
 io = socketio.listen(server)
@@ -147,6 +147,7 @@ function forgotPassword(data, ip, callback)
       newUser.email = data.email;
       newUser.username = data.username;
       newUser.password=data.password;
+      
       newUser.save(function (err, product, numAffected) {
         if (!err) 
         {
@@ -170,7 +171,11 @@ function authenticate(data, ip, callback)
   //get credentials sent by the client 
     var username = data.username;
     var password = data.password;
-    
+    if(session.username != undefined)
+    {
+      callback('alreadyloggedin');
+      return;
+    }
     // generate a hash from string
     var crypto = require('crypto'),
         key = 'mysecret key'
@@ -192,7 +197,10 @@ function authenticate(data, ip, callback)
       console.log('User found:'+userRetrieved+' validating password hash...');
       
       var passwordMatch=userRetrieved.password == password;
-      
+      if(passwordMatch)
+      {
+        session.username = userRetrieved.username;
+      }
       console.log('Password Match:'+passwordMatch);
       callback(passwordMatch);
     });
