@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Registration from '../components/RegistrationComponent.jsx';
-import ForgotPassword from '../components/ForgotPasswordComponent.jsx';
+
+const socket=io.connect();
 
 class NavigationComponent extends React.Component{
   
   constructor() {
     super();
-    this.state = { showNavigation: false }
+    this.state = { showNavigation: false}
+    this.handleLogout = ::this.handleLogout;
   }
   
 
@@ -22,12 +23,38 @@ class NavigationComponent extends React.Component{
             </span>
             { showNavigation && 
             (
+            
               <nav>
                 <ul className="menu-styling">
-                  <li><Link to='/'>Home</Link></li>
-                  <li><Link to='/login'>Login</Link></li>
-                  <li><Link to='/register'>Register</Link></li>
-                  <li><Link to='/forgotpassword'>Forgot Password</Link></li>
+                <li><Link to='/'>Home</Link></li>
+                {this.props.navigationDisplay == 'anon' &&
+                (
+                  <div>
+                    <li><Link to='/login'>Login</Link></li>
+                    <li><Link to='/register'>Register</Link></li>
+                    <li><Link to='/forgotpassword'>Forgot Password</Link></li>
+                    
+                  </div>
+                )
+                }
+                {this.props.navigationDisplay == 'regular' &&
+                (
+                  <div>
+                    <li><Link to='/complaints/create'>Create a complaint</Link></li>
+                    <li><Link to='/complaints'>View all</Link></li>
+                    <li onClick={this.handleLogout}>Log out</li>
+                  </div>
+                  )
+                }
+                {this.props.navigationDisplay == 'admin' &&
+                (
+                  <div>
+                  <li onClick={this.handleLogout}>Log out</li>
+                  </div>
+                )
+                }
+                
+                  
                 </ul>
               </nav>
             )}
@@ -37,6 +64,10 @@ class NavigationComponent extends React.Component{
     );
   };
   
+  handleLogout(e) {
+    socket.emit('logout');
+    {this.props.changeMenu('anon')};
+  
 };
- 
+}  
  export default NavigationComponent;

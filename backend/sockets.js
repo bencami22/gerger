@@ -81,6 +81,10 @@ io.on('connection', function (socket) {
      // });
     });
     
+    socket.on('logout', function(){
+      logout();
+    });
+    
      socket.on('error', function(err){
      console.error(err.stack);
    });
@@ -104,10 +108,13 @@ function registration(data, ip, callback)
       }
       
       console.log('User found:'+userRetrieved+' validating password hash...');
+      
       var newUser=new userModel();
       newUser.email = data.email;
       newUser.username = data.username;
-      newUser.password=data.password;
+      newUser.password=hashPassword(data.password);
+      newUser.role = 'regular';
+      
       newUser.save(function (err, product, numAffected) {
         if (!err) 
         {
@@ -124,6 +131,12 @@ function registration(data, ip, callback)
       
       
     });
+}
+
+function logout(callback)
+{
+  session.username = null;
+  callback()
 }
 
 function forgotPassword(data, ip, callback)
@@ -146,7 +159,7 @@ function forgotPassword(data, ip, callback)
       var newUser=new userModel();
       newUser.email = data.email;
       newUser.username = data.username;
-      newUser.password=data.password;
+      newUser.password= hashPassword(data.password);
       
       newUser.save(function (err, product, numAffected) {
         if (!err) 
@@ -171,19 +184,15 @@ function authenticate(data, ip, callback)
   //get credentials sent by the client 
     var username = data.username;
     var password = data.password;
-    if(session.username != undefined)
-    {
-      callback('alreadyloggedin');
-      return;
-    }
-    // generate a hash from string
-    var crypto = require('crypto'),
-        key = 'mysecret key'
-        
-        // create hahs
-    var hash = crypto.createHmac('sha256', key)
-    hash.update(password)
-    var hashedValue = hash.digest('hex')
+    
+    //if(session.username != undefined)
+    //{
+    //  callback('alreadyloggedin');
+    //  return;
+    //}
+    
+   
+    var hashedValue = hashPassword(password);
 
     userModel.findOne({username:username}, function (err, userRetrieved) {
           
@@ -196,16 +205,29 @@ function authenticate(data, ip, callback)
       
       console.log('User found:'+userRetrieved+' validating password hash...');
       
-      var passwordMatch=userRetrieved.password == password;
+      var passwordMatch=userRetrieved.password == hashedValue;
       if(passwordMatch)
       {
         session.username = userRetrieved.username;
       }
+      
       console.log('Password Match:'+passwordMatch);
-      callback(passwordMatch);
+      
+      callback(userRetrieved.role);
     });
 }
 
+function hashPassword(password)
+{
+  var crypto = require('crypto'),
+      key = 'mysecret key'
+      
+      // create hahs
+  var hash = crypto.createHmac('sha256', key)
+  hash.update(password)
+  var hashedValue = hash.digest('hex');
+  return hashedValue;
+}
 function complaint(data, ip){
 if (!data || ! data.title || ! data.content )
         return;

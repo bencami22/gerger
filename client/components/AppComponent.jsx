@@ -5,14 +5,23 @@ import MainComponent from './MainComponent.jsx'
 class AppComponent extends React.Component{
   constructor() {
     super();
+    
+    this.state = { NavigationDisplay:'anon' }
   }
+ 
+  changeMenu(newValue)
+  {
+    this.setState({
+      NavigationDisplay: newValue,
+    });
+  };
   
   render() {
     return (
       <BrowserRouter>
       <div>
-            <NavigationComponent />
-            <MainComponent />
+            <NavigationComponent navigationDisplay= {this.state.NavigationDisplay} changeMenu={this.changeMenu.bind(this)} />
+            <MainComponent changeMenu={this.changeMenu.bind(this)}/>
       </div>
       </BrowserRouter>
     );

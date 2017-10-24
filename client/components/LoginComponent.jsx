@@ -3,13 +3,10 @@ import session from 'express-session';
 
 const socket=io.connect();
 
-socket.on('authenticated', function() {
-    // use the socket as usual 
-  });
   
 class LoginComponent extends React.Component{
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {username: '', password: ''};
     
     this.handleUsernameChange = ::this.handleUsernameChange;
@@ -21,10 +18,10 @@ class LoginComponent extends React.Component{
   render() {
     return (
      <form id="login" onSubmit={this.handleSubmit}>
-            Username: <input value={this.state.username} onChange={this.handleUsernameChange} />
-            Password: <input value={this.state.password} onChange={this.handlePasswordChange} />
-            <button type="submit" className="myButton">Login</button>
-        </form>
+        Username: <input value={this.state.username} onChange={this.handleUsernameChange} />
+        Password: <input value={this.state.password} onChange={this.handlePasswordChange} />
+        <button type="submit" className="myButton">Login</button>
+      </form>
     );
   };
   
@@ -33,8 +30,9 @@ class LoginComponent extends React.Component{
     
     socket.emit('authentication', {username: this.state.username, password: this.state.password}, function(data)
     {
-      alert(data==true?'Success':data=='alreadyloggedin'?'AlreadyLoggedIn':'fail');
-    });
+      //if no user found, false will be returned and so anon menu will show, else show menu depending on role
+        this.props.changeMenu(data==false?'anon':'regular');
+    }.bind((this)));
   }
   
    handleUsernameChange(e) {
