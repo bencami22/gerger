@@ -1,34 +1,30 @@
 import React from 'react';
 import ComplaintViewComponent from './ComplaintViewComponent.jsx';
+import { connect } from 'react-redux';
+import { complaints } from '../reducers/reducer-complaints';
 
-const socket=io.connect();
+class ComplaintsViewComponent extends React.Component {
+    constructor() {
+        super();
+    }
 
-class ComplaintsViewComponent extends React.Component{
-  constructor() {
-    super();
-    
-    this.state= {complaints:new Array()};
-    
-    socket.on('complaint', (data)=>
-     {
-        var arrayvar = this.state.complaints;
-        arrayvar.push({author:data.author, title:data.title, content:data.content})
-        this.setState({ complaints: arrayvar })
+    render() {
+        return (
+            <dl>
+                {this.props.complaints && this.props.complaints.map((x, i)=>
+                    <ComplaintViewComponent key={i} author={x.author} title={x.title} content={x.content} />
+                )}
+            </dl>
+        );
+    };
 
-     });
-     
-  }
-  
-  render() {
-    return (
-        <dl>
-            {this.state.complaints.map((x, i)=>
-                <ComplaintViewComponent key={i} author={x.author} title={x.title} content={x.content} />
-            )}
-        </dl>
-    );
-  };
-  
 };
- 
- export default ComplaintsViewComponent;
+
+//passes state into component as a prop
+function mapStateToProps(state) {
+    return {
+        complaints: state.complaints
+    }
+}
+
+export default connect(mapStateToProps)(ComplaintsViewComponent);

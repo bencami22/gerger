@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { activeUser } from '../reducers/reducer-activeUser';
+import { setActiveUser } from '../actions/action-activeUser';
+
 
 const socket = io.connect();
 
@@ -66,9 +68,10 @@ class NavigationComponent extends React.Component {
   };
 
   handleLogout(e) {
-    socket.emit('logout'); { this.props.loggedInUser(null) };
-
+    socket.emit('logout');
+    this.props.setActiveUser(null);
   };
+  
 }
 
 //passes state into component as a prop
@@ -78,5 +81,10 @@ function mapStateToProps(state) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setActiveUser: setActiveUser }, dispatch);
+}
+
+
 //this makes it a container, rather than a dumb component.
-export default connect(mapStateToProps)(NavigationComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationComponent);
