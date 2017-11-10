@@ -1,6 +1,6 @@
-export const addComplaint = (complaint) => {
+export const setComplaints = (complaints) => {
     return {
-        type: "ADD_COMPLAINT",
-        payload: complaint
+        type: "SET_COMPLAINTS",
+        payload: complaints
     }
 };

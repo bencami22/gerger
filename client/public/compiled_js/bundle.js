@@ -15417,7 +15417,7 @@ exports.default = function () {
     var action = arguments[1];
 
     switch (action.type) {
-        case "ADD_COMPLAINT":
+        case "SET_COMPLAINTS":
             return action.payload;
             break;
         default:
@@ -45231,10 +45231,11 @@ var MainComponent = function (_React$Component) {
 
         socket.on('complaint', function (data) {
             var arrayvar = _this.props.complaints;
-            if (arrayvar != null) {
-                arrayvar.push({ author: data.author, title: data.title, content: data.content });
-                _this.props.setComplaint(arrayvar);
+            if (arrayvar == null) {
+                arrayvar = [];
             }
+            arrayvar.push({ author: data.author, title: data.title, content: data.content });
+            _this.props.setComplaints(arrayvar);
         });
         return _this;
     }
@@ -45261,23 +45262,23 @@ var MainComponent = function (_React$Component) {
 
     return MainComponent;
 }(_react2.default.Component);
-/*
+
 //passes state into component as a prop
+
+
 function mapStateToProps(state) {
     return {
         complaints: state.complaints
-    }
+    };
 }
 
 // Get actions and pass them as props to to UserList
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setComplaint: setComplaint }, dispatch);
+    return (0, _redux.bindActionCreators)({ setComplaints: _actionComplaints.setComplaints }, dispatch);
 }
-*/
+
 //this makes it a container, rather than a dumb component.
-
-
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(null, null)(MainComponent));
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainComponent));
 
 /***/ }),
 /* 409 */
@@ -45289,10 +45290,10 @@ exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(null,
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var addComplaint = exports.addComplaint = function addComplaint(complaint) {
+var setComplaints = exports.setComplaints = function setComplaints(complaints) {
     return {
-        type: "ADD_COMPLAINT",
-        payload: complaint
+        type: "SET_COMPLAINTS",
+        payload: complaints
     };
 };
 

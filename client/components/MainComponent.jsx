@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { setComplaint } from '../actions/action-complaints';
+import { setComplaints } from '../actions/action-complaints';
 import { complaints } from '../reducers/reducer-complaints';
 
 import Home from './HomeComponent.jsx'
@@ -22,10 +22,12 @@ class MainComponent extends React.Component {
 
         socket.on('complaint', (data) => {
             var arrayvar = this.props.complaints;
-            if (arrayvar != null) {
-                arrayvar.push({ author: data.author, title: data.title, content: data.content });
-                this.props.setComplaint(arrayvar);
+            if (arrayvar == null) {
+                arrayvar = []
             }
+            arrayvar.push({ author: data.author, title: data.title, content: data.content });
+            this.props.setComplaints(arrayvar);
+
 
         });
     }
@@ -45,7 +47,7 @@ class MainComponent extends React.Component {
         );
     };
 }
-/*
+
 //passes state into component as a prop
 function mapStateToProps(state) {
     return {
@@ -55,8 +57,8 @@ function mapStateToProps(state) {
 
 // Get actions and pass them as props to to UserList
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setComplaint: setComplaint }, dispatch);
+    return bindActionCreators({ setComplaints: setComplaints }, dispatch);
 }
-*/
+
 //this makes it a container, rather than a dumb component.
-export default withRouter(connect(null, null)(MainComponent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainComponent));

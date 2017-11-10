@@ -1,6 +1,6 @@
 export default function(state = null, action) {
     switch (action.type) {
-        case "ADD_COMPLAINT":
+        case "SET_COMPLAINTS":
             return action.payload;
             break;
         default:
