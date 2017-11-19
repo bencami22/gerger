@@ -3,6 +3,7 @@ import session from 'express-session';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setActiveUser } from '../actions/action-activeUser';
+import { withRouter } from 'react-router-dom'
 
 const socket = io.connect();
 
@@ -21,9 +22,11 @@ class LoginComponent extends React.Component {
   render() {
     return (
       <form id="login" onSubmit={this.handleSubmit}>
-        Username: <input value={this.state.username} onChange={this.handleUsernameChange} />
-        Password: <input value={this.state.password} onChange={this.handlePasswordChange} />
+       <div className="overallDv"> 
+       <div className="lblStyle" > Username: <input type="text" className="inputStyle" value={this.state.username} onChange={this.handleUsernameChange} /></div>
+       <div className="lblStyle" > Password: <input type="text" className="inputStyle" value={this.state.password} onChange={this.handlePasswordChange} /></div>
         <button type="submit" className="myButton">Login</button>
+        </div>
       </form>
     );
   };
@@ -34,6 +37,9 @@ class LoginComponent extends React.Component {
     socket.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
       this.props.setActiveUser(data == false ? 'anon' : 'regular');
+      if (data != 'anon') {
+        this.props.history.push('/complaints/create');
+      }
     }.bind((this)));
   }
 
@@ -53,4 +59,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 //this makes it a container, rather than a dumb component.
-export default connect(null, mapDispatchToProps)(LoginComponent);
+export default withRouter(connect(null, mapDispatchToProps)(LoginComponent));

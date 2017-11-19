@@ -51,7 +51,7 @@ body {
 
 nav {
   ul {
-    margin-left: 2.5rem;
+    //margin-left: 2.5rem;
     padding: 0;
     list-style: none;
   }
@@ -70,6 +70,34 @@ nav {
   	color: $dark-red;
   }
 }
+
+.inputStyle{
+    margin-left:10px; 
+    width: 140px;
+    line-height: 20px;
+    @include border-radius(5px);
+    border: 1px solid #e0e0eb;
+}
+
+.inputStyle:active{
+    margin-left:10px; 
+    width: 140px;
+    line-height: 20px;
+    @include border-radius(5px);
+    border: 1px solid #e0e0eb;
+}
+
+
+.lblStyle{
+    margin-bottom:10px
+}
+.overallDv{
+  margin: 0 auto;
+  @include font-size(14px);
+  padding:0 10px;
+}
+
+
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;

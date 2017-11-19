@@ -29,7 +29,6 @@ body {
   list-style: none !important; }
 
 nav ul {
-  margin-left: 2.5rem;
   padding: 0;
   list-style: none; }
 nav li {
@@ -41,6 +40,34 @@ nav a {
   text-decoration: none; }
 nav a:hover {
   color: #e80b0b; }
+
+.inputStyle {
+  margin-left: 10px;
+  width: 140px;
+  line-height: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #e0e0eb; }
+
+.inputStyle:active {
+  margin-left: 10px;
+  width: 140px;
+  line-height: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #e0e0eb; }
+
+.lblStyle {
+  margin-bottom: 10px; }
+
+.overallDv {
+  margin: 0 auto;
+  font-size: 14px;
+  padding: 0 10px; }
 
 .myButton {
   background-color: #e0e0eb;

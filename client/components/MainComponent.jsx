@@ -62,3 +62,9 @@ function mapDispatchToProps(dispatch) {
 
 //this makes it a container, rather than a dumb component.
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainComponent));
+//In the latest beta API however they kind of went back to their previous way of doing things (that is using react context exclusively to communicate changes), connect() prevents that from working by ways of shouldComponentUpdate.
+
+//They have provided again in the beta the withRouter() HOC that solves this nicely, just import it and do
+
+//This should work just fine after that.
+//Note that you would also need to wrap any redux connected component that has router components inside it with a withRouter(). That means if you have router Links in your redux connected Nav component for example, you would need to wrap it with withRouter() as well.
