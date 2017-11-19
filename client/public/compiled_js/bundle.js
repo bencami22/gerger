@@ -43931,7 +43931,7 @@ var NavigationComponent = function (_React$Component) {
                 )
               ),
               this.props.activeUser == null && _react2.default.createElement(
-                'div',
+                'span',
                 null,
                 _react2.default.createElement(
                   'li',
@@ -43962,7 +43962,7 @@ var NavigationComponent = function (_React$Component) {
                 )
               ),
               this.props.activeUser == 'regular' && _react2.default.createElement(
-                'div',
+                'span',
                 null,
                 _react2.default.createElement(
                   'li',
@@ -43989,7 +43989,7 @@ var NavigationComponent = function (_React$Component) {
                 )
               ),
               this.props.activeUser == 'admin' && _react2.default.createElement(
-                'div',
+                'span',
                 null,
                 _react2.default.createElement(
                   'li',

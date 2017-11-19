@@ -56,17 +56,20 @@ nav {
     list-style: none;
   }
 
-  li { display: inline-block; }
 
-  a {
-  	@include font-size(14px);
+a{
+   color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+li{
+  display: inline-block;
+    @include font-size(14px);
   	@extend .text-styling;
-    display: block;
     padding: 6px 12px;
-    text-decoration: none;
-  }
-  
-  a:hover{
+    text-decoration: none !important;
+    
+}
+  li:hover{
   	color: $dark-red;
   }
 }

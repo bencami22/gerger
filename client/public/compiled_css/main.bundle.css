@@ -13,7 +13,7 @@ body {
 .cursor {
   cursor: pointer; }
 
-.text-styling, nav a, .myButton, .smallText, .textDv {
+.text-styling, nav li, .myButton, .smallText, .textDv {
   font-family: Avantgarde, sans-serif;
   letter-spacing: 2px;
   color: black;
@@ -32,16 +32,19 @@ nav ul {
   padding: 0;
   list-style: none; }
 
-nav li {
-  display: inline-block; }
-
 nav a {
-  font-size: 14px;
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none; }
+  color: inherit;
+  /* blue colors for links too */
+  text-decoration: inherit;
+  /* no underline */ }
 
-nav a:hover {
+nav li {
+  display: inline-block;
+  font-size: 14px;
+  padding: 6px 12px;
+  text-decoration: none !important; }
+
+nav li:hover {
   color: #e80b0b; }
 
 .inputStyle {

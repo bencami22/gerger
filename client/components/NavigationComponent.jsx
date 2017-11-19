@@ -30,33 +30,33 @@ class NavigationComponent extends React.Component {
             
               <nav>
                 <ul className="menu-styling">
-                <li><Link to='/'>Home</Link></li>
-                {this.props.activeUser ==null &&
-                (
-                  <div>
-                    <li><Link to='/login'>Login</Link></li>
-                    <li><Link to='/register'>Register</Link></li>
-                    <li><Link to='/forgotpassword'>Forgot Password</Link></li>
-                  </div>
-                )
-                }
-                {this.props.activeUser == 'regular' &&
-                (
-                  <div>
-                    <li><Link to='/complaints/create'>Create a complaint</Link></li>
-                    <li><Link to='/complaints'>View all</Link></li>
-                    <li onClick={this.handleLogout}>Log out</li>
-                  </div>
+                  <li><Link to='/'>Home</Link></li>
+                  {this.props.activeUser ==null &&
+                  (
+                    <span>
+                      <li><Link to='/login'>Login</Link></li>
+                      <li><Link to='/register'>Register</Link></li>
+                      <li><Link to='/forgotpassword'>Forgot Password</Link></li>
+                    </span>
                   )
-                }
-                {this.props.activeUser == 'admin' &&
-                (
-                  <div>
-                  <li onClick={this.handleLogout}>Log out</li>
-                  </div>
-                )
-                }
-                
+                  }
+                  {this.props.activeUser == 'regular' &&
+                  (
+                    <span>
+                      <li><Link to='/complaints/create'>Create a complaint</Link></li>
+                      <li><Link to='/complaints'>View all</Link></li>
+                      <li onClick={this.handleLogout}>Log out</li>
+                    </span>
+                    )
+                  }
+                  {this.props.activeUser == 'admin' &&
+                  (
+                    <span>
+                    <li onClick={this.handleLogout}>Log out</li>
+                    </span>
+                  )
+                  }
+                  
                   
                 </ul>
               </nav>
@@ -71,7 +71,7 @@ class NavigationComponent extends React.Component {
     socket.emit('logout');
     this.props.setActiveUser(null);
   };
-  
+
 }
 
 //passes state into component as a prop
