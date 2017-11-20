@@ -49,6 +49,22 @@ body {
 	list-style: $menu-styling-none;
 }
 
+.complaint-list
+{list-style: $menu-styling-none;
+   .complaint-list-author
+   {
+   }
+   .complaint-list-title
+   {
+     font-style: italic;
+   }
+   .complaint-list-content
+   {
+     color: #808080;
+     font-size:75%
+   }
+}
+
 nav {
   ul {
     //margin-left: 2.5rem;

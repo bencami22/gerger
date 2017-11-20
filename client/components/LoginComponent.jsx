@@ -1,5 +1,4 @@
 import React from 'react';
-import session from 'express-session';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setActiveUser } from '../actions/action-activeUser';
@@ -36,8 +35,8 @@ class LoginComponent extends React.Component {
 
     socket.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
-      this.props.setActiveUser(data == false ? 'anon' : 'regular');
-      if (data != 'anon') {
+      if (data != 'undefined') {
+        this.props.setActiveUser(data);
         this.props.history.push('/complaints/create');
       }
     }.bind((this)));

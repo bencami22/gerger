@@ -28,6 +28,14 @@ body {
 .menu-styling {
   list-style: none !important; }
 
+.complaint-list {
+  list-style: none !important; }
+  .complaint-list .complaint-list-title {
+    font-style: italic; }
+  .complaint-list .complaint-list-content {
+    color: #808080;
+    font-size: 75%; }
+
 nav ul {
   padding: 0;
   list-style: none; }

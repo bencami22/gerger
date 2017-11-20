@@ -3,9 +3,11 @@ import ComplaintViewComponent from './ComplaintViewComponent.jsx';
 import { connect } from 'react-redux';
 import { complaints } from '../reducers/reducer-complaints';
 
+const socket = io.connect();
+
 class ComplaintsViewComponent extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {

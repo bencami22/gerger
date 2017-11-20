@@ -24,36 +24,19 @@ module.exports.listen = function(server) {
       complaint(data, socket.handshake.address.address);
     });
 
+    socket.on('GetAllComplaints', function(data) {
+      sendComplaints(socket);
+    });
+
     socket.on('authentication', function(data, callback) {
       authenticate(data, socket.handshake.address, function(data) {
-        
-        var result = data;
-        
-        console.log("User Authenticated:" + result)
-        
-        if (result) {
-          var complaintsLoaded = new Promise(function(resolve, reject) {
-            if (complaints.length == 0) {
-              complaintModel.find({}, function(err, docs) {
-                docs.forEach(function(element) {
-                  console.log("Retrieved from and adding to collection: " + element);
-                  complaints.push(element);
-                });
-                resolve();
-              });
-            }
-            else {
-              resolve();
-            }
-          });
 
-          complaintsLoaded.then(function() {
-            //sending previous complaints
-            complaints.forEach(function(data) {
-              console.log("Emitting: " + data);
-              socket.emit('complaint', data);
-            });
-          });
+        var result = data;
+
+        console.log("User Authenticated:" + result)
+
+        if (result) {
+          sendComplaints(socket);
         }
         callback(result);
       });
@@ -91,6 +74,31 @@ module.exports.listen = function(server) {
     });
 
   });
+
+  function sendComplaints(socket) {
+    var complaintsLoaded = new Promise(function(resolve, reject) {
+      if (complaints.length == 0) {
+        complaintModel.find({}, function(err, docs) {
+          docs.forEach(function(element) {
+            console.log("Retrieved from and adding to collection: " + element);
+            complaints.push(element);
+          });
+          resolve();
+        });
+      }
+      else {
+        resolve();
+      }
+    });
+
+    complaintsLoaded.then(function() {
+      //sending previous complaints
+      complaints.forEach(function(data) {
+        console.log("Emitting: " + data);
+        socket.emit('complaint', data);
+      });
+    });
+  }
 
   function registration(data, ip, callback) {
     var username = data.username;
@@ -198,7 +206,7 @@ module.exports.listen = function(server) {
 
       console.log('Password Match:' + passwordMatch);
 
-      callback(userRetrieved.role);
+      callback(userRetrieved);
     });
   }
 

@@ -1,4 +1,7 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { activeUser } from '../reducers/reducer-activeUser';
 
 const socket = io.connect();
 
@@ -34,6 +37,7 @@ class CreateComplaintComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     socket.emit('complaint', {
+      author: this.props.activeUser.username,
       title: this.state.title,
       content: this.state.content
     });
@@ -41,4 +45,12 @@ class CreateComplaintComponent extends React.Component {
 
 };
 
-export default CreateComplaintComponent;
+//passes state into component as a prop
+function mapStateToProps(state) {
+  return {
+    activeUser: state.activeUser
+  }
+}
+
+//this makes it a container, rather than a dumb component.
+export default connect(mapStateToProps)(CreateComplaintComponent);
