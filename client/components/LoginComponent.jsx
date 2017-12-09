@@ -22,8 +22,8 @@ class LoginComponent extends React.Component {
     return (
       <form id="login" onSubmit={this.handleSubmit}>
        <div className="overallDv"> 
-       <div className="lblStyle" > Username: <input type="text" className="inputStyle" value={this.state.username} onChange={this.handleUsernameChange} /></div>
-       <div className="lblStyle" > Password: <input type="text" className="inputStyle" value={this.state.password} onChange={this.handlePasswordChange} /></div>
+       <div className="rowArea" > Username: <input type="text" className="inputStyle" value={this.state.username} onChange={this.handleUsernameChange} /></div>
+       <div className="rowArea" > Password: <input type="text" className="inputStyle" value={this.state.password} onChange={this.handlePasswordChange} /></div>
         <button type="submit" className="myButton">Login</button>
         </div>
       </form>

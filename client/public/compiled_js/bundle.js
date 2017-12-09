@@ -28132,7 +28132,7 @@ var NavigationComponent = function (_React$Component) {
                   'Home'
                 )
               ),
-              this.props.activeUser == null && _react2.default.createElement(
+              this.props.activeUser == null || this.props.activeUser.role == null && _react2.default.createElement(
                 'span',
                 null,
                 _react2.default.createElement(
@@ -29620,13 +29620,13 @@ var LoginComponent = function (_React$Component) {
           { className: 'overallDv' },
           _react2.default.createElement(
             'div',
-            { className: 'lblStyle' },
+            { className: 'rowArea' },
             ' Username: ',
             _react2.default.createElement('input', { type: 'text', className: 'inputStyle', value: this.state.username, onChange: this.handleUsernameChange })
           ),
           _react2.default.createElement(
             'div',
-            { className: 'lblStyle' },
+            { className: 'rowArea' },
             ' Password: ',
             _react2.default.createElement('input', { type: 'text', className: 'inputStyle', value: this.state.password, onChange: this.handlePasswordChange })
           ),
@@ -29726,16 +29726,40 @@ var RegistrationComponent = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { id: 'registration', onSubmit: this.handleSubmit },
-        'Email: ',
-        _react2.default.createElement('input', { value: this.state.email, onChange: this.handleEmailChange }),
-        'Username: ',
-        _react2.default.createElement('input', { value: this.state.username, onChange: this.handleUsernameChange }),
-        'Password: ',
-        _react2.default.createElement('input', { value: this.state.password, onChange: this.handlePasswordChange }),
         _react2.default.createElement(
-          'button',
-          { type: 'submit' },
-          'Register'
+          'div',
+          { className: 'overallDv' },
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            _react2.default.createElement(
+              'label',
+              { className: 'registerEmailAlign' },
+              'Email: '
+            ),
+            _react2.default.createElement('input', { value: this.state.email, className: 'inputStyle', onChange: this.handleEmailChange })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            'Username: ',
+            _react2.default.createElement('input', { value: this.state.username, className: 'inputStyle', onChange: this.handleUsernameChange })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            'Password: ',
+            _react2.default.createElement('input', { value: this.state.password, className: 'inputStyle', onChange: this.handlePasswordChange })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            _react2.default.createElement(
+              'button',
+              { className: 'myButton', type: 'submit' },
+              'Register'
+            )
+          )
         )
       );
     }
@@ -29821,19 +29845,23 @@ var ForgotPasswordComponent = function (_React$Component) {
         { id: 'forgotPassword', onSubmit: this.handleSubmit },
         _react2.default.createElement(
           'div',
-          { className: 'textDv' },
-          'Email:',
-          _react2.default.createElement('input', { value: this.state.email, className: 'inputField', onChange: this.handleEmailChange }),
+          { className: 'overallDv' },
           _react2.default.createElement(
-            'button',
-            { type: 'submit', className: 'myButton' },
-            'Submit'
+            'div',
+            { className: 'rowArea' },
+            'Email:',
+            _react2.default.createElement('input', { value: this.state.email, className: 'inputStyle', onChange: this.handleEmailChange }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit', className: 'myButton' },
+              'Submit'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'smallText' },
+            'we will send you the updated password on this email'
           )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'smallText' },
-          'we will send you the updated password on this email'
         )
       );
     }
@@ -29914,14 +29942,31 @@ var CreateComplaintComponent = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { id: 'sendComplaint', onSubmit: this.handleSubmit },
-        'Title: ',
-        _react2.default.createElement('input', { value: this.state.title, onChange: this.handleTitleChange }),
-        'Content: ',
-        _react2.default.createElement('input', { value: this.state.content, onChange: this.handleContentChange }),
         _react2.default.createElement(
-          'button',
-          { type: 'submit', className: 'myButton' },
-          'Click me!'
+          'div',
+          { className: 'overallDv' },
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            _react2.default.createElement(
+              'label',
+              { className: 'complaintCreateTitleAlign' },
+              'Title:'
+            ),
+            ' ',
+            _react2.default.createElement('input', { className: 'inputStyle', value: this.state.title, onChange: this.handleTitleChange })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rowArea' },
+            'Content: ',
+            _react2.default.createElement('input', { className: 'inputStyle', value: this.state.content, onChange: this.handleContentChange })
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', className: 'myButton' },
+            'Submit'
+          )
         )
       );
     }

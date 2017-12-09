@@ -13,7 +13,7 @@ body {
 .cursor {
   cursor: pointer; }
 
-.text-styling, nav li, .myButton, .smallText, .textDv {
+.text-styling, nav li, .overallDv, .myButton, .smallText {
   font-family: Avantgarde, sans-serif;
   letter-spacing: 2px;
   color: black;
@@ -27,6 +27,9 @@ body {
 
 .menu-styling {
   list-style: none !important; }
+
+.ml39 {
+  margin-left: 39px !important; }
 
 .complaint-list {
   list-style: none !important; }
@@ -72,13 +75,13 @@ nav li:hover {
   border-radius: 5px;
   border: 1px solid #e0e0eb; }
 
-.lblStyle {
-  margin-bottom: 10px; }
-
 .overallDv {
   margin: 0 auto;
   font-size: 14px;
-  padding: 0 10px; }
+  padding: 0 10px;
+  width: 500px;
+  margin-bottom: 10px;
+  font-size: 13px; }
 
 .myButton {
   background-color: #e0e0eb;
@@ -106,12 +109,16 @@ nav li:hover {
   font-size: 8px;
   margin-top: 10px; }
 
-.textDv {
-  width: 500px;
-  margin: 0 auto;
-  font-size: 13px; }
-
 .inputField {
   padding: 5px; }
+
+.rowArea {
+  margin-bottom: 5px; }
+
+.complaintCreateTitleAlign {
+  margin-right: 30px; }
+
+.registerEmailAlign {
+  margin-right: 41px; }
 
 /*# sourceMappingURL=site.css.map */

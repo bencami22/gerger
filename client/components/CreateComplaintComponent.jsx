@@ -19,9 +19,11 @@ class CreateComplaintComponent extends React.Component {
   render() {
     return (
       <form id="sendComplaint" onSubmit={this.handleSubmit}>
-            Title: <input value={this.state.title} onChange={this.handleTitleChange} />
-            Content: <input value={this.state.content} onChange={this.handleContentChange} />
-            <button type="submit" className="myButton">Click me!</button>
+        <div className="overallDv">
+            <div className="rowArea"><label className="complaintCreateTitleAlign">Title:</label> <input className="inputStyle" value={this.state.title} onChange={this.handleTitleChange} /></div>
+            <div className="rowArea">Content: <input className="inputStyle" value={this.state.content} onChange={this.handleContentChange} /></div>
+            <button type="submit" className="myButton">Submit</button>
+          </div>
         </form>
     );
   };

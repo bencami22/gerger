@@ -49,6 +49,10 @@ body {
 	list-style: $menu-styling-none;
 }
 
+.ml39{
+    margin-left:39px !important;
+}
+
 .complaint-list
 {list-style: $menu-styling-none;
    .complaint-list-author
@@ -107,16 +111,15 @@ li{
 }
 
 
-.lblStyle{
-    margin-bottom:10px
-}
 .overallDv{
   margin: 0 auto;
   @include font-size(14px);
   padding:0 10px;
+    width:500px;
+	margin-bottom:10px;
+	@extend .text-styling;
+	@include font-size(13px);
 }
-
-
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -163,16 +166,20 @@ li{
 	@include margin-top(10px);
 }
 
-.textDv{
-	width:500px;
-	margin: 0 auto;
-	@extend .text-styling;
-	@include font-size(13px);
-}
 
 .inputField{
 	padding:5px;
 }
 
+.rowArea
+{
+    margin-bottom:5px;
+}
 
+.complaintCreateTitleAlign{
+    margin-right: 30px;
+}
 
+.registerEmailAlign{
+    margin-right: 41px;
+}
