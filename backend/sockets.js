@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var complaintModel = mongoose.model('Complaint');
 var userModel = mongoose.model('User');
 var session = require('express-session');
+var nodemailer = require('nodemailer');
+var fs = require('fs');
+var path = require('path')
 module.exports.listen = function(server) {
 
   io = socketio.listen(server)
@@ -51,7 +54,7 @@ module.exports.listen = function(server) {
     });
 
     socket.on('forgotPassword', function(data, callback) {
-      forgotPassword(data, socket.handshake.address, function(data) {
+      forgotPassword(data.email, socket.handshake.address, function(data) {
         var result = data;
         console.log("Forgot Password:" + result)
         callback(result);
@@ -143,35 +146,30 @@ module.exports.listen = function(server) {
   }
 
   function forgotPassword(data, ip, callback) {
-    var username = data.username;
-    var password = data.password;
-    var email = data.email;
+    var email = data;
 
-    userModel.findOne({ username: username }, function(err, userRetrieved) {
+    userModel.findOne({ email: email }, function(err, userRetrieved) {
 
       //inform the callback of auth success/failure 
-      if (err || userRetrieved) {
-        console.log('User found:' + userRetrieved + ' Error:' + err);
-        callback(false);
-        return;
-      }
+      //if (err || !userRetrieved) {
+      // console.log('User not found.');
+      //  callback(false);
+      //  return;
+      //}
 
       console.log('User found:' + userRetrieved + ' validating password hash...');
-      var newUser = new userModel();
-      newUser.email = data.email;
-      newUser.username = data.username;
-      newUser.password = hashPassword(data.password);
 
-      newUser.save(function(err, product, numAffected) {
-        if (!err) {
-          console.log('Success!');
-          callback(true);
+      fs.readFile(path.resolve(__dirname, '..', 'backend/mailtemplates/resetpassword.html'), 'utf8', function(err, content) {
+
+        if (err) {
+          console.log('Error loading file. err+' + err);
         }
         else {
-          console.log('Error saving to mongoDB! Error:' + err);
-          callback(false);
+          sendMail('bencamilleri69@gmail.com', 'Reset password', content.replace('[link]', 'linkgoeshere'));
         }
+
       });
+
     });
   }
 
@@ -273,6 +271,44 @@ module.exports.listen = function(server) {
   function broadcast(event, data) {
     sockets.forEach(function(socket) {
       socket.emit(event, data);
+    });
+  }
+
+  function sendMail(to, subject, htmlBody) {
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    nodemailer.createTestAccount((err, account) => {
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'hgjduw6272hs@gmail.com',
+          pass: 'hgjduw6272hs'
+        }
+      });
+
+      // setup email data with unicode symbols
+      let mailOptions = {
+        from: '"GerGer" <admin@gerger.com>', // sender address
+        to: to, // list of receivers omma separated
+        subject: subject, // Subject line
+        //text: 'Hello world?', // plain text body
+        html: htmlBody // html body
+      };
+
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+      });
     });
   }
 

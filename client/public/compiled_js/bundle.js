@@ -28132,7 +28132,7 @@ var NavigationComponent = function (_React$Component) {
                   'Home'
                 )
               ),
-              this.props.activeUser == null || this.props.activeUser.role == null && _react2.default.createElement(
+              (this.props.activeUser == null || this.props.activeUser.role == null) && _react2.default.createElement(
                 'span',
                 null,
                 _react2.default.createElement(

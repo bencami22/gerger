@@ -35,7 +35,7 @@ class NavigationComponent extends React.Component {
               <nav>
                 <ul className="menu-styling">
                   <li><Link to='/'>Home</Link></li>
-                  {this.props.activeUser ==null || this.props.activeUser.role ==null&&
+                  {(this.props.activeUser ==null || this.props.activeUser.role ==null )&&
                   (
                     <span>
                       <li><Link to='/login'>Login</Link></li>
