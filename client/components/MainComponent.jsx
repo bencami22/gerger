@@ -12,6 +12,7 @@ import Home from './HomeComponent.jsx'
 import Login from './LoginComponent.jsx'
 import Registration from './RegistrationComponent.jsx'
 import ForgotPassword from './ForgotPasswordComponent.jsx'
+import ResetPassword from './ResetPasswordComponent.jsx'
 import CreateComplaint from './CreateComplaintComponent.jsx'
 import ComplaintsView from './ComplaintsViewComponent.jsx'
 
@@ -25,6 +26,7 @@ class MainComponent extends React.Component {
         if (sessionStorage.activeUser != null && (this.props == null || this.props.activeUser == null)) {
             this.props.setActiveUser(JSON.parse(sessionStorage.activeUser));
         }
+
         socket.on('complaint', (data) => {
             var arrayvar = this.props.complaints;
             if (arrayvar == null) {
@@ -43,6 +45,7 @@ class MainComponent extends React.Component {
                     <Route path='/Login' component={Login} />
                     <Route path='/Register' component={Registration} />
                     <Route path='/ForgotPassword' component={ForgotPassword} />
+                    <Route path='/ResetPassword' component={ResetPassword} />
                     <Route path='/complaints/create' component={CreateComplaint} />
                     <Route path='/complaints' component={ComplaintsView} />
                 </Switch>

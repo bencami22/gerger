@@ -35,7 +35,7 @@ class LoginComponent extends React.Component {
 
     socket.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
-      if (data != 'undefined') {
+      if (data != null && data != false) {
         this.props.setActiveUser(data);
         this.props.history.push('/complaints/create');
       }

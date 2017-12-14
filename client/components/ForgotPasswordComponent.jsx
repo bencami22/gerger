@@ -21,7 +21,7 @@ class ForgotPasswordComponent extends React.Component {
              
               <button type="submit" className="myButton">Submit</button>
               </div>
-            <div className="smallText">we will send you the updated password on this email</div>
+            <div className="smallText">we will send you a reset password link.</div>
           </div>
         </form>
     );

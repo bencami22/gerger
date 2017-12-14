@@ -6,7 +6,9 @@ var userModel = mongoose.model('User');
 var session = require('express-session');
 var nodemailer = require('nodemailer');
 var fs = require('fs');
-var path = require('path')
+var path = require('path');
+var uuid = require('uuid/v1');
+
 module.exports.listen = function(server) {
 
   io = socketio.listen(server)
@@ -61,6 +63,27 @@ module.exports.listen = function(server) {
       });
     });
 
+    socket.on('changePassword', function(data, callback) {
+      userModel.findOne({
+          resetPasswordTokens: { $elemMatch: { token: data.resetPasswordToken } }
+        },
+        function(err, userRetrieved) {
+
+          //inform the callback of auth success/failure 
+          if (err || !userRetrieved) {
+            callback(false);
+            return;
+          }
+
+          changePassword(userRetrieved.username, data.newPassword, function(err, data) {
+            var result = data;
+            console.log("Change Password:" + result)
+            callback(result);
+          });
+        })
+    });
+
+
 
     socket.on('identify', function(name) {
       socket._username = String(name.name || 'Anonymous'); //, function (err) {
@@ -103,6 +126,24 @@ module.exports.listen = function(server) {
     });
   }
 
+  function changePassword(username, newPassword, callback) {
+    userModel.findOne({ username: username }, function(err, userRetrieved) {
+
+      //inform the callback of auth success/failure 
+      if (err || !userRetrieved) {
+        callback(null, false);
+        return;
+      }
+
+      userRetrieved.password = hashPassword(newPassword);
+
+      userRetrieved.save();
+
+      callback(null, true);
+    });
+    callback(null, false);
+  }
+
   function registration(data, ip, callback) {
     var username = data.username;
     var password = data.password;
@@ -136,8 +177,6 @@ module.exports.listen = function(server) {
         }
 
       });
-
-
     });
   }
 
@@ -165,7 +204,13 @@ module.exports.listen = function(server) {
           console.log('Error loading file. err+' + err);
         }
         else {
-          sendMail('bencamilleri69@gmail.com', 'Reset password', content.replace('[link]', 'linkgoeshere'));
+          var resetPasswordToken = new Object();
+          resetPasswordToken.token = uuid();
+
+          userRetrieved.resetPasswordTokens.push(resetPasswordToken);
+          userRetrieved.save();
+
+          sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
         }
 
       });
@@ -200,6 +245,9 @@ module.exports.listen = function(server) {
       var passwordMatch = userRetrieved.password == hashedValue;
       if (passwordMatch) {
         session.username = userRetrieved.username;
+      }
+      else {
+        userRetrieved = null;
       }
 
       console.log('Password Match:' + passwordMatch);
