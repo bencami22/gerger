@@ -28,7 +28,10 @@ class MainComponent extends React.Component {
         }
 
         socket.on('complaint', (data) => {
-            var arrayvar = this.props.complaints;
+            var arrayvar;
+            if (this.props.complaints != null) {
+                arrayvar = Array.from(this.props.complaints); //Redux doesnt work if the data is mutated.
+            }
             if (arrayvar == null) {
                 arrayvar = []
             }
