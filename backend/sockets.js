@@ -20,9 +20,10 @@ module.exports.listen = function(server) {
       updateRoster();
     });
 
-    socket.on('complaint', function(data) {
+    socket.on('complaint', function(data, callback) {
       var complaint = complaintsBL.complaint(data, socket.handshake.address.address);
       broadcast('complaint', complaint);
+      callback(true);
     });
 
     socket.on('GetAllComplaints', function(data) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import humane from '../public/compiled_js/humane.min.js'
 
 const socket = io.connect();
 
@@ -30,8 +31,12 @@ class ForgotPasswordComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     socket.emit('forgotPassword', { email: this.state.email }, function(data) {
-      alert(data ? 'Success' : 'fail');
-    });
+      if (data) {
+        humane.log('We have sent you an email so you can reset your password.');
+        this.setState({ email: '' });
+      }
+      else { humane.log('Oops, something went wrong.') };
+    }.bind(this));
   }
 
   handleEmailChange(e) {

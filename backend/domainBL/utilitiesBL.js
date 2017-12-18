@@ -20,8 +20,11 @@ exports.sendMail = function sendMail(to, subject, htmlBody) {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'hgjduw6272hs@gmail.com',
-                pass: 'hgjduw6272hs'
+                user:'gergermalta',
+                pass:'Hello123!'
+                //user: 'hgjduw6272hs@gmail.com',
+                //pass: 'hgjduw6272hs'
+                
             }
         });
 

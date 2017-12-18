@@ -22,7 +22,7 @@ class NavigationComponent extends React.Component {
     const { showNavigation } = this.state
     return (
       <header>
-          <div className="cursor">
+          <div className="navigation cursor">
             <span onClick={() => this.setState({ showNavigation: !showNavigation })}>
             {showNavigation && (
              <i className="material-icons">keyboard_arrow_up</i>)}

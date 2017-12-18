@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setActiveUser } from '../actions/action-activeUser';
 import { withRouter } from 'react-router-dom'
+import humane from '../public/compiled_js/humane.min.js'
 
 const socket = io.connect();
 
@@ -36,8 +37,15 @@ class LoginComponent extends React.Component {
     socket.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
       if (data != null && data != false) {
+        humane.log('Welcome back, ' + data.username + '.');
+
         this.props.setActiveUser(data);
         this.props.history.push('/complaints/create');
+
+      }
+      else {
+        this.setState({ username: '', password: '' });
+        humane.log('Wrong username or password.');
       }
     }.bind((this)));
   }

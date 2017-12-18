@@ -46,7 +46,7 @@ exports.forgotPassword = function forgotPassword(data, ip, callback) {
 
         console.log('User found:' + userRetrieved + ' validating password hash...');
 
-        fs.readFile(path.resolve(__dirname, '..', 'backend/mailtemplates/resetpassword.html'), 'utf8', function(err, content) {
+        fs.readFile(path.resolve(__dirname, '..', './mailtemplates/resetpassword.html'), 'utf8', function(err, content) {
 
             if (err) {
                 console.log('Error loading file. err+' + err);
@@ -59,6 +59,7 @@ exports.forgotPassword = function forgotPassword(data, ip, callback) {
                 userRetrieved.save();
 
                 utiltiesBL.sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
+                callback(true);
             }
         });
     });
@@ -99,7 +100,7 @@ exports.registration = function registration(data, ip, callback) {
             return;
         }
 
-        console.log('User found:' + userRetrieved + ' validating password hash...');
+        console.log('No user found, continueing with registration.');
 
         var newUser = new userModel();
         newUser.email = data.email;

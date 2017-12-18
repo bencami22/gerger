@@ -2,6 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { activeUser } from '../reducers/reducer-activeUser';
+import humane from '../public/compiled_js/humane.min.js'
+
 
 const socket = io.connect();
 
@@ -39,10 +41,19 @@ class CreateComplaintComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     socket.emit('complaint', {
-      author: this.props.activeUser.username,
-      title: this.state.title,
-      content: this.state.content
-    });
+        author: this.props.activeUser.username,
+        title: this.state.title,
+        content: this.state.content
+      },
+      function(data) {
+        if (data) {
+          humane.log('Complaint successfully submitted.');
+          this.setState({ author: '', title: '', content: '' });
+        }
+        else {
+          humane.log('Oops, something went wrong with submitting your complaint.');
+        }
+      }.bind((this)));
   }
 
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import humane from '../public/compiled_js/humane.min.js'
 
 const socket = io.connect();
 
@@ -30,8 +31,14 @@ class RegistrationComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     socket.emit('registration', { email: this.state.email, username: this.state.username, password: this.state.password }, function(data) {
-      alert(data ? 'Success' : 'fail');
-    });
+      if (data) {
+        humane.log('Account was successfully created.');
+        this.props.history.push('/login');
+      }
+      else {
+        humane.log('Registration failed.')
+      };
+    }.bind((this)));
   }
 
   handleEmailChange(e) {

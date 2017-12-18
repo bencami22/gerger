@@ -28100,7 +28100,7 @@ var NavigationComponent = function (_React$Component) {
         null,
         _react2.default.createElement(
           'div',
-          { className: 'cursor' },
+          { className: 'navigation cursor' },
           _react2.default.createElement(
             'span',
             { onClick: function onClick() {
@@ -29592,6 +29592,10 @@ var _actionActiveUser = __webpack_require__(69);
 
 var _reactRouterDom = __webpack_require__(30);
 
+var _humaneMin = __webpack_require__(294);
+
+var _humaneMin2 = _interopRequireDefault(_humaneMin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29655,8 +29659,13 @@ var LoginComponent = function (_React$Component) {
       socket.emit('authentication', { username: this.state.username, password: this.state.password }, function (data) {
         //if no user found, false will be returned and so anon menu will show, else show menu depending on role
         if (data != null && data != false) {
+          _humaneMin2.default.log('Welcome back, ' + data.username + '.');
+
           this.props.setActiveUser(data);
           this.props.history.push('/complaints/create');
+        } else {
+          this.setState({ username: '', password: '' });
+          _humaneMin2.default.log('Wrong username or password.');
         }
       }.bind(this));
     }
@@ -29701,6 +29710,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _humaneMin = __webpack_require__(294);
+
+var _humaneMin2 = _interopRequireDefault(_humaneMin);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29777,8 +29790,13 @@ var RegistrationComponent = function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       socket.emit('registration', { email: this.state.email, username: this.state.username, password: this.state.password }, function (data) {
-        alert(data ? 'Success' : 'fail');
-      });
+        if (data) {
+          _humaneMin2.default.log('Account was successfully created.');
+          this.props.history.push('/login');
+        } else {
+          _humaneMin2.default.log('Registration failed.');
+        };
+      }.bind(this));
     }
   }, {
     key: 'handleEmailChange',
@@ -29820,6 +29838,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _humaneMin = __webpack_require__(294);
+
+var _humaneMin2 = _interopRequireDefault(_humaneMin);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29879,8 +29901,13 @@ var ForgotPasswordComponent = function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       socket.emit('forgotPassword', { email: this.state.email }, function (data) {
-        alert(data ? 'Success' : 'fail');
-      });
+        if (data) {
+          _humaneMin2.default.log('We have sent you an email so you can reset your password.');
+          this.setState({ email: '' });
+        } else {
+          _humaneMin2.default.log('Oops, something went wrong.');
+        };
+      }.bind(this));
     }
   }, {
     key: 'handleEmailChange',
@@ -30344,6 +30371,10 @@ var _reactRedux = __webpack_require__(25);
 
 var _reducerActiveUser = __webpack_require__(42);
 
+var _humaneMin = __webpack_require__(294);
+
+var _humaneMin2 = _interopRequireDefault(_humaneMin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30422,7 +30453,14 @@ var CreateComplaintComponent = function (_React$Component) {
         author: this.props.activeUser.username,
         title: this.state.title,
         content: this.state.content
-      });
+      }, function (data) {
+        if (data) {
+          _humaneMin2.default.log('Complaint successfully submitted.');
+          this.setState({ author: '', title: '', content: '' });
+        } else {
+          _humaneMin2.default.log('Oops, something went wrong with submitting your complaint.');
+        }
+      }.bind(this));
     }
   }]);
 
@@ -30865,6 +30903,125 @@ module.exports = exports["default"];
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+;
+/**
+ * humane.js
+ * Humanized Messages for Notifications
+ * @author Marc Harter (@wavded)
+ * @example
+ *   humane.log('hello world');
+ * @license MIT
+ * See more usage examples at: http://wavded.github.com/humane-js/
+ */
+!function (name, context, definition) {
+  if (true) module.exports = definition(name, context);else if (typeof define === "function" && _typeof(define.amd) === "object") define(definition);else context[name] = definition(name, context);
+}("humane", undefined, function (name, context) {
+  var win = window;var doc = document;var ENV = { on: function on(el, type, cb) {
+      "addEventListener" in win ? el.addEventListener(type, cb, false) : el.attachEvent("on" + type, cb);
+    }, off: function off(el, type, cb) {
+      "removeEventListener" in win ? el.removeEventListener(type, cb, false) : el.detachEvent("on" + type, cb);
+    }, bind: function bind(fn, ctx) {
+      return function () {
+        fn.apply(ctx, arguments);
+      };
+    }, isArray: Array.isArray || function (obj) {
+      return Object.prototype.toString.call(obj) === "[object Array]";
+    }, config: function config(preferred, fallback) {
+      return preferred != null ? preferred : fallback;
+    }, transSupport: false, useFilter: /msie [678]/i.test(navigator.userAgent), _checkTransition: function _checkTransition() {
+      var el = doc.createElement("div");var vendors = { webkit: "webkit", Moz: "", O: "o", ms: "MS" };for (var vendor in vendors) {
+        if (vendor + "Transition" in el.style) {
+          this.vendorPrefix = vendors[vendor];this.transSupport = true;
+        }
+      }
+    } };ENV._checkTransition();var Humane = function Humane(o) {
+    o || (o = {});this.queue = [];this.baseCls = o.baseCls || "humane";this.addnCls = o.addnCls || "";this.timeout = "timeout" in o ? o.timeout : 2500;this.waitForMove = o.waitForMove || false;this.clickToClose = o.clickToClose || false;this.timeoutAfterMove = o.timeoutAfterMove || false;this.container = o.container;try {
+      this._setupEl();
+    } catch (e) {
+      ENV.on(win, "load", ENV.bind(this._setupEl, this));
+    }
+  };Humane.prototype = { constructor: Humane, _setupEl: function _setupEl() {
+      var el = doc.createElement("div");el.style.display = "none";if (!this.container) {
+        if (doc.body) this.container = doc.body;else throw "document.body is null";
+      }this.container.appendChild(el);this.el = el;this.removeEvent = ENV.bind(function () {
+        var timeoutAfterMove = ENV.config(this.currentMsg.timeoutAfterMove, this.timeoutAfterMove);if (!timeoutAfterMove) {
+          this.remove();
+        } else {
+          setTimeout(ENV.bind(this.remove, this), timeoutAfterMove);
+        }
+      }, this);this.transEvent = ENV.bind(this._afterAnimation, this);this._run();
+    }, _afterTimeout: function _afterTimeout() {
+      if (!ENV.config(this.currentMsg.waitForMove, this.waitForMove)) this.remove();else if (!this.removeEventsSet) {
+        ENV.on(doc.body, "mousemove", this.removeEvent);ENV.on(doc.body, "click", this.removeEvent);ENV.on(doc.body, "keypress", this.removeEvent);ENV.on(doc.body, "touchstart", this.removeEvent);this.removeEventsSet = true;
+      }
+    }, _run: function _run() {
+      if (this._animating || !this.queue.length || !this.el) return;this._animating = true;if (this.currentTimer) {
+        clearTimeout(this.currentTimer);this.currentTimer = null;
+      }var msg = this.queue.shift();var clickToClose = ENV.config(msg.clickToClose, this.clickToClose);if (clickToClose) {
+        ENV.on(this.el, "click", this.removeEvent);ENV.on(this.el, "touchstart", this.removeEvent);
+      }var timeout = ENV.config(msg.timeout, this.timeout);if (timeout > 0) this.currentTimer = setTimeout(ENV.bind(this._afterTimeout, this), timeout);if (ENV.isArray(msg.html)) msg.html = "<ul><li>" + msg.html.join("<li>") + "</ul>";this.el.innerHTML = msg.html;this.currentMsg = msg;this.el.className = this.baseCls;if (ENV.transSupport) {
+        this.el.style.display = "block";setTimeout(ENV.bind(this._showMsg, this), 50);
+      } else {
+        this._showMsg();
+      }
+    }, _setOpacity: function _setOpacity(opacity) {
+      if (ENV.useFilter) {
+        try {
+          this.el.filters.item("DXImageTransform.Microsoft.Alpha").Opacity = opacity * 100;
+        } catch (err) {}
+      } else {
+        this.el.style.opacity = String(opacity);
+      }
+    }, _showMsg: function _showMsg() {
+      var addnCls = ENV.config(this.currentMsg.addnCls, this.addnCls);if (ENV.transSupport) {
+        this.el.className = this.baseCls + " " + addnCls + " " + this.baseCls + "-animate";
+      } else {
+        var opacity = 0;this.el.className = this.baseCls + " " + addnCls + " " + this.baseCls + "-js-animate";this._setOpacity(0);this.el.style.display = "block";var self = this;var interval = setInterval(function () {
+          if (opacity < 1) {
+            opacity += .1;if (opacity > 1) opacity = 1;self._setOpacity(opacity);
+          } else clearInterval(interval);
+        }, 30);
+      }
+    }, _hideMsg: function _hideMsg() {
+      var addnCls = ENV.config(this.currentMsg.addnCls, this.addnCls);if (ENV.transSupport) {
+        this.el.className = this.baseCls + " " + addnCls;ENV.on(this.el, ENV.vendorPrefix ? ENV.vendorPrefix + "TransitionEnd" : "transitionend", this.transEvent);
+      } else {
+        var opacity = 1;var self = this;var interval = setInterval(function () {
+          if (opacity > 0) {
+            opacity -= .1;if (opacity < 0) opacity = 0;self._setOpacity(opacity);
+          } else {
+            self.el.className = self.baseCls + " " + addnCls;clearInterval(interval);self._afterAnimation();
+          }
+        }, 30);
+      }
+    }, _afterAnimation: function _afterAnimation() {
+      if (ENV.transSupport) ENV.off(this.el, ENV.vendorPrefix ? ENV.vendorPrefix + "TransitionEnd" : "transitionend", this.transEvent);if (this.currentMsg.cb) this.currentMsg.cb();this.el.style.display = "none";this._animating = false;this._run();
+    }, remove: function remove(e) {
+      var cb = typeof e == "function" ? e : null;ENV.off(doc.body, "mousemove", this.removeEvent);ENV.off(doc.body, "click", this.removeEvent);ENV.off(doc.body, "keypress", this.removeEvent);ENV.off(doc.body, "touchstart", this.removeEvent);ENV.off(this.el, "click", this.removeEvent);ENV.off(this.el, "touchstart", this.removeEvent);this.removeEventsSet = false;if (cb && this.currentMsg) this.currentMsg.cb = cb;if (this._animating) this._hideMsg();else if (cb) cb();
+    }, log: function log(html, o, cb, defaults) {
+      var msg = {};if (defaults) for (var opt in defaults) {
+        msg[opt] = defaults[opt];
+      }if (typeof o == "function") cb = o;else if (o) for (var opt in o) {
+        msg[opt] = o[opt];
+      }msg.html = html;if (cb) msg.cb = cb;this.queue.push(msg);this._run();return this;
+    }, spawn: function spawn(defaults) {
+      var self = this;return function (html, o, cb) {
+        self.log.call(self, html, o, cb, defaults);return self;
+      };
+    }, create: function create(o) {
+      return new Humane(o);
+    } };return new Humane();
+});
 
 /***/ })
 /******/ ]);
