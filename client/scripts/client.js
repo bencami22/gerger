@@ -4,7 +4,8 @@ import App from '../components/AppComponent.jsx';
 import { compose, createStore } from 'redux';
 import allReducers from '../reducers';
 import { Provider } from 'react-redux';
-import persistState from 'redux-sessionstorage'
+import persistState from 'redux-sessionstorage';
+
 
 const createPersistentStore = compose(
     persistState(["activeUser"], { key: "activeUser" }),
