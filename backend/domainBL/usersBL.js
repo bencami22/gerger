@@ -93,7 +93,7 @@ exports.registration = function registration(data, ip, callback) {
 
     userModel.findOne({ username: username }, function(err, userRetrieved) {
 
-        //inform the callback of auth success/failure 
+        //inform the callback is username is already used
         if (err || userRetrieved) {
             console.log('User found:' + userRetrieved + ' Error:' + err);
             callback(false);
@@ -111,6 +111,16 @@ exports.registration = function registration(data, ip, callback) {
         newUser.save(function(err, product, numAffected) {
             if (!err) {
                 console.log('Success!');
+                fs.readFile(path.resolve(__dirname, '..', './mailtemplates/registrationcomplete.html'), 'utf8', function(err, content) {
+
+                    if (err) {
+                        console.log('Error loading file. err+' + err);
+                    }
+                    else {
+                        utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.username));
+                        callback(true);
+                    }
+                });
                 callback(true);
             }
             else {
