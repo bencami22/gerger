@@ -44,5 +44,9 @@ module.exports = {
     },
     plugins: [
         extractSass
-    ]
+    ],
+    node: {
+        net: 'empty',
+        dns: 'empty'
+    },
 };

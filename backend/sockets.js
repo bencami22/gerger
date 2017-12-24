@@ -31,16 +31,35 @@ module.exports.listen = function(server) {
     });
 
     socket.on('authentication', function(data, callback) {
-      usersBL.authenticate(data, socket.handshake.address, function(data) {
+      usersBL.authenticate(data, socket.handshake.address)
+        .then(function(data) {
+          var result = data;
+          if (result) {
+            console.log("User Authenticated:" + result);
+            session.username = result.username;
+            complaintsBL.sendComplaints(socket);
+          }
+          callback(result);
+        })
+        .catch(function() {
+          callback(false);
+        });
+    });
 
-        var result = data;
-        if (result) {
-          console.log("User Authenticated:" + result);
-          session.username = result.username;
-          complaintsBL.sendComplaints(socket);
-        }
-        callback(result);
-      });
+    socket.on('authenticationOrCreate', function(data, callback) {
+      usersBL.authenticateOrCreate(data, socket.handshake.address)
+        .then(function(data) {
+          var result = data;
+          if (result) {
+            console.log("User Authenticated:" + result);
+            session.username = result.username;
+            complaintsBL.sendComplaints(socket);
+          }
+          callback(result);
+        })
+        .catch(function() {
+          callback(false);
+        });
     });
 
     socket.on('registration', function(data, callback) {
@@ -52,20 +71,27 @@ module.exports.listen = function(server) {
     });
 
     socket.on('forgotPassword', function(data, callback) {
-      usersBL.forgotPassword(data.email, socket.handshake.address, function(data) {
-        var result = data;
-        console.log("Forgot Password:" + result)
-        callback(result);
-      });
+      usersBL.forgotPassword(data.email, socket.handshake.address).then(function() {
+          var result = data;
+          console.log("Forgot Password:" + result)
+          callback(result);
+        })
+        .catch(function() {
+          callback(false);
+        });
     });
 
     socket.on('changePassword', function(data, callback) {
 
-      usersBL.changePassword(data.resetPasswordToken, data.newPassword, function(err, data) {
-        var result = data;
-        console.log("Change Password:" + result)
-        callback(result);
-      });
+      usersBL.changePassword(data.resetPasswordToken, data.newPassword)
+        .then(function() {
+          var result = data;
+          console.log("Change Password:" + result)
+          callback(result);
+        })
+        .catch(function() {
+
+        });
 
     });
 

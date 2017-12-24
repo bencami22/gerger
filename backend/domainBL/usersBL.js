@@ -5,85 +5,143 @@ var uuid = require('uuid/v1');
 var fs = require('fs');
 var path = require('path');
 
-exports.authenticate = function authenticate(data, ip, callback) {
-    //get credentials sent by the client 
-    var username = data.username;
-    var password = data.password;
+exports.authenticate = function authenticate(data, ip) {
+    return new Promise(function(resolve, reject) {
 
-    var hashedValue = utiltiesBL.hashPassword(password);
+        //get credentials sent by the client 
+        var username = data.username;
+        var password = data.password;
 
-    userModel.findOne({ username: username }, function(err, userRetrieved) {
+        var hashedValue = utiltiesBL.hashPassword(password);
 
-        //inform the callback of auth success/failure 
-        if (err || !userRetrieved) {
-            callback(false);
-            return;
-        }
 
-        console.log('User found:' + userRetrieved + ' validating password hash...');
-
-        var passwordMatch = userRetrieved.password == hashedValue;
-        if (!passwordMatch) {
-            userRetrieved = null;
-        }
-        console.log('Password Match:' + passwordMatch);
-
-        callback(userRetrieved);
-    });
-}
-
-exports.forgotPassword = function forgotPassword(data, ip, callback) {
-    var email = data;
-
-    userModel.findOne({ email: email }, function(err, userRetrieved) {
-
-        //inform the callback of auth success/failure 
-        if (err || !userRetrieved) {
-            console.log('User not found.');
-            callback(false);
-            return;
-        }
-
-        console.log('User found:' + userRetrieved + ' validating password hash...');
-
-        fs.readFile(path.resolve(__dirname, '..', './mailtemplates/resetpassword.html'), 'utf8', function(err, content) {
-
-            if (err) {
-                console.log('Error loading file. err+' + err);
-            }
-            else {
-                var resetPasswordToken = new Object();
-                resetPasswordToken.token = uuid();
-
-                userRetrieved.resetPasswordTokens.push(resetPasswordToken);
-                userRetrieved.save();
-
-                utiltiesBL.sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
-                callback(true);
-            }
-        });
-    });
-}
-
-exports.changePassword = function changePassword(resetPasswordToken, newPassword, callback) {
-    userModel.findOne({
-            resetPasswordTokens: { $elemMatch: { token: resetPasswordToken } }
-        },
-        function(err, userRetrieved) {
+        userModel.findOne({ username: username }, function(err, userRetrieved) {
 
             //inform the callback of auth success/failure 
             if (err || !userRetrieved) {
-                callback(false);
-                return;
+                reject();
             }
 
-            userRetrieved.password = utiltiesBL.hashPassword(newPassword);
+            console.log('User found:' + userRetrieved + ' validating password hash...');
 
-            userRetrieved.save();
-            console.log("Change Password for userL" + userRetrieved.username + " was successful");
-            callback(null, true);
+            var passwordMatch = userRetrieved.password == hashedValue;
+            if (!passwordMatch) {
+                userRetrieved = null;
+            }
+            console.log('Password Match:' + passwordMatch);
+
+            resolve(userRetrieved);
         });
-    callback(null, false);
+    });
+}
+
+exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
+    return new Promise(function(resolve, reject) {
+
+        userModel.findOne({
+                extUIds: data.uid
+            }).exec()
+            .then(function(userRetrieved) {
+
+                if (!userRetrieved) {
+                    //user not found, lets add him
+                    var newUser = new userModel();
+                    newUser.email = data.email;
+                    newUser.username = data.email; //data.firstName+date.lastName;
+                    newUser.extUIds.push(data.uid);
+                    newUser.role = 'regular';
+
+                    newUser.save(function(err, product, numAffected) {
+                        if (!err) {
+                            console.log('Success!');
+                            fs.readFile(path.resolve(__dirname, '..', './mailtemplates/registrationcomplete.html'), 'utf8', function(err, content) {
+
+                                if (err) {
+                                    console.log('Error loading file. err+' + err);
+                                }
+                                else {
+                                    utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.username));
+                                    resolve(newUser);
+                                }
+                            });
+                            resolve(newUser);
+                        }
+                        else {
+                            console.log('Error saving to mongoDB! Error:' + err);
+                            reject();
+                        }
+                    });
+                }
+                else {
+                    //user found
+                    console.log('User found:' + userRetrieved + ' validating password hash...');
+
+                    //TODO: a FB graph api call to make sure the access token is valid here
+
+                    resolve(userRetrieved);
+                }
+
+            })
+            .catch(function(error) {
+                reject(error);
+            })
+    });
+};
+
+
+exports.forgotPassword = function forgotPassword(data, ip) {
+    return new Promise(function(resolve, reject) {
+        var email = data;
+
+        userModel.findOne({ extUserIds: data.uid }, function(err, userRetrieved) {
+
+            //inform the callback of auth success/failure 
+            if (err || !userRetrieved) {
+                console.log('User not found.');
+                reject();
+            }
+
+            console.log('User found:' + userRetrieved + ' validating password hash...');
+
+            fs.readFile(path.resolve(__dirname, '..', './mailtemplates/resetpassword.html'), 'utf8', function(err, content) {
+
+                if (err) {
+                    console.log('Error loading file. err+' + err);
+                }
+                else {
+                    var resetPasswordToken = new Object();
+                    resetPasswordToken.token = uuid();
+
+                    userRetrieved.resetPasswordTokens.push(resetPasswordToken);
+                    userRetrieved.save();
+
+                    utiltiesBL.sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
+                    resolve();
+                }
+            });
+        });
+    });
+}
+
+exports.changePassword = function changePassword(resetPasswordToken, newPassword) {
+    return new Promise(function(resolve, reject) {
+        userModel.findOne({
+                resetPasswordTokens: { $elemMatch: { token: resetPasswordToken } }
+            },
+            function(err, userRetrieved) {
+
+                //inform the callback of auth success/failure 
+                if (err || !userRetrieved) {
+                    reject();
+                }
+
+                userRetrieved.password = utiltiesBL.hashPassword(newPassword);
+
+                userRetrieved.save();
+                console.log("Change Password for userL" + userRetrieved.username + " was successful");
+                resolve();
+            });
+    });
 }
 
 exports.registration = function registration(data, ip, callback) {
