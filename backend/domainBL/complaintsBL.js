@@ -4,9 +4,9 @@
   var complaintModel = mongoose.model('Complaint');
 
   exports.sendComplaints = function sendComplaints(socket) {
-    var complaintsLoaded = new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
       if (complaints.length == 0) {
-        complaintModel.find({}, function(err, docs) {
+        return complaintModel.find().exec().then(function(docs) {
           docs.forEach(function(element) {
             console.log("Retrieved from and adding to collection: " + element);
             complaints.push(element);
@@ -14,55 +14,43 @@
           resolve();
         });
       }
-      else {
-        resolve();
-      }
-    });
-
-    complaintsLoaded.then(function() {
-      //sending previous complaints
+      resolve();
+    }).then(function() {
       complaints.forEach(function(data) {
         console.log("Emitting: " + data);
         socket.emit('complaint', data);
       });
+    }).catch(function(err) {
+      console.log(err);
+    });
+  };
+
+
+  exports.complaint = function complaint(complaintToAdd, ip) {
+    return new Promise(function(resolve, reject) {
+      if (!complaintToAdd || !complaintToAdd.title || !complaintToAdd.content)
+        reject(false);
+
+      var complaint = new complaintModel();
+      complaint.author = complaintToAdd.author;
+      complaint.title = complaintToAdd.title;
+      complaint.content = complaintToAdd.content;
+      complaint.ip = ip;
+
+      complaint.save().then(function(doc) {
+        console.log('Success!');
+      }).catch(function(err) {
+        console.log('Error saving to mongoDB! Error:' + err);
+      });
+
+      var returnData = {
+        author: complaint.author,
+        title: complaint.title,
+        content: complaint.content
+      };
+
+      complaints.push(returnData);
+      resolve(returnData);
     });
   }
-
-  exports.complaint = function complaint(data, ip) {
-    if (!data || !data.title || !data.content)
-      return;
-
-    var complaint = new complaintModel();
-    complaint.author = data.author;
-    complaint.title = data.title;
-    complaint.content = data.content;
-    complaint.ip = ip;
-
-    complaint.save(function(err, product, numAffected) {
-      if (!err) {
-        console.log('Success!');
-      }
-      else {
-        console.log('Error saving to mongoDB! Error:' + err);
-      }
-
-    });
-
-    complaintModel.find({}, function(err, docs) {
-      if (!err) {
-        docs.forEach(function(element) {
-          console.log(element);
-        });
-      }
-    });
-
-    var data = {
-      author: complaint.author,
-      title: complaint.title,
-      content: complaint.content
-    };
-
-    complaints.push(data);
-    return data;
-  };
   

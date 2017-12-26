@@ -59503,7 +59503,7 @@ var ResetPasswordComponent = function (_React$Component) {
                         'div',
                         { className: 'rowArea' },
                         ' Password: ',
-                        _react2.default.createElement('input', { type: 'text', className: shouldMarkError('newPassword') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('newPassword'), value: this.state.newPassword, onChange: this.handleNewPasswordChange })
+                        _react2.default.createElement('input', { type: 'password', className: shouldMarkError('newPassword') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('newPassword'), value: this.state.newPassword, onChange: this.handleNewPasswordChange })
                     ),
                     _react2.default.createElement(
                         'button',

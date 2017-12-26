@@ -14,10 +14,10 @@ exports.authenticate = function authenticate(data, ip) {
 
         var hashedValue = utiltiesBL.hashPassword(password);
 
-        userModel.findOne({ username: username }, function(err, userRetrieved) {
+        userModel.findOne({ username: username }).exec().then(function(userRetrieved) {
 
             //inform the callback of auth success/failure 
-            if (err || !userRetrieved) {
+            if (!userRetrieved) {
                 reject();
             }
 
@@ -30,9 +30,11 @@ exports.authenticate = function authenticate(data, ip) {
             console.log('Password Match:' + passwordMatch);
 
             resolve(userRetrieved);
+        }).catch(function(err) {
+            reject(err);
         });
     });
-}
+};
 
 exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
     return new Promise(function(resolve, reject) {
@@ -85,9 +87,9 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
                 }
 
             })
-            .catch(function(error) {
-                reject(error);
-            })
+            .catch(function(err) {
+                reject(err);
+            });
     });
 };
 
@@ -96,10 +98,10 @@ exports.forgotPassword = function forgotPassword(data, ip) {
     return new Promise(function(resolve, reject) {
         var email = data;
 
-        userModel.findOne({ extUserIds: data.uid }, function(err, userRetrieved) {
+        userModel.findOne({ email: email }).exec().then(function(userRetrieved) {
 
             //inform the callback of auth success/failure 
-            if (err || !userRetrieved) {
+            if (!userRetrieved) {
                 console.log('User not found.');
                 reject();
             }
@@ -122,55 +124,56 @@ exports.forgotPassword = function forgotPassword(data, ip) {
                     resolve();
                 }
             });
+        }).catch(function(err) {
+            reject(err);
         });
     });
-}
+};
 
 exports.changePassword = function changePassword(resetPasswordToken, newPassword) {
     return new Promise(function(resolve, reject) {
         userModel.findOne({
                 resetPasswordTokens: { $elemMatch: { token: resetPasswordToken } }
-            },
-            function(err, userRetrieved) {
+            }).exec().then(
+                function(userRetrieved) {
 
-                //inform the callback of auth success/failure 
-                if (err || !userRetrieved) {
-                    reject();
-                }
+                    //inform the callback of auth success/failure 
+                    if (!userRetrieved) {
+                        reject();
+                    }
 
-                userRetrieved.password = utiltiesBL.hashPassword(newPassword);
+                    userRetrieved.password = utiltiesBL.hashPassword(newPassword);
 
-                userRetrieved.save();
-                console.log("Change Password for userL" + userRetrieved.username + " was successful");
-                resolve();
+                    userRetrieved.save().then(function() {
+                        console.log("Change Password for userL" + userRetrieved.username + " was successful");
+                        resolve();
+                    })
+
+                })
+            .catch(function(err) {
+                reject(err);
             });
     });
-}
+};
 
-exports.registration = function registration(data, ip, callback) {
-    var username = data.username;
-    var password = data.password;
-    var email = data.email;
+exports.registration = function registration(data, ip) {
+    return new Promise(function(resolve, reject) {
+        userModel.findOne({ username: data.username }).then(function(userRetrieved) {
 
-    userModel.findOne({ username: username }, function(err, userRetrieved) {
+            //inform the callback is username is already used
+            if (userRetrieved) {
+                reject();
+            }
 
-        //inform the callback is username is already used
-        if (err || userRetrieved) {
-            console.log('User found:' + userRetrieved + ' Error:' + err);
-            callback(false);
-            return;
-        }
+            console.log('No user found, continueing with registration.');
 
-        console.log('No user found, continueing with registration.');
+            var newUser = new userModel();
+            newUser.email = data.email;
+            newUser.username = data.username;
+            newUser.password = utiltiesBL.hashPassword(data.password);
+            newUser.role = 'regular';
 
-        var newUser = new userModel();
-        newUser.email = data.email;
-        newUser.username = data.username;
-        newUser.password = utiltiesBL.hashPassword(data.password);
-        newUser.role = 'regular';
-
-        newUser.save(function(err, product, numAffected) {
-            if (!err) {
+            newUser.save().then(function() {
                 console.log('Success!');
                 fs.readFile(path.resolve(__dirname, '..', './mailtemplates/registrationcomplete.html'), 'utf8', function(err, content) {
 
@@ -179,15 +182,13 @@ exports.registration = function registration(data, ip, callback) {
                     }
                     else {
                         utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.username));
-                        callback(true);
+                        resolve(newUser);
                     }
                 });
-                callback(true);
-            }
-            else {
-                console.log('Error saving to mongoDB! Error:' + err);
-                callback(false);
-            }
+                resolve(newUser);
+            });
+        }).catch(function(err) {
+            reject(err);
         });
     });
-}
+};

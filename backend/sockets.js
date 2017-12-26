@@ -21,9 +21,12 @@ module.exports.listen = function(server) {
     });
 
     socket.on('complaint', function(data, callback) {
-      var complaint = complaintsBL.complaint(data, socket.handshake.address.address);
-      broadcast('complaint', complaint);
-      callback(true);
+      complaintsBL.complaint(data, socket.handshake.address.address).then(function(complaint) {
+        broadcast('complaint', complaint);
+        callback(true);
+      }).catch(function(err) {
+        callback(false);
+      })
     });
 
     socket.on('GetAllComplaints', function(data) {
@@ -63,11 +66,14 @@ module.exports.listen = function(server) {
     });
 
     socket.on('registration', function(data, callback) {
-      usersBL.registration(data, socket.handshake.address, function(data) {
-        var result = data;
-        console.log("User registration:" + result)
-        callback(result);
-      });
+      usersBL.registration(data, socket.handshake.address).then(function(data) {
+          var result = data;
+          console.log("User registration:" + result);
+          callback(result);
+        })
+        .catch(function(err) {
+          callback(false);
+        })
     });
 
     socket.on('forgotPassword', function(data, callback) {

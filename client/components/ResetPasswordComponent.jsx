@@ -43,7 +43,7 @@ class ResetPasswordComponent extends React.Component {
         return (
             <form id="login" onSubmit={this.handleSubmit}>
                <div className="overallDv"> 
-               <div className="rowArea" > Password: <input type="text" className={shouldMarkError('newPassword')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('newPassword')} value={this.state.newPassword} onChange={this.handleNewPasswordChange} /></div>
+               <div className="rowArea" > Password: <input type="password" className={shouldMarkError('newPassword')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('newPassword')} value={this.state.newPassword} onChange={this.handleNewPasswordChange} /></div>
                 <button type="submit" className="myButton"onClick={this.handleBlur('submit')} disabled={isDisabled}>Change Password</button>
              </div>
       </form>

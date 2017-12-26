@@ -9,13 +9,13 @@ import { activeUser } from '../reducers/reducer-activeUser';
 import { setComplaints } from '../actions/action-complaints';
 import { setActiveUser } from '../actions/action-activeUser';
 
-import Home from './HomeComponent.jsx'
-import Login from './LoginComponent.jsx'
-import Registration from './RegistrationComponent.jsx'
-import ForgotPassword from './ForgotPasswordComponent.jsx'
-import ResetPassword from './ResetPasswordComponent.jsx'
-import CreateComplaint from './CreateComplaintComponent.jsx'
-import ComplaintsView from './ComplaintsViewComponent.jsx'
+import Home from './HomeComponent.jsx';
+import Login from './LoginComponent.jsx';
+import Registration from './RegistrationComponent.jsx';
+import ForgotPassword from './ForgotPasswordComponent.jsx';
+import ResetPassword from './ResetPasswordComponent.jsx';
+import CreateComplaint from './CreateComplaintComponent.jsx';
+import ComplaintsView from './ComplaintsViewComponent.jsx';
 
 const socket = io.connect();
 
