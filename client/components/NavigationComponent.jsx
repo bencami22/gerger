@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { activeUser } from '../reducers/reducer-activeUser';
 import { setActiveUser } from '../actions/action-activeUser';
 import { setComplaints } from '../actions/action-complaints';
+import { setJustLoggedOut } from '../actions/action-justLoggedOut';
 import { withRouter } from 'react-router-dom'
+import firebase from 'firebase';
 
 const socket = io.connect();
 
@@ -74,6 +76,15 @@ class NavigationComponent extends React.Component {
     socket.emit('logout');
     this.props.setActiveUser(null);
     this.props.setComplaints(null);
+
+    firebase.auth().signOut().then(function() {
+        this.props.setJustLoggedOut(true);
+        // Sign-out successful.
+      }.bind(this))
+      .catch(function(error) {
+        var xxx = 8;
+        // An error happened.
+      });
     this.props.history.push('/');
   };
 
@@ -87,7 +98,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setActiveUser: setActiveUser, setComplaints: setComplaints }, dispatch);
+  return bindActionCreators({ setActiveUser: setActiveUser, setComplaints: setComplaints, setJustLoggedOut: setJustLoggedOut }, dispatch);
 }
 
 

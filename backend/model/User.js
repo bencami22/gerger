@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
          email: { type: String },
-         extUIds: [String],
+         extUIds: [{ uid: { type: String, index: true }, provider: String }],
          username: { type: String, index: true },
          password: { type: String },
          role: { type: String },

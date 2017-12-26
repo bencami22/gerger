@@ -1,5 +1,6 @@
-import React from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import React from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import firebase from 'firebase';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -25,6 +26,19 @@ class MainComponent extends React.Component {
         //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless.
         if (sessionStorage.activeUser != null && (this.props == null || this.props.activeUser == null)) {
             this.props.setActiveUser(JSON.parse(sessionStorage.activeUser));
+        }
+
+        if (!firebase.apps.length) {
+            var config = {
+                apiKey: "AIzaSyB9vgSiajKvo85y6HBtM-k4pk32YS7T_ig",
+                authDomain: "gergercomplaints.firebaseapp.com",
+                databaseURL: "https://gergercomplaints.firebaseio.com",
+                projectId: "gergercomplaints",
+                storageBucket: "gergercomplaints.appspot.com",
+                messagingSenderId: "486403153169"
+            };
+
+            firebase.initializeApp(config);
         }
 
         socket.on('complaint', (data) => {

@@ -14,7 +14,6 @@ exports.authenticate = function authenticate(data, ip) {
 
         var hashedValue = utiltiesBL.hashPassword(password);
 
-
         userModel.findOne({ username: username }, function(err, userRetrieved) {
 
             //inform the callback of auth success/failure 
@@ -39,16 +38,20 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
     return new Promise(function(resolve, reject) {
 
         userModel.findOne({
-                extUIds: data.uid
+                extUIds: {
+                    $elemMatch: { uid: data.uid }
+                }
             }).exec()
             .then(function(userRetrieved) {
-
                 if (!userRetrieved) {
                     //user not found, lets add him
                     var newUser = new userModel();
                     newUser.email = data.email;
                     newUser.username = data.email; //data.firstName+date.lastName;
-                    newUser.extUIds.push(data.uid);
+                    newUser.extUIds.push({
+                        uid: data.uid,
+                        provider: data.provider
+                    });
                     newUser.role = 'regular';
 
                     newUser.save(function(err, product, numAffected) {
