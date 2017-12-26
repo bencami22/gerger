@@ -36,9 +36,9 @@ class LoginComponent extends React.Component {
           var token = result.credential.accessToken;
           var user = result.user;
           var additionalUserInfo = result.additionalUserInfo;
-          if (token && additionalUserInfo) {
+          if (user && token && additionalUserInfo) {
             socket.emit('authenticationOrCreate', {
-              email: additionalUserInfo.profile.email,
+              email: additionalUserInfo.profile.email != null ? additionalUserInfo.profile.email : user.email,
               firstName: additionalUserInfo.profile.first_name != null ? additionalUserInfo.profile.first_name : additionalUserInfo.profile.given_name,
               lastName: additionalUserInfo.profile.last_name != null ? additionalUserInfo.profile.last_name : additionalUserInfo.profile.family_name,
               uid: additionalUserInfo.profile.id,
