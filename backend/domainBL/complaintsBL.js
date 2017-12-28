@@ -36,6 +36,7 @@
       complaint.title = complaintToAdd.title;
       complaint.content = complaintToAdd.content;
       complaint.ip = ip;
+      complaint.fileUrls = complaintToAdd.fileUrls;
 
       complaint.save().then(function(doc) {
         console.log('Success!');
