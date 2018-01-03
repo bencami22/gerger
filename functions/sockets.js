@@ -1,5 +1,4 @@
 var socketio = require('socket.io');
-var async = require('async');
 var session = require('express-session');
 
 var complaintsBL = require('./domainBL/complaintsBL');
@@ -17,7 +16,6 @@ module.exports.listen = function(server) {
 
     socket.on('disconnect', function() {
       sockets.splice(sockets.indexOf(socket), 1);
-      updateRoster();
     });
 
     socket.on('complaint', function(data, callback) {
@@ -119,18 +117,6 @@ module.exports.listen = function(server) {
 
   function logout() {
     session.username = null;
-  }
-
-  function updateRoster() {
-    async.map(
-      sockets,
-      function(socket, callback) {
-        socket.get('name', callback);
-      },
-      function(err, names) {
-        broadcast('roster', names);
-      }
-    );
   }
 
   function broadcast(event, data) {

@@ -12,13 +12,17 @@ var http = require('http'),
     presets: ['react']
   }),
   multer = require('multer'),
-  imgur = require('imgur-uploader');
+  imgur = require('imgur-uploader'),
+  functions = require("firebase-functions"),
+  cors = require("cors");
 
 //The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
   var addr = server.address();
   console.log("Server listening at", addr.address + ":" + addr.port);
 });
+
+app.use(cors({ origin: true }))
 
 app.use(session({
   secret: 'ThisisthesecretusedtosignthesessionIDcookie'
@@ -54,3 +58,9 @@ app.post('/uploadHandler', upload.single('file'), function(req, res, next) {
     });
   }
 });
+
+const functionsapi = functions.https.onRequest(app)
+
+module.exports = {
+  functionsapi
+}
