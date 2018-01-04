@@ -5,15 +5,9 @@ var http = require('http'),
   server = http.createServer(app),
   db = require('./model/db'),
   io = require('./sockets').listen(server),
-  react = require('react'),
   session = require('express-session'),
-  reactDOM = require('react-dom'),
-  babel = require('babel-register')({
-    presets: ['react']
-  }),
   multer = require('multer'),
   imgur = require('imgur-uploader'),
-  functions = require("firebase-functions"),
   cors = require("cors");
 
 //The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
@@ -58,9 +52,3 @@ app.post('/uploadHandler', upload.single('file'), function(req, res, next) {
     });
   }
 });
-
-const functionsapi = functions.https.onRequest(app)
-
-module.exports = {
-  functionsapi
-}
