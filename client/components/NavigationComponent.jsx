@@ -9,7 +9,8 @@ import { setJustLoggedOut } from '../actions/action-justLoggedOut';
 import { withRouter } from 'react-router-dom'
 import firebase from 'firebase';
 
-const socket = io.connect();
+
+import { socketConnection } from '../reducers/reducer-socketConnection';
 
 class NavigationComponent extends React.Component {
 
@@ -73,7 +74,7 @@ class NavigationComponent extends React.Component {
   };
 
   handleLogout(e) {
-    socket.emit('logout');
+    this.props.socketConnection.emit('logout');
     this.props.setActiveUser(null);
     this.props.setComplaints(null);
 
@@ -93,12 +94,17 @@ class NavigationComponent extends React.Component {
 //passes state into component as a prop
 function mapStateToProps(state) {
   return {
-    activeUser: state.activeUser
+    activeUser: state.activeUser,
+    socketConnection: state.socketConnection
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setActiveUser: setActiveUser, setComplaints: setComplaints, setJustLoggedOut: setJustLoggedOut }, dispatch);
+  return bindActionCreators({
+    setActiveUser: setActiveUser,
+    setComplaints: setComplaints,
+    setJustLoggedOut: setJustLoggedOut
+  }, dispatch);
 }
 
 

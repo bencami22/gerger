@@ -4,7 +4,10 @@ import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 
 const queryString = require('query-string');
-const socket = io.connect();
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { socketConnection } from '../reducers/reducer-socketConnection';
 
 
 class ResetPasswordComponent extends React.Component {
@@ -53,7 +56,7 @@ class ResetPasswordComponent extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        socket.emit('changePassword', { resetPasswordToken: this.state.resetPasswordToken, newPassword: this.state.newPassword }, function(data) {
+        this.props.socketConnection.emit('changePassword', { resetPasswordToken: this.state.resetPasswordToken, newPassword: this.state.newPassword }, function(data) {
             if (data != null && data) {
                 humane.log('Successfully reset your password.');
                 this.props.history.push('/login');
@@ -77,4 +80,12 @@ function validate(newPassword) {
     };
 }
 
-export default ResetPasswordComponent;
+//passes state into component as a prop
+function mapStateToProps(state) {
+    return {
+        socketConnection: state.socketConnection
+    }
+}
+
+//this makes it a container, rather than a dumb component.
+export default connect(mapStateToProps)(ResetPasswordComponent);

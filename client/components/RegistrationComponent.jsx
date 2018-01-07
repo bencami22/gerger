@@ -2,7 +2,9 @@ import React from 'react';
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 
-const socket = io.connect();
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { socketConnection } from '../reducers/reducer-socketConnection';
 
 class RegistrationComponent extends React.Component {
   constructor() {
@@ -52,7 +54,7 @@ class RegistrationComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    socket.emit('registration', { email: this.state.email, username: this.state.username, password: this.state.password }, function(data) {
+    this.props.socketConnection.emit('registration', { email: this.state.email, username: this.state.username, password: this.state.password }, function(data) {
       if (data) {
         humane.log('Account was successfully created.');
         this.props.history.push('/login');
@@ -86,4 +88,12 @@ function validate(email, username, password) {
   };
 }
 
-export default RegistrationComponent;
+//passes state into component as a prop
+function mapStateToProps(state) {
+  return {
+    socketConnection: state.socketConnection
+  }
+}
+
+//this makes it a container, rather than a dumb component.
+export default connect(mapStateToProps)(RegistrationComponent);

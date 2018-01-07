@@ -14,13 +14,19 @@ module.exports.listen = function(server) {
 
     sockets.push(socket);
 
+    console.log("just connected:" + socket.id)
+
+    sockets.forEach(function(data) {
+      console.log("socket: " + data.id);
+    });
+
     socket.on('disconnect', function() {
       sockets.splice(sockets.indexOf(socket), 1);
     });
 
     socket.on('complaint', function(data, callback) {
       complaintsBL.complaint(data, socket.handshake.address.address).then(function(complaint) {
-        broadcast('complaint', complaint);
+        broadcast('complaintrec', complaint);
         callback(true);
       }).catch(function(err) {
         callback(false);
@@ -31,8 +37,10 @@ module.exports.listen = function(server) {
       complaintsBL.sendComplaints(socket);
     });
 
+
     socket.on('authentication', function(data, callback) {
-      usersBL.authenticate(data, socket.handshake.address)
+
+      return usersBL.authenticate(data, socket.handshake.address)
         .then(function(data) {
           var result = data;
           if (result) {

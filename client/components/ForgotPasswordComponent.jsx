@@ -2,7 +2,7 @@ import React from 'react';
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator'
 
-const socket = io.connect();
+import { socketConnection } from '../reducers/reducer-socketConnection';
 
 class ForgotPasswordComponent extends React.Component {
   constructor() {
@@ -49,7 +49,7 @@ class ForgotPasswordComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    socket.emit('forgotPassword', { email: this.state.email }, function(data) {
+    this.props.socketConnection.emit('forgotPassword', { email: this.state.email }, function(data) {
       if (data) {
         humane.log('We have sent you an email so you can reset your password.');
         this.setState({ email: '' });

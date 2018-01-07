@@ -1,30 +1,43 @@
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>FraBen's GerGer</title>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href="/compiled_css/main.bundle.css" rel='stylesheet' type='text/css'>
-        <link href="/compiled_css/flatty.css" rel='stylesheet' type='text/css'>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/compiled_css/dropzone.min.css">
-        
-    </head>
-    <body>
-       <div id="appComponent"></div>
-       
-        <!--<div id="registerComponent"></div>-->
-        
-        <!--<div id="registrationComponent"></div>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FraBen's GerGer</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="/compiled_css/main.bundle.css" rel='stylesheet' type='text/css'>
+    <link href="/compiled_css/flatty.css" rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/compiled_css/dropzone.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111764619-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-111764619-1');
+    </script>
+</head>
+
+<body>
+    <div id="appComponent"></div>
+
+    <!--<div id="registerComponent"></div>-->
+
+    <!--<div id="registrationComponent"></div>
         
         <!--<div id="forgotPasswordComponent"></div>
         
         <!--<div id="loginComponent"></div>
         
         <!--<div id="createComplaintComponent"></div>-->
-    
-        <!--<div id="complaintsViewComponent">-->
-            
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-        <script src="./compiled_js/bundle.js"></script>
-    </body>
+
+    <!--<div id="complaintsViewComponent">-->
+
+    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>-->
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="./compiled_js/bundle.js"></script>
+</body>
+
 </html>

@@ -6,8 +6,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { complaints } from '../reducers/reducer-complaints';
 import { activeUser } from '../reducers/reducer-activeUser';
+import { socketConnection } from '../reducers/reducer-socketConnection';
 import { setComplaints } from '../actions/action-complaints';
 import { setActiveUser } from '../actions/action-activeUser';
+import { setSocketConnection } from '../actions/action-socketConnection';
 
 import Home from './HomeComponent.jsx';
 import Login from './LoginComponent.jsx';
@@ -22,6 +24,8 @@ const socket = io.connect();
 class MainComponent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.props.setSocketConnection(socket);
 
         //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless.
         if (sessionStorage.activeUser != null && (this.props == null || this.props.activeUser == null)) {
@@ -41,7 +45,8 @@ class MainComponent extends React.Component {
             firebase.initializeApp(config);
         }
 
-        socket.on('complaint', (data) => {
+        socket.on('complaintrec', function(data) {
+            console.log(data);
             var arrayvar;
             if (this.props.complaints != null) {
                 arrayvar = Array.from(this.props.complaints); //Redux doesnt work if the data is mutated.
@@ -49,9 +54,9 @@ class MainComponent extends React.Component {
             if (arrayvar == null) {
                 arrayvar = []
             }
-            arrayvar.push({ author: data.author, title: data.title, content: data.content });
+            arrayvar.push({ author: data.author, title: data.title, content: data.content, anon: data.anon, dtTimestamp: data.dtTimestamp });
             this.props.setComplaints(arrayvar);
-        });
+        }.bind(this))
     }
 
     render() {
@@ -75,13 +80,14 @@ class MainComponent extends React.Component {
 function mapStateToProps(state) {
     return {
         complaints: state.complaints,
-        activeUser: state.activeUser
+        activeUser: state.activeUser,
+        socketConnection: state.socketConnection
     }
 }
 
 // Get actions and pass them as props to to UserList
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setComplaints: setComplaints, setActiveUser: setActiveUser }, dispatch);
+    return bindActionCreators({ setComplaints: setComplaints, setActiveUser: setActiveUser, setSocketConnection: setSocketConnection }, dispatch);
 }
 
 //this makes it a container, rather than a dumb component.

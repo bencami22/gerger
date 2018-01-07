@@ -18,7 +18,7 @@
     }).then(function() {
       complaints.forEach(function(data) {
         console.log("Emitting: " + data);
-        socket.emit('complaint', data);
+        socket.emit('complaintrec', data);
       });
     }).catch(function(err) {
       console.log(err);
@@ -35,6 +35,7 @@
       complaint.author = complaintToAdd.author;
       complaint.title = complaintToAdd.title;
       complaint.content = complaintToAdd.content;
+      complaint.anon = complaintToAdd.anon;
       complaint.ip = ip;
       complaint.fileUrls = complaintToAdd.fileUrls;
 
@@ -47,7 +48,10 @@
       var returnData = {
         author: complaint.author,
         title: complaint.title,
-        content: complaint.content
+        content: complaint.content,
+        anon: complaint.anon,
+        fileUrls: complaint.fileUrls,
+        dtTimestamp: Date.now
       };
 
       complaints.push(returnData);

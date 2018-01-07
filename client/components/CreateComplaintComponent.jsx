@@ -2,11 +2,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { activeUser } from '../reducers/reducer-activeUser';
+import { socketConnection } from '../reducers/reducer-socketConnection';
+
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 import DropzoneComponent from 'react-dropzone-component';
 
-const socket = io.connect();
+
 
 class CreateComplaintComponent extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class CreateComplaintComponent extends React.Component {
     this.state = {
       title: '',
       content: '',
+      anon: false,
       touched: {
         title: false,
         content: false,
@@ -24,6 +27,7 @@ class CreateComplaintComponent extends React.Component {
 
     this.handleTitleChange = ::this.handleTitleChange;
     this.handleContentChange = ::this.handleContentChange;
+    this.handleAnonChange = ::this.handleAnonChange;
     this.handleSubmit = ::this.handleSubmit;
     this.sendComplaint = ::this.sendComplaint;
 
@@ -84,6 +88,9 @@ class CreateComplaintComponent extends React.Component {
             <div className="rowArea">Content:
               <input className={shouldMarkError('content')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('content')} value={this.state.content} onChange={this.handleContentChange} />
             </div>
+            <div className="rowArea"> Post anonymously:
+              <input id="checkBox" type="checkbox" value={this.state.anon} onChange={this.handleAnonChange} />
+            </div>
             <div className="rowArea">
               <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
             </div>
@@ -103,11 +110,16 @@ class CreateComplaintComponent extends React.Component {
     this.setState({ content: e.target.value });
   }
 
+  handleAnonChange(e) {
+    this.setState({ anon: e.target.checked });
+  }
+
   sendComplaint() {
-    socket.emit('complaint', {
+    this.props.socketConnection.emit('complaint', {
         author: this.props.activeUser.username,
         title: this.state.title,
         content: this.state.content,
+        anon: this.state.anon,
         fileUrls: this.state.fileUrls
       },
       function(data) {
@@ -145,7 +157,8 @@ function validate(title, content) {
 //passes state into component as a prop
 function mapStateToProps(state) {
   return {
-    activeUser: state.activeUser
+    activeUser: state.activeUser,
+    socketConnection: state.socketConnection
   }
 }
 

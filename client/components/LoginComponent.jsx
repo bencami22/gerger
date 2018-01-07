@@ -1,14 +1,16 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import { setActiveUser } from '../actions/action-activeUser';
 import { justLoggedOut } from '../reducers/reducer-justLoggedOut';
+import { socketConnection } from '../reducers/reducer-socketConnection';
+
 import { withRouter } from 'react-router-dom'
 import humane from '../public/compiled_js/humane.min.js';
 import validator from 'validator';
 import firebase from 'firebase';
 
-const socket = io.connect();
 
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -37,7 +39,7 @@ class LoginComponent extends React.Component {
           var user = result.user;
           var additionalUserInfo = result.additionalUserInfo;
           if (user && token && additionalUserInfo) {
-            socket.emit('authenticationOrCreate', {
+            this.props.socketConnection.emit('authenticationOrCreate', {
               email: additionalUserInfo.profile.email != null ? additionalUserInfo.profile.email : user.email,
               firstName: additionalUserInfo.profile.first_name != null ? additionalUserInfo.profile.first_name : additionalUserInfo.profile.given_name,
               lastName: additionalUserInfo.profile.last_name != null ? additionalUserInfo.profile.last_name : additionalUserInfo.profile.family_name,
@@ -120,7 +122,7 @@ class LoginComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    socket.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
+    this.props.socketConnection.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
       if (data != null && data != false) {
         humane.log('Welcome back ' + data.username + '.');
@@ -162,7 +164,8 @@ function mapDispatchToProps(dispatch) {
 //passes state into component as a prop
 function mapStateToProps(state) {
   return {
-    justLoggedOut: state.justLoggedOut
+    justLoggedOut: state.justLoggedOut,
+    socketConnection: state.socketConnection
   }
 }
 

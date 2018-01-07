@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 
 var ComplaintSchema = new mongoose.Schema({
-          userId: { type: Number, index: true },
+          author: { type: String, index: true },
           title: { type: String },
           content: { type: String },
-          date: { type: Date, default: Date.now },
+          anon: { type: Boolean },
+          dtTimestamp: { type: Date, default: Date.now },
           ip: { type: String },
           fileUrls: [String]
 });
