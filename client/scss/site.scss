@@ -1,193 +1,294 @@
 @import 'variables.scss';
 
 body {
-  font-family: $font-stack;
-  font-size: 25px;
-  color: black;
-  background-color: #fafafa;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  text-align: center
-  
+    font-family: $font-stack;
+    font-size: 25px;
+    color: black;
+    background-color: #fafafa;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-align: center
 }
 
-.navigation
-{
-    margin-top:40px;
+.navigation {
+    margin-top: 40px;
 }
 
-.form{
-	margin:0 auto;
+.form {
+    margin: 0 auto;
 }
 
-.cursor{
-	cursor: $cursor-pointer;
+.cursor {
+    cursor: $cursor-pointer;
 }
 
-.text-styling{
-	font-family: Avantgarde, sans-serif;
-	letter-spacing: 2px;
-	color: black;
-	text-transform: uppercase;
+.text-styling {
+    font-family: Avantgarde, sans-serif;
+    letter-spacing: 2px;
+    color: black;
+    text-transform: uppercase;
 }
 
 @mixin font-size($size) {
-  font-size: $size;
+    font-size: $size;
 }
 
 @mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
 }
 
 
-.homeScrnTitle { 
-	@include font-size(28px); 
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	padding: 10px;
+.homeScrnTitle {
+    @include font-size(28px);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
 }
 
-.menu-styling{
-	list-style: $menu-styling-none;
+.menu-styling {
+    list-style: $menu-styling-none;
 }
 
-.ml39{
-    margin-left:39px !important;
+.ml39 {
+    margin-left: 39px !important;
 }
 
-.complaint-list
-{list-style: $menu-styling-none;
-   .complaint-list-author
-   {
-   }
-   .complaint-list-title
-   {
-     font-style: italic;
-   }
-   .complaint-list-content
-   {
-     color: #808080;
-     font-size:75%
-   }
+.complaint-list {
+    list-style: $menu-styling-none;
+    .complaint-list-author {}
+    .complaint-list-title {
+        font-style: italic;
+    }
+    .complaint-list-content {
+        color: #808080;
+        font-size: 75%
+    }
 }
 
 nav {
-  ul {
-    //margin-left: 2.5rem;
-    padding: 0;
-    list-style: none;
-  }
+    ul {
+        //margin-left: 2.5rem;
+        padding: 0;
+        list-style: none;
+    }
 
 
-a{
-   color: inherit; /* blue colors for links too */
-  text-decoration: inherit; /* no underline */
+    a {
+        color: inherit;
+        /* blue colors for links too */
+        text-decoration: inherit;
+        /* no underline */
+    }
+    li {
+        display: inline-block;
+        @include font-size(14px);
+        @extend .text-styling;
+        padding: 6px 12px;
+        text-decoration: none !important;
+
+    }
+    li:hover {
+        color: $dark-red;
+    }
 }
-li{
-  display: inline-block;
+
+.inputStyle {
+    margin-left: 10px;
+    width: 140px;
+    line-height: 20px;
+    @include border-radius(5px);
+    border: 1px solid #e0e0eb;
+}
+
+.inputStyle:active {
+    margin-left: 10px;
+    width: 140px;
+    line-height: 20px;
+    @include border-radius(5px);
+    border: 1px solid #e0e0eb;
+}
+
+
+.overallDv {
+    margin: 0 auto;
     @include font-size(14px);
-  	@extend .text-styling;
-    padding: 6px 12px;
-    text-decoration: none !important;
-    
-}
-  li:hover{
-  	color: $dark-red;
-  }
-}
-
-.inputStyle{
-    margin-left:10px; 
-    width: 140px;
-    line-height: 20px;
-    @include border-radius(5px);
-    border: 1px solid #e0e0eb;
-}
-
-.inputStyle:active{
-    margin-left:10px; 
-    width: 140px;
-    line-height: 20px;
-    @include border-radius(5px);
-    border: 1px solid #e0e0eb;
-}
-
-
-.overallDv{
-  margin: 0 auto;
-  @include font-size(14px);
-  padding:0 10px;
-    width:500px;
-	margin-bottom:10px;
-	@extend .text-styling;
-	@include font-size(13px);
+    padding: 0 10px;
+    width: 500px;
+    margin-bottom: 10px;
+    @extend .text-styling;
+    @include font-size(13px);
 }
 
 @mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
 }
 
 @mixin margin-left($marginleft) {
-  margin-left: $marginleft;
+    margin-left: $marginleft;
 }
 
 @mixin margin-top($margin-top) {
-  margin-top: $margin-top;
+    margin-top: $margin-top;
 }
 
 .myButton {
-	background-color:#e0e0eb;
-  @include border-radius(7px);
-  @include margin-left(10px);
-  @extend .text-styling;
-  @include font-size(10px); 
-	border:1px solid #495159;
-	display:inline-block;
-	cursor:pointer;
-	padding:10px 5px;
-	text-decoration:none;
+    background-color: #e0e0eb;
+    @include border-radius(7px);
+    @include margin-left(10px);
+    @extend .text-styling;
+    @include font-size(10px);
+    border: 1px solid #495159;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 5px;
+    text-decoration: none;
 }
 
 
 .myButton:hover {
-	background-color:#b1b1cd;
-	opacity:0.4;
+    background-color: #b1b1cd;
+    opacity: 0.4;
 }
 
 .myButton:active {
-	position:relative;
-	top:1px;
+    position: relative;
+    top: 1px;
 }
 
 
-.smallText{
-	@extend .text-styling;
-	@include font-size(8px);
-	@include margin-top(10px);
+.smallText {
+    @extend .text-styling;
+    @include font-size(8px);
+    @include margin-top(10px);
 }
 
 
-.inputField{
-	padding:5px;
+.inputField {
+    padding: 5px;
 }
 
-.rowArea
-{
-    margin-bottom:5px;
+.rowArea {
+    margin-bottom: 5px;
 }
 
-.complaintCreateTitleAlign{
+.complaintCreateTitleAlign {
     margin-right: 30px;
 }
 
-.registerEmailAlign{
+.registerEmailAlign {
     margin-right: 41px;
 }
 
-.errorTextBox { border: 1px solid red; }
+.errorTextBox {
+    border: 1px solid red;
+}
+
+/////////////////////////////
+/* Style the Image Used to Trigger the Modal */
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+
+.modal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}

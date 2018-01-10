@@ -54,7 +54,7 @@ class MainComponent extends React.Component {
             if (arrayvar == null) {
                 arrayvar = []
             }
-            arrayvar.push({ author: data.author, title: data.title, content: data.content, anon: data.anon, dtTimestamp: data.dtTimestamp });
+            arrayvar.push({ author: data.author, title: data.title, content: data.content, anon: data.anon, dtTimestamp: data.dtTimestamp, fileUrls: data.fileUrls });
             this.props.setComplaints(arrayvar);
         }.bind(this))
     }

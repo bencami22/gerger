@@ -19,6 +19,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dropzone-component": "^3.0.0",
+    "react-image-lightbox": "^4.4.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.1",
     "reactcss": "^1.2.2",
