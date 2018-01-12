@@ -2,8 +2,11 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
          email: { type: String },
+         firstName: { type: String, index: true },
+         lastName: { type: String },
+         avatarUrl: { type: String },
+         locality: { type: String },
          extUIds: [{ uid: { type: String, index: true }, provider: String }],
-         username: { type: String, index: true },
          password: { type: String },
          role: { type: String },
          dtTimestamp: { type: Date, default: Date.now },

@@ -9,12 +9,12 @@ exports.authenticate = function authenticate(data, ip) {
     return new Promise(function(resolve, reject) {
 
         //get credentials sent by the client 
-        var username = data.username;
+        var email = data.email;
         var password = data.password;
 
         var hashedValue = utiltiesBL.hashPassword(password);
 
-        userModel.findOne({ username: username }).exec().then(function(userRetrieved) {
+        userModel.findOne({ email: email }).exec().then(function(userRetrieved) {
 
             //inform the callback of auth success/failure 
             if (!userRetrieved) {
@@ -49,7 +49,8 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
                     //user not found, lets add him
                     var newUser = new userModel();
                     newUser.email = data.email;
-                    newUser.username = data.email; //data.firstName+date.lastName;
+                    newUser.firstName = data.firstName; //data.firstName+date.lastName;
+                    newUser.lastName = data.lastName;
                     newUser.extUIds.push({
                         uid: data.uid,
                         provider: data.provider
@@ -65,7 +66,7 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
                                     console.log('Error loading file. err+' + err);
                                 }
                                 else {
-                                    utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.username));
+                                    utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
                                     resolve(newUser);
                                 }
                             });
@@ -145,7 +146,7 @@ exports.changePassword = function changePassword(resetPasswordToken, newPassword
                     userRetrieved.password = utiltiesBL.hashPassword(newPassword);
 
                     userRetrieved.save().then(function() {
-                        console.log("Change Password for userL" + userRetrieved.username + " was successful");
+                        console.log("Change Password for userL" + userRetrieved.email + " was successful");
                         resolve();
                     })
 
@@ -158,9 +159,9 @@ exports.changePassword = function changePassword(resetPasswordToken, newPassword
 
 exports.registration = function registration(data, ip) {
     return new Promise(function(resolve, reject) {
-        userModel.findOne({ username: data.username }).then(function(userRetrieved) {
+        userModel.findOne({ email: data.email }).then(function(userRetrieved) {
 
-            //inform the callback is username is already used
+            //inform the callback is email is already used
             if (userRetrieved) {
                 reject();
             }
@@ -169,7 +170,8 @@ exports.registration = function registration(data, ip) {
 
             var newUser = new userModel();
             newUser.email = data.email;
-            newUser.username = data.username;
+            newUser.firstName = data.firstName;
+            newUser.lastName = data.LastName;
             newUser.password = utiltiesBL.hashPassword(data.password);
             newUser.role = 'regular';
 
@@ -181,7 +183,7 @@ exports.registration = function registration(data, ip) {
                         console.log('Error loading file. err+' + err);
                     }
                     else {
-                        utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.username));
+                        utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
                         resolve(newUser);
                     }
                 });

@@ -15,14 +15,18 @@ class ComplaintViewComponent extends React.Component {
 
     if (this.props.fileUrls != null) {
       var i = -1;
-      var urls = this.props.fileUrls.map(function(url) {
-        i++;
-        return (<img id={i} 
+      var urls = null;
+      for (i = 0; i < this.props.fileUrls.length; i++) {
+        if (urls == null) urls = [];
+        urls.push(<img id={i} 
         onClick={() => this.setState({ isOpen: true
-        //, photoIndex: {i} 
-        })} src={url} style={{width:'40px'}} />);
-      }.bind(this));
+        , photoIndex: i 
+        })} src={this.props.fileUrls[i]} style={{width:'40px'}} />);
+      }
+
     }
+
+
 
     return (
 

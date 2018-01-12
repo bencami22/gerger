@@ -16,7 +16,7 @@ class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
       touched: {
         email: false,
@@ -25,7 +25,7 @@ class LoginComponent extends React.Component {
       }
     };
 
-    this.handleUsernameChange = ::this.handleUsernameChange;
+    this.handleEmailChange = ::this.handleEmailChange;
     this.handlePasswordChange = ::this.handlePasswordChange;
     this.handleSubmit = ::this.handleSubmit;
     this.handleFacebookLogin = ::this.handleFacebookLogin;
@@ -49,15 +49,15 @@ class LoginComponent extends React.Component {
             }, function(data) {
               //if no user found, false will be returned and so anon menu will show, else show menu depending on role
               if (data != null && data != false) {
-                humane.log('Welcome back ' + data.username + '.');
+                humane.log('Welcome back ' + data.firstName + '.');
 
                 this.props.setActiveUser(data);
                 this.props.history.push('/complaints/create');
 
               }
               else {
-                this.setState({ username: '', password: '' });
-                humane.log('Wrong username or password.');
+                this.setState({ email: '', password: '' });
+                humane.log('Wrong email or password.');
               }
             }.bind((this)));
           }
@@ -84,7 +84,7 @@ class LoginComponent extends React.Component {
 
   render() {
 
-    const errors = validate(this.state.username, this.state.password);
+    const errors = validate(this.state.email, this.state.password);
     const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
 
     const shouldMarkError = (field) => {
@@ -94,7 +94,7 @@ class LoginComponent extends React.Component {
     return (
       <form id="login" onSubmit={this.handleSubmit}>
        <div className="overallDv"> 
-       <div className="rowArea" > Username: <input type="text" className={shouldMarkError('username')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('username')} value={this.state.username} onChange={this.handleUsernameChange} /></div>
+       <div className="rowArea" > Email: <input type="text" className={shouldMarkError('email')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('email')} value={this.state.email} onChange={this.handleEmailChange} /></div>
        <div className="rowArea" > Password: <input type="password" className={shouldMarkError('password')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('password')} value={this.state.password} onChange={this.handlePasswordChange} /></div>
         <button type="submit" className="myButton" onClick={this.handleBlur('submit')} disabled={isDisabled}>Login</button>
         
@@ -122,24 +122,24 @@ class LoginComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.socketConnection.emit('authentication', { username: this.state.username, password: this.state.password }, function(data) {
+    this.props.socketConnection.emit('authentication', { email: this.state.email, password: this.state.password }, function(data) {
       //if no user found, false will be returned and so anon menu will show, else show menu depending on role
       if (data != null && data != false) {
-        humane.log('Welcome back ' + data.username + '.');
+        humane.log('Welcome back ' + data.firstName + '.');
 
         this.props.setActiveUser(data);
         this.props.history.push('/complaints/create');
 
       }
       else {
-        this.setState({ username: '', password: '' });
-        humane.log('Wrong username or password.');
+        this.setState({ email: '', password: '' });
+        humane.log('Wrong email or password.');
       }
     }.bind((this)));
   }
 
-  handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
+  handleEmailChange(e) {
+    this.setState({ email: e.target.value });
   }
 
   handlePasswordChange(e) {
@@ -147,10 +147,10 @@ class LoginComponent extends React.Component {
   }
 };
 
-function validate(username, password) {
+function validate(email, password) {
   // true means invalid, so our conditions got reversed
   return {
-    username: validator.isEmpty(username),
+    email: validator.isEmpty(email),
     password: validator.isEmpty(password),
   };
 }
