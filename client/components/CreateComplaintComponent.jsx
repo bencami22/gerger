@@ -116,7 +116,8 @@ class CreateComplaintComponent extends React.Component {
 
   sendComplaint() {
     this.props.socketConnection.emit('complaint', {
-        author: this.props.activeUser.username,
+        user: this.props.activeUser.email,
+        author: this.props.activeUser.firstName,
         title: this.state.title,
         content: this.state.content,
         anon: this.state.anon,

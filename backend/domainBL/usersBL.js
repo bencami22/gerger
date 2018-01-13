@@ -38,7 +38,7 @@ exports.authenticate = function authenticate(data, ip) {
 
 exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
     return new Promise(function(resolve, reject) {
-
+        //TODO: a FB graph api call to make sure the access token is valid here
         userModel.findOne({
                 extUIds: {
                     $elemMatch: { uid: data.uid }
@@ -46,54 +46,65 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
             }).exec()
             .then(function(userRetrieved) {
                 if (!userRetrieved) {
-                    //user not found, lets add him
-                    var newUser = new userModel();
-                    newUser.email = data.email;
-                    newUser.firstName = data.firstName; //data.firstName+date.lastName;
-                    newUser.lastName = data.lastName;
-                    newUser.extUIds.push({
-                        uid: data.uid,
-                        provider: data.provider
-                    });
-                    newUser.role = 'regular';
+                    userModel.findOne({
+                            email: data.email
+                        }).exec()
+                        .then(function(userRetrieved) {
+                            if (!userRetrieved) {
+                                //user not found, lets add him
+                                var newUser = new userModel();
+                                newUser.email = data.email;
+                                newUser.firstName = data.firstName; //data.firstName+date.lastName;
+                                newUser.lastName = data.lastName;
+                                newUser.avatarUrl = data.avatarUrl;
+                                newUser.extUIds.push({
+                                    uid: data.uid,
+                                    provider: data.provider
+                                });
+                                newUser.role = 'regular';
 
-                    newUser.save(function(err, product, numAffected) {
-                        if (!err) {
-                            console.log('Success!');
-                            fs.readFile(path.resolve(__dirname, '..', './mailtemplates/registrationcomplete.html'), 'utf8', function(err, content) {
+                                newUser.save(function(err, product, numAffected) {
+                                    if (!err) {
+                                        console.log('Success!');
+                                        fs.readFile(path.resolve(__dirname, '..', './mailtemplates/registrationcomplete.html'), 'utf8', function(err, content) {
 
-                                if (err) {
-                                    console.log('Error loading file. err+' + err);
-                                }
-                                else {
-                                    utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
-                                    resolve(newUser);
-                                }
-                            });
-                            resolve(newUser);
-                        }
-                        else {
-                            console.log('Error saving to mongoDB! Error:' + err);
-                            reject();
-                        }
-                    });
+                                            if (err) {
+                                                console.log('Error loading file. err+' + err);
+                                            }
+                                            else {
+                                                utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
+                                                resolve(newUser);
+                                            }
+                                        });
+                                        resolve(newUser);
+                                    }
+                                    else {
+                                        console.log('Error saving to mongoDB! Error:' + err);
+                                        reject();
+                                    }
+                                });
+                            }
+                            else {
+                                //user found
+                                console.log('Email User found:' + userRetrieved + ' adding uid to email');
+
+                                userRetrieved.extUIds.push({ uid: data.uid, provider: data.provider });
+                                userRetrieved.save();
+                                resolve(userRetrieved);
+                            }
+
+                        })
+                        .catch(function(err) {
+                            reject(err);
+                        });
                 }
                 else {
-                    //user found
-                    console.log('User found:' + userRetrieved + ' validating password hash...');
-
-                    //TODO: a FB graph api call to make sure the access token is valid here
-
+                    console.log(' User found:' + userRetrieved);
                     resolve(userRetrieved);
                 }
-
-            })
-            .catch(function(err) {
-                reject(err);
             });
     });
-};
-
+}
 
 exports.forgotPassword = function forgotPassword(data, ip) {
     return new Promise(function(resolve, reject) {

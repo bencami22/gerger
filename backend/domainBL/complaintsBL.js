@@ -18,7 +18,9 @@
     }).then(function() {
       complaints.forEach(function(data) {
         console.log("Emitting: " + data);
+        var dt = data.dtTimestamp.toString();
         socket.emit('complaintrec', data);
+
       });
     }).catch(function(err) {
       console.log(err);
@@ -32,6 +34,7 @@
         reject(false);
 
       var complaint = new complaintModel();
+      complaint.user = complaintToAdd.user;
       complaint.author = complaintToAdd.author;
       complaint.title = complaintToAdd.title;
       complaint.content = complaintToAdd.content;
@@ -51,7 +54,7 @@
         content: complaint.content,
         anon: complaint.anon,
         fileUrls: complaint.fileUrls,
-        dtTimestamp: Date.now
+        dtTimestamp: Date.now()
       };
 
       complaints.push(returnData);

@@ -53879,7 +53879,8 @@ var LoginComponent = function (_React$Component) {
               lastName: additionalUserInfo.profile.last_name != null ? additionalUserInfo.profile.last_name : additionalUserInfo.profile.family_name,
               uid: additionalUserInfo.profile.id,
               provider: additionalUserInfo.providerId,
-              token: token
+              token: token,
+              avatarUrl: additionalUserInfo.profile.picture.data.url
             }, function (data) {
               //if no user found, false will be returned and so anon menu will show, else show menu depending on role
               if (data != null && data != false) {
@@ -57246,7 +57247,8 @@ var CreateComplaintComponent = function (_React$Component) {
     key: 'sendComplaint',
     value: function sendComplaint() {
       this.props.socketConnection.emit('complaint', {
-        author: this.props.activeUser.username,
+        user: this.props.activeUser.email,
+        author: this.props.activeUser.firstName,
         title: this.state.title,
         content: this.state.content,
         anon: this.state.anon,
