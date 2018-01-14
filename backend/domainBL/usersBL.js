@@ -182,7 +182,7 @@ exports.registration = function registration(data, ip) {
             var newUser = new userModel();
             newUser.email = data.email;
             newUser.firstName = data.firstName;
-            newUser.lastName = data.LastName;
+            newUser.lastName = data.lastName;
             newUser.password = utiltiesBL.hashPassword(data.password);
             newUser.role = 'regular';
 

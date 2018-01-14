@@ -6,19 +6,24 @@
   exports.sendComplaints = function sendComplaints(socket) {
     return new Promise(function(resolve, reject) {
       if (complaints.length == 0) {
-        return complaintModel.find().exec().then(function(docs) {
-          docs.forEach(function(element) {
-            console.log("Retrieved from and adding to collection: " + element);
-            complaints.push(element);
+        return complaintModel.find()
+          .populate('user', 'firstName avatarUrl')
+          .exec()
+          .then(function(docs) {
+            docs.forEach(function(element) {
+              console.log("Retrieved from and adding to collection: " + element);
+              complaints.push(element);
+            });
+            resolve();
+          })
+          .catch(function(err) {
+            console.log(err);
           });
-          resolve();
-        });
       }
       resolve();
     }).then(function() {
       complaints.forEach(function(data) {
         console.log("Emitting: " + data);
-        var dt = data.dtTimestamp.toString();
         socket.emit('complaintrec', data);
 
       });
@@ -34,8 +39,7 @@
         reject(false);
 
       var complaint = new complaintModel();
-      complaint.user = complaintToAdd.user;
-      complaint.author = complaintToAdd.author;
+      complaint.user = complaintToAdd.user._id;
       complaint.title = complaintToAdd.title;
       complaint.content = complaintToAdd.content;
       complaint.anon = complaintToAdd.anon;
@@ -49,12 +53,12 @@
       });
 
       var returnData = {
-        author: complaint.author,
+        user: complaintToAdd.user,
         title: complaint.title,
         content: complaint.content,
         anon: complaint.anon,
         fileUrls: complaint.fileUrls,
-        dtTimestamp: Date.now()
+        dtTimestamp: complaint.dtTimestamp
       };
 
       complaints.push(returnData);

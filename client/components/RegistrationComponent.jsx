@@ -50,7 +50,7 @@ class RegistrationComponent extends React.Component {
        <div className="rowArea"><label className="registerEmailAlign">Email: </label><input value={this.state.email} className={shouldMarkError('email')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('email')}  onChange={this.handleEmailChange} />< /div>
        <div className="rowArea">First Name: <input value={this.state.firstName}  className={shouldMarkError('firstName')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('firstName')}  onChange={this.handleFirstNameChange} /></div>
        <div className="rowArea">Last Name: <input value={this.state.lastName}  className={shouldMarkError('lastName')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('lastName')}  onChange={this.handleLastNameChange} /></div>
-       <div className="rowArea">Password: <input value={this.state.password}  className={shouldMarkError('password')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('password')}  onChange={this.handlePasswordChange} /></div>
+       <div className="rowArea">Password: <input type="password" value={this.state.password}  className={shouldMarkError('password')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('password')}  onChange={this.handlePasswordChange} /></div>
        <div className="rowArea"><button className="myButton" type="submit" onClick={this.handleBlur('submit')} disabled={isDisabled}>Register</button></div>
      </div>
         </form>);

@@ -53677,7 +53677,7 @@ var MainComponent = function (_React$Component) {
             if (arrayvar == null) {
                 arrayvar = [];
             }
-            arrayvar.push({ author: data.author, title: data.title, content: data.content, anon: data.anon, dtTimestamp: data.dtTimestamp, fileUrls: data.fileUrls });
+            arrayvar.push({ author: data.user.firstName, avatarUrl: data.user.avatarUrl, title: data.title, content: data.content, anon: data.anon, dtTimestamp: data.dtTimestamp, fileUrls: data.fileUrls });
             this.props.setComplaints(arrayvar);
         }.bind(_this));
         return _this;
@@ -53880,7 +53880,7 @@ var LoginComponent = function (_React$Component) {
               uid: additionalUserInfo.profile.id,
               provider: additionalUserInfo.providerId,
               token: token,
-              avatarUrl: additionalUserInfo.profile.picture.data.url
+              avatarUrl: additionalUserInfo.profile.picture.data ? additionalUserInfo.profile.picture.data.url : additionalUserInfo.profile.picture
             }, function (data) {
               //if no user found, false will be returned and so anon menu will show, else show menu depending on role
               if (data != null && data != false) {
@@ -56354,7 +56354,7 @@ var RegistrationComponent = function (_React$Component) {
             'div',
             { className: 'rowArea' },
             'Password: ',
-            _react2.default.createElement('input', { value: this.state.password, className: shouldMarkError('password') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('password'), onChange: this.handlePasswordChange })
+            _react2.default.createElement('input', { type: 'password', value: this.state.password, className: shouldMarkError('password') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('password'), onChange: this.handlePasswordChange })
           ),
           _react2.default.createElement(
             'div',
@@ -57247,8 +57247,7 @@ var CreateComplaintComponent = function (_React$Component) {
     key: 'sendComplaint',
     value: function sendComplaint() {
       this.props.socketConnection.emit('complaint', {
-        user: this.props.activeUser.email,
-        author: this.props.activeUser.firstName,
+        user: this.props.activeUser,
         title: this.state.title,
         content: this.state.content,
         anon: this.state.anon,
@@ -57354,7 +57353,7 @@ var ComplaintsViewComponent = function (_React$Component) {
                 'dl',
                 null,
                 this.props.complaints && this.props.complaints.map(function (x, i) {
-                    return _react2.default.createElement(_ComplaintViewComponent2.default, { key: i, author: x.author, title: x.title, content: x.content, anon: x.anon, dtTimestamp: x.dtTimestamp, fileUrls: x.fileUrls });
+                    return _react2.default.createElement(_ComplaintViewComponent2.default, { key: i, author: x.author, avatarUrl: x.avatarUrl, title: x.title, content: x.content, anon: x.anon, dtTimestamp: x.dtTimestamp, fileUrls: x.fileUrls });
                 })
             );
         }
@@ -57435,12 +57434,14 @@ var ComplaintViewComponent = function (_React$Component) {
           if (urls == null) urls = [];
           urls.push(_react2.default.createElement('img', { id: i,
             onClick: function onClick() {
-              return _this2.setState({ isOpen: true,
-                photoIndex: i
+              return _this2.setState({ isOpen: true
+                //     , photoIndex: i 
               });
             }, src: this.props.fileUrls[i], style: { width: '40px' } }));
         }
       }
+
+      var anonAvatarUrl = 'http://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg';
 
       return _react2.default.createElement(
         'li',
@@ -57454,7 +57455,7 @@ var ComplaintViewComponent = function (_React$Component) {
             _react2.default.createElement(
               'span',
               { className: 'complaint-list-content' },
-              _react2.default.createElement('img', { style: { 'borderRadius': '50%', 'width': '60px' }, src: 'http://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg' })
+              _react2.default.createElement('img', { style: { 'borderRadius': '50%', 'width': '60px' }, src: this.props.anon ? anonAvatarUrl : this.props.avatarUrl ? this.props.avatarUrl : anonAvatarUrl })
             )
           ),
           _react2.default.createElement(

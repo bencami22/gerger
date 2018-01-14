@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var ComplaintSchema = new mongoose.Schema({
-          user: { type: String, index: true },
-          author: { type: String },
+          user: { type: Schema.Types.ObjectId, ref: 'User' },
           title: { type: String },
           content: { type: String },
           anon: { type: Boolean },

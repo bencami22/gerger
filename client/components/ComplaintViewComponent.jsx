@@ -20,20 +20,20 @@ class ComplaintViewComponent extends React.Component {
         if (urls == null) urls = [];
         urls.push(<img id={i} 
         onClick={() => this.setState({ isOpen: true
-        , photoIndex: i 
+   //     , photoIndex: i 
         })} src={this.props.fileUrls[i]} style={{width:'40px'}} />);
       }
 
     }
 
-
+    var anonAvatarUrl = 'http://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg';
 
     return (
 
       <li className="complaint-list">
       <div>
        <p>
-        <span className="complaint-list-content"><img style={{'borderRadius': '50%', 'width':'60px'}} src="http://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg" /></span>
+        <span className="complaint-list-content"><img style={{'borderRadius': '50%', 'width':'60px'}} src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} /></span>
         </p>
          <p>
         <span className="complaint-list-content">-{formatDate(this.props.dtTimestamp)}</span>

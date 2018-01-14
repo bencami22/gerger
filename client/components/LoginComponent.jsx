@@ -46,7 +46,7 @@ class LoginComponent extends React.Component {
               uid: additionalUserInfo.profile.id,
               provider: additionalUserInfo.providerId,
               token: token,
-              avatarUrl: additionalUserInfo.profile.picture.data.url
+              avatarUrl: (additionalUserInfo.profile.picture.data ? additionalUserInfo.profile.picture.data.url : additionalUserInfo.profile.picture)
             }, function(data) {
               //if no user found, false will be returned and so anon menu will show, else show menu depending on role
               if (data != null && data != false) {
