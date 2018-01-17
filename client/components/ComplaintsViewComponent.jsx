@@ -12,7 +12,7 @@ class ComplaintsViewComponent extends React.Component {
         return (
             <dl>
                 {this.props.complaints && this.props.complaints.map((x, i)=>
-                    <ComplaintViewComponent key={i} author={x.author} avatarUrl={x.avatarUrl} title={x.title} content={x.content} anon={x.anon} dtTimestamp={x.dtTimestamp} fileUrls={x.fileUrls} />
+                    <ComplaintViewComponent key={i} author={x.author} avatarUrl={x.avatarUrl} title={x.title} content={x.content} locality={x.locality} anon={x.anon} dtTimestamp={x.dtTimestamp} fileUrls={x.fileUrls} />
                 )}
             </dl>
         );

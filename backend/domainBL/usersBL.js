@@ -128,7 +128,8 @@ exports.forgotPassword = function forgotPassword(data, ip) {
                 else {
                     var resetPasswordToken = new Object();
                     resetPasswordToken.token = uuid();
-
+                    if (userRetrieved.resetPasswordTokens == null)
+                        userRetrieved.resetPasswordTokens = new [];
                     userRetrieved.resetPasswordTokens.push(resetPasswordToken);
                     userRetrieved.save();
 

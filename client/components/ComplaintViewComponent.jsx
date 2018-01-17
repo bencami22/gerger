@@ -39,13 +39,15 @@ class ComplaintViewComponent extends React.Component {
         <span className="complaint-list-content">-{formatDate(this.props.dtTimestamp)}</span>
         </p>
         <p>
+        <span className="complaint-list-content"> at {this.props.locality}</span>
+        </p>
+        <p>
         <span className="complaint-list-author">{this.props.anon?"Anon":this.props.author}</span> says <span className="complaint-list-title">"{this.props.title}"</span> 
         </p>
         <p>
         <span className="complaint-list-content">-{this.props.content}</span>
         </p>
         <p>
-        
         <span className="complaint-list-content">{urls}</span>
         </p>
         <hr/>

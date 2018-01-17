@@ -42,6 +42,7 @@
       complaint.user = complaintToAdd.user._id;
       complaint.title = complaintToAdd.title;
       complaint.content = complaintToAdd.content;
+      complaint.locality = complaintToAdd.locality;
       complaint.anon = complaintToAdd.anon;
       complaint.ip = ip;
       complaint.fileUrls = complaintToAdd.fileUrls;
@@ -56,6 +57,7 @@
         user: complaintToAdd.user,
         title: complaint.title,
         content: complaint.content,
+        locality: complaint.locality,
         anon: complaint.anon,
         fileUrls: complaint.fileUrls,
         dtTimestamp: complaint.dtTimestamp

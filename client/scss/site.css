@@ -122,7 +122,10 @@ nav li:hover {
   margin-right: 30px; }
 
 .registerEmailAlign {
-  margin-right: 41px; }
+  margin-right: 49px; }
+
+.loginEmailAlign {
+  margin-left: 48px; }
 
 .errorTextBox {
   border: 1px solid red; }

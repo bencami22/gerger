@@ -7,7 +7,7 @@ import { socketConnection } from '../reducers/reducer-socketConnection';
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 import DropzoneComponent from 'react-dropzone-component';
-
+import LocalitiesComponent from '../components/LocalitiesComponent.jsx';
 
 
 class CreateComplaintComponent extends React.Component {
@@ -16,6 +16,7 @@ class CreateComplaintComponent extends React.Component {
     this.state = {
       title: '',
       content: '',
+      locality: '',
       anon: false,
       touched: {
         title: false,
@@ -27,6 +28,7 @@ class CreateComplaintComponent extends React.Component {
 
     this.handleTitleChange = ::this.handleTitleChange;
     this.handleContentChange = ::this.handleContentChange;
+    this.handleLocalityChange = ::this.handleLocalityChange;
     this.handleAnonChange = ::this.handleAnonChange;
     this.handleSubmit = ::this.handleSubmit;
     this.sendComplaint = ::this.sendComplaint;
@@ -78,6 +80,7 @@ class CreateComplaintComponent extends React.Component {
         }
       }
     };
+
     return (
 
       <form id="sendComplaint" onSubmit={this.handleSubmit}>
@@ -88,7 +91,12 @@ class CreateComplaintComponent extends React.Component {
             <div className="rowArea">Content:
               <input className={shouldMarkError('content')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('content')} value={this.state.content} onChange={this.handleContentChange} />
             </div>
-            <div className="rowArea"> Post anonymously:
+            <div className="rowArea">
+            Locality: 
+            <LocalitiesComponent handleChange={this.handleLocalityChange.bind(this)} />
+            </div>
+            <div className="rowArea">
+             Post anonymously:
               <input id="checkBox" type="checkbox" value={this.state.anon} onChange={this.handleAnonChange} />
             </div>
             <div className="rowArea">
@@ -110,6 +118,10 @@ class CreateComplaintComponent extends React.Component {
     this.setState({ content: e.target.value });
   }
 
+  handleLocalityChange(name, value) {
+    this.setState({ locality: value });
+  }
+
   handleAnonChange(e) {
     this.setState({ anon: e.target.checked });
   }
@@ -119,6 +131,7 @@ class CreateComplaintComponent extends React.Component {
         user: this.props.activeUser,
         title: this.state.title,
         content: this.state.content,
+        locality: this.state.locality,
         anon: this.state.anon,
         fileUrls: this.state.fileUrls
       },

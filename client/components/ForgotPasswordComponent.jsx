@@ -2,6 +2,8 @@ import React from 'react';
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator'
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { socketConnection } from '../reducers/reducer-socketConnection';
 
 class ForgotPasswordComponent extends React.Component {
@@ -71,4 +73,11 @@ function validate(email) {
   };
 }
 
-export default ForgotPasswordComponent
+//passes state into component as a prop
+function mapStateToProps(state) {
+  return {
+    socketConnection: state.socketConnection
+  }
+}
+
+export default connect(mapStateToProps)(ForgotPasswordComponent);

@@ -95,7 +95,7 @@ class LoginComponent extends React.Component {
     return (
       <form id="login" onSubmit={this.handleSubmit}>
        <div className="overallDv"> 
-       <div className="rowArea" > Email: <input type="text" className={shouldMarkError('email')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('email')} value={this.state.email} onChange={this.handleEmailChange} /></div>
+       <div className="rowArea" > Email: <input type="text" className={shouldMarkError('email')?"inputStyle errorTextBox loginEmailAlign":"inputStyle loginEmailAlign"} onBlur={this.handleBlur('email')} value={this.state.email} onChange={this.handleEmailChange} /></div>
        <div className="rowArea" > Password: <input type="password" className={shouldMarkError('password')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('password')} value={this.state.password} onChange={this.handlePasswordChange} /></div>
         <button type="submit" className="myButton" onClick={this.handleBlur('submit')} disabled={isDisabled}>Login</button>
         
