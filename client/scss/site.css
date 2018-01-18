@@ -122,13 +122,16 @@ nav li:hover {
   margin-right: 30px; }
 
 .registerEmailAlign {
-  margin-right: 49px; }
+  margin-right: 47px; }
 
 .loginEmailAlign {
   margin-left: 48px; }
 
 .errorTextBox {
   border: 1px solid red; }
+
+.alignTextLeft {
+  text-align: left; }
 
 /* Style the Image Used to Trigger the Modal */
 #myImg {

@@ -58,7 +58,7 @@ class CreateComplaintComponent extends React.Component {
 
   render() {
 
-    const errors = validate(this.state.title, this.state.content);
+    const errors = validate(this.state.title, this.state.content, this.state.locality);
     const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
 
     const shouldMarkError = (field) => {
@@ -89,7 +89,7 @@ class CreateComplaintComponent extends React.Component {
               <input className={shouldMarkError('title')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('title')} value={this.state.title} onChange={this.handleTitleChange} />
             </div>
             <div className="rowArea">Content:
-              <input className={shouldMarkError('content')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('content')} value={this.state.content} onChange={this.handleContentChange} />
+              <textarea  cols="30" rows="3" className={shouldMarkError('content')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('content')} value={this.state.content} onChange={this.handleContentChange} />
             </div>
             <div className="rowArea">
             Locality: 
@@ -159,11 +159,12 @@ class CreateComplaintComponent extends React.Component {
 
 
 
-function validate(title, content) {
+function validate(title, content, locality) {
   // true means invalid, so our conditions got reversed
   return {
     title: validator.isEmpty(title),
     content: validator.isEmpty(content),
+    locality: validator.equals(locality, "Select")
   };
 }
 
