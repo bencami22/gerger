@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "scripts": {
         "start": "cd backend && npm start",
-        //"postinstall": "cd backend && npm install && cd.. && cd client && npm install"//windows
-        "postinstall": "cd backend && npm install && cd - && cd client && npm install" //unix
+        "postinstall": "cd backend && npm install && cd - && cd client && npm install"
     }
 }
