@@ -1,8 +1,8 @@
 {
-    "name": "foobar-app",
-    "version": "0.1.0",
+    "name": "gerger-malta",
+    "version": "0.0.1",
     "scripts": {
-        "postinstall": "npm install --prefix backend && npm install --prefix client",
-        "start": "backend/server.js"
+        "start": "cd backend && npm start",
+        "postinstall": "cd backend && npm install && cd.. && cd client && npm install"
     }
 }

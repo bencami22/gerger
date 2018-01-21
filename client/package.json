@@ -1,8 +1,6 @@
 {
-  "name": "Complaints",
+  "name": "gerger-malta-client",
   "version": "0.0.1",
-  "description": "https://www.youtube.com/watch?v=Uf1Vk3RnXsk",
-  "main": "server.js",
   "repository": "",
   "author": "Ben",
   "dependencies": {
@@ -29,12 +27,5 @@
     "source-list-map": "^2.0.0",
     "validator": "^9.2.0",
     "webpack": "^3.10.0"
-  },
-  "scripts": {
-    "serve": "firebase serve --only functions",
-    "shell": "firebase experimental:functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
   }
 }
