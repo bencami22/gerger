@@ -26,7 +26,7 @@ class ComplaintViewComponent extends React.Component {
 
     }
 
-    var anonAvatarUrl = 'http://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg';
+    var anonAvatarUrl = 'https://s3.amazonaws.com/nvest/Blank_Club_Website_Avatar_Gray.jpg';
 
     return (
 

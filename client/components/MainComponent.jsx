@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { complaints } from '../reducers/reducer-complaints';
 import { activeUser } from '../reducers/reducer-activeUser';
 import { socketConnection } from '../reducers/reducer-socketConnection';
+import { sortComplaints } from '../reducers/reducer-sortComplaints';
 import { setComplaints } from '../actions/action-complaints';
 import { setActiveUser } from '../actions/action-activeUser';
 import { setSocketConnection } from '../actions/action-socketConnection';
@@ -46,15 +47,27 @@ class MainComponent extends React.Component {
         }
 
         socket.on('complaintrec', function(data) {
-            console.log(data);
+            //console.log(data);
             var arrayvar;
-            if (this.props.complaints != null) {
-                arrayvar = Array.from(this.props.complaints); //Redux doesnt work if the data is mutated.
+            if (data.reset) {
+                arrayvar = [];
             }
-            if (arrayvar == null) {
-                arrayvar = []
+            else {
+                if (this.props.complaints != null) {
+                    arrayvar = Array.from(this.props.complaints); //Redux doesnt work if the data is mutated.
+                }
+                if (arrayvar == null) {
+                    arrayvar = []
+                }
             }
-            arrayvar.push({ author: data.user.firstName, avatarUrl: data.user.avatarUrl, title: data.title, content: data.content, locality: data.locality, anon: data.anon, dtTimestamp: data.dtTimestamp, fileUrls: data.fileUrls });
+
+            let complaint = data.data;
+            if (data.single && this.props.sortComplaints && this.props.sortComplaints.ordering == "desc") {
+                arrayvar.unshift({ author: complaint.user.firstName, avatarUrl: complaint.user.avatarUrl, title: complaint.title, content: complaint.content, locality: complaint.locality, anon: complaint.anon, dtTimestamp: complaint.dtTimestamp, fileUrls: complaint.fileUrls });
+            }
+            else {
+                arrayvar.push({ author: complaint.user.firstName, avatarUrl: complaint.user.avatarUrl, title: complaint.title, content: complaint.content, locality: complaint.locality, anon: complaint.anon, dtTimestamp: complaint.dtTimestamp, fileUrls: complaint.fileUrls });
+            }
             this.props.setComplaints(arrayvar);
         }.bind(this))
     }
@@ -81,7 +94,8 @@ function mapStateToProps(state) {
     return {
         complaints: state.complaints,
         activeUser: state.activeUser,
-        socketConnection: state.socketConnection
+        socketConnection: state.socketConnection,
+        sortComplaints: state.sortComplaints
     }
 }
 

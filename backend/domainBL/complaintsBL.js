@@ -1,37 +1,44 @@
   var mongoose = require('mongoose');
 
-  var complaints = [];
   var complaintModel = mongoose.model('Complaint');
 
-  exports.sendComplaints = function sendComplaints(socket) {
+  exports.sendComplaints = function sendComplaints(socket, ordering, limit, locality) {
+    var complaints = [];
     return new Promise(function(resolve, reject) {
-      if (complaints.length == 0) {
-        return complaintModel.find()
-          .populate('user', 'firstName avatarUrl')
-          .exec()
-          .then(function(docs) {
-            docs.forEach(function(element) {
-              console.log("Retrieved from and adding to collection: " + element);
-              complaints.push(element);
-            });
-            resolve();
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+      var query;
+      if (locality) {
+        query = complaintModel.find({ locality: locality });
       }
-      resolve();
+      else {
+        query = complaintModel.find();
+      }
+      return query
+        .sort({ dtTimestamp: ordering })
+        .limit(limit)
+        .populate('user', 'firstName avatarUrl')
+        .exec()
+        .then(function(docs) {
+          docs.forEach(function(element) {
+            console.log("Retrieved from and adding to collection: " + element);
+            complaints.push(element);
+          });
+          resolve();
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }).then(function() {
+      var reset = true;
       complaints.forEach(function(data) {
-        console.log("Emitting: " + data);
-        socket.emit('complaintrec', data);
+        var dataToSend = { reset: reset, data: data };
+        socket.emit('complaintrec', dataToSend);
+        reset = false;
 
       });
     }).catch(function(err) {
       console.log(err);
     });
   };
-
 
   exports.complaint = function complaint(complaintToAdd, ip) {
     return new Promise(function(resolve, reject) {
@@ -63,7 +70,6 @@
         dtTimestamp: complaint.dtTimestamp
       };
 
-      complaints.push(returnData);
       resolve(returnData);
     });
   }

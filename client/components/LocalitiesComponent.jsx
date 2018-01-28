@@ -16,7 +16,7 @@ class LocalitiesComponent extends React.Component {
 
     handleOnChange(e) {
         this.setState({ locality: e.target.value });
-        this.props.handleChange(e.target.name, e.target.value);
+        this.props.handleOnChange(e);
     }
 
     handleBlur = (field) => (evt) => {
@@ -32,7 +32,7 @@ class LocalitiesComponent extends React.Component {
             return errors[field] && (this.state.touched[field]);
         };
 
-        const localities = ["Select", "Attard", "Balzan", "Birgu", "Birkirkara", "Birżebbuġa", "Bormla", "Dingli", "Fgura", "Furjana", "Gudja", "Għargħur", "Gżira", "Iklin", "Imdina", "Imqabba", "Imsida", "Imġarr", "Isla", "Kalkara", "Lija", "Luqa", "Marsa", "Marsaskala", "Marsaxlokk", "Mellieħa", "Mosta", "Naxxar", "Pembroke", "Pietà", "Qormi", "Qrendi", "Rabat", "Raħal Ġdid (Paola)", "San Pawl il-Bahar", "San Ġiljan", "San Ġwann", "Santa Luċija", "Santa Venera", "Siġġiewi", "Sliema", "Valletta", "Ħal Għaxaq", "Ħal Kirkop", "Ħal Safi", "Ħamrun", "Żabbar", "Żebbuġ", "Żejtun", "Imtarfa", "Swieqi", "Ta' Xbiex", "Xgħajra", "Tarxien", "Żurrieq"];
+        const localities = [this.props.defaultValue ? this.props.defaultValue : "Select", "Attard", "Balzan", "Birgu", "Birkirkara", "Birżebbuġa", "Bormla", "Dingli", "Fgura", "Furjana", "Gudja", "Għargħur", "Gżira", "Iklin", "Imdina", "Imqabba", "Imsida", "Imġarr", "Isla", "Kalkara", "Lija", "Luqa", "Marsa", "Marsaskala", "Marsaxlokk", "Mellieħa", "Mosta", "Naxxar", "Pembroke", "Pietà", "Qormi", "Qrendi", "Rabat", "Raħal Ġdid (Paola)", "San Pawl il-Bahar", "San Ġiljan", "San Ġwann", "Santa Luċija", "Santa Venera", "Siġġiewi", "Sliema", "Valletta", "Ħal Għaxaq", "Ħal Kirkop", "Ħal Safi", "Ħamrun", "Żabbar", "Żebbuġ", "Żejtun", "Imtarfa", "Swieqi", "Ta' Xbiex", "Xgħajra", "Tarxien", "Żurrieq"];
 
         return (
             <select name="locality" className={shouldMarkError('locality')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('locality')} onChange={this.handleOnChange}>

@@ -26,15 +26,16 @@ module.exports.listen = function(server) {
 
     socket.on('complaint', function(data, callback) {
       complaintsBL.complaint(data, socket.handshake.address.address).then(function(complaint) {
-        broadcast('complaintrec', complaint);
+        var dataToSend = { data: complaint, single: true };
+        broadcast('complaintrec', dataToSend);
         callback(true);
       }).catch(function(err) {
         callback(false);
       })
     });
 
-    socket.on('GetAllComplaints', function(data) {
-      complaintsBL.sendComplaints(socket);
+    socket.on('GetComplaints', function(data) {
+      complaintsBL.sendComplaints(socket, data.ordering, data.limit, data.locality == "All" ? null : data.locality);
     });
 
 
@@ -46,7 +47,7 @@ module.exports.listen = function(server) {
           if (result) {
             console.log("User Authenticated:" + result);
             session.username = result.username;
-            complaintsBL.sendComplaints(socket);
+            complaintsBL.sendComplaints(socket, 'desc', 10);
           }
           callback(result);
         })
@@ -62,7 +63,7 @@ module.exports.listen = function(server) {
           if (result) {
             console.log("User Authenticated:" + result);
             session.username = result.username;
-            complaintsBL.sendComplaints(socket);
+            complaintsBL.sendComplaints(socket, 'desc', 10);
           }
           callback(result);
         })

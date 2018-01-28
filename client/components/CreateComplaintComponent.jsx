@@ -93,7 +93,7 @@ class CreateComplaintComponent extends React.Component {
             </div>
             <div className="rowArea">
             Locality: 
-            <LocalitiesComponent handleChange={this.handleLocalityChange.bind(this)} />
+            <LocalitiesComponent handleOnChange={this.handleLocalityChange.bind(this)} />
             </div>
             <div className="rowArea">
              Post anonymously:
