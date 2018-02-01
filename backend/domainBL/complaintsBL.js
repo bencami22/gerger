@@ -28,12 +28,11 @@
           console.log(err);
         });
     }).then(function() {
-      var reset = true;
+      var dataToSend = { reset: true };
+      socket.emit('complaintrec', dataToSend);
       complaints.forEach(function(data) {
-        var dataToSend = { reset: reset, data: data };
+        var dataToSend = { reset: false, data: data };
         socket.emit('complaintrec', dataToSend);
-        reset = false;
-
       });
     }).catch(function(err) {
       console.log(err);

@@ -21,6 +21,7 @@ class ComplaintsViewComponent extends React.Component {
     }
 
     handleOnChange(e) {
+
         this.setState({
                 [e.target.name]: e.target.value
             },
@@ -49,6 +50,12 @@ class ComplaintsViewComponent extends React.Component {
                     } 
                     </dl>
                 </div>}
+                 {this.props.complaints.length==0 &&
+                 <div>
+                 <p>
+                    No results found. Tweak your filters!
+                 </p>
+                 </div>}
             </div>
         )
     };

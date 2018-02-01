@@ -65,7 +65,7 @@ class MainComponent extends React.Component {
             if (data.single && this.props.sortComplaints && this.props.sortComplaints.ordering == "desc") {
                 arrayvar.unshift({ author: complaint.user.firstName, avatarUrl: complaint.user.avatarUrl, title: complaint.title, content: complaint.content, locality: complaint.locality, anon: complaint.anon, dtTimestamp: complaint.dtTimestamp, fileUrls: complaint.fileUrls });
             }
-            else {
+            else if (complaint) {
                 arrayvar.push({ author: complaint.user.firstName, avatarUrl: complaint.user.avatarUrl, title: complaint.title, content: complaint.content, locality: complaint.locality, anon: complaint.anon, dtTimestamp: complaint.dtTimestamp, fileUrls: complaint.fileUrls });
             }
             this.props.setComplaints(arrayvar);

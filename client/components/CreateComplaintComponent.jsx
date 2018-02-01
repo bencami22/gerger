@@ -16,7 +16,7 @@ class CreateComplaintComponent extends React.Component {
     this.state = {
       title: '',
       content: '',
-      locality: '',
+      locality: 'Select',
       anon: false,
       touched: {
         title: false,
@@ -118,8 +118,8 @@ class CreateComplaintComponent extends React.Component {
     this.setState({ content: e.target.value });
   }
 
-  handleLocalityChange(name, value) {
-    this.setState({ locality: value });
+  handleLocalityChange(e) {
+    this.setState({ locality: e.target.value });
   }
 
   handleAnonChange(e) {
@@ -148,11 +148,19 @@ class CreateComplaintComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.dropzone.getAcceptedFiles().length > 0) {
-      this.dropzone.processQueue();
-    }
-    else {
-      this.sendComplaint();
+    const errors = validate(this.state.title, this.state.content, this.state.locality);
+    const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
+
+    const shouldMarkError = (field) => {
+      return errors[field] && (this.state.touched[field] || isDisabled);
+    };
+    if (!isDisabled) {
+      if (this.dropzone.getAcceptedFiles().length > 0) {
+        this.dropzone.processQueue();
+      }
+      else {
+        this.sendComplaint();
+      }
     }
   }
 };

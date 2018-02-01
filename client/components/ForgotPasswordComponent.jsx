@@ -51,13 +51,21 @@ class ForgotPasswordComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.socketConnection.emit('forgotPassword', { email: this.state.email }, function(data) {
-      if (data) {
-        humane.log('We have sent you an email so you can reset your password.');
-        this.setState({ email: '' });
-      }
-      else { humane.log('Oops, something went wrong.') };
-    }.bind(this));
+    const errors = validate(this.state.email);
+    const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
+    
+    const shouldMarkError = (field) => {
+      return errors[field] && (this.state.touched[field] || isDisabled);
+    };
+    if (!isDisabled) {
+      this.props.socketConnection.emit('forgotPassword', { email: this.state.email }, function(data) {
+        if (data) {
+          humane.log('We have sent you an email so you can reset your password.');
+          this.setState({ email: '' });
+        }
+        else { humane.log('Oops, something went wrong.') };
+      }.bind(this));
+    }
   }
 
   handleEmailChange(e) {

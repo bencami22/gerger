@@ -122,21 +122,29 @@ class LoginComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const errors = validate(this.state.email, this.state.password);
+    const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
 
-    this.props.socketConnection.emit('authentication', { email: this.state.email, password: this.state.password }, function(data) {
-      //if no user found, false will be returned and so anon menu will show, else show menu depending on role
-      if (data != null && data != false) {
-        humane.log('Welcome back ' + data.firstName + '.');
+    const shouldMarkError = (field) => {
+      return errors[field] && (this.state.touched[field] || isDisabled);
+    };
 
-        this.props.setActiveUser(data);
-        this.props.history.push('/complaints/create');
+    if (!isDisabled) {
+      this.props.socketConnection.emit('authentication', { email: this.state.email, password: this.state.password }, function(data) {
+        //if no user found, false will be returned and so anon menu will show, else show menu depending on role
+        if (data != null && data != false) {
+          humane.log('Welcome back ' + data.firstName + '.');
 
-      }
-      else {
-        this.setState({ email: '', password: '' });
-        humane.log('Wrong email or password.');
-      }
-    }.bind((this)));
+          this.props.setActiveUser(data);
+          this.props.history.push('/complaints/create');
+
+        }
+        else {
+          this.setState({ email: '', password: '' });
+          humane.log('Wrong email or password.');
+        }
+      }.bind((this)));
+    }
   }
 
   handleEmailChange(e) {

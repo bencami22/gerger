@@ -58,15 +58,23 @@ class RegistrationComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.socketConnection.emit('registration', { email: this.state.email, firstName: this.state.firstName, lastName: this.state.lastName, password: this.state.password }, function(data) {
-      if (data) {
-        humane.log('Account was successfully created.');
-        this.props.history.push('/login');
-      }
-      else {
-        humane.log('Registration failed.')
-      };
-    }.bind((this)));
+    const errors = validate(this.state.email, this.state.firstName, this.state.lastName, this.state.password);
+    const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
+
+    const shouldMarkError = (field) => {
+      return errors[field] && (this.state.touched[field] || isDisabled);
+    };
+    if (!isDisabled) {
+      this.props.socketConnection.emit('registration', { email: this.state.email, firstName: this.state.firstName, lastName: this.state.lastName, password: this.state.password }, function(data) {
+        if (data) {
+          humane.log('Account was successfully created.');
+          this.props.history.push('/login');
+        }
+        else {
+          humane.log('Registration failed.')
+        };
+      }.bind((this)));
+    }
   }
 
   handleEmailChange(e) {

@@ -55,16 +55,23 @@ class ResetPasswordComponent extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const errors = validate(this.state.email);
+        const isDisabled = this.state.touched.submit && Object.keys(errors).some(x => errors[x]);
 
-        this.props.socketConnection.emit('changePassword', { resetPasswordToken: this.state.resetPasswordToken, newPassword: this.state.newPassword }, function(data) {
-            if (data != null && data) {
-                humane.log('Successfully reset your password.');
-                this.props.history.push('/login');
-            }
-            else {
-                humane.log('Oops, something went wrong.');
-            }
-        });
+        const shouldMarkError = (field) => {
+            return errors[field] && (this.state.touched[field] || isDisabled);
+        };
+        if (!isDisabled) {
+            this.props.socketConnection.emit('changePassword', { resetPasswordToken: this.state.resetPasswordToken, newPassword: this.state.newPassword }, function(data) {
+                if (data != null && data) {
+                    humane.log('Successfully reset your password.');
+                    this.props.history.push('/login');
+                }
+                else {
+                    humane.log('Oops, something went wrong.');
+                }
+            });
+        }
     }
 
     handleNewPasswordChange(e) {

@@ -28,7 +28,7 @@ class ComplaintsSortComponent extends React.Component {
                 <div className="overallDv"> 
                  <div className="rowArea" >
                     Sort:
-                    <select name="ordering"  onChange={this.handleOnChange}>
+                    <select name="ordering"  onChange={this.handleOnChange} >
                         <option key="desc" value="desc">Recent first</option>  
                         <option key="asc" value="asc">Oldest first</option>
                     </select>
@@ -43,7 +43,6 @@ class ComplaintsSortComponent extends React.Component {
             </div>
         );
     }
-
 
 }
 
