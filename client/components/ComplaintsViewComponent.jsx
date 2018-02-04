@@ -2,6 +2,7 @@ import React from 'react';
 import ComplaintViewComponent from './ComplaintViewComponent.jsx';
 import { connect } from 'react-redux';
 import { complaints } from '../reducers/reducer-complaints';
+import { sortComplaints } from '../reducers/reducer-sortComplaints';
 
 import { bindActionCreators } from 'redux';
 import { setSortComplaints } from '../actions/action-sortComplaints';
@@ -11,11 +12,13 @@ import ComplaintsSortComponent from '../components/ComplaintsSortComponent.jsx';
 class ComplaintsViewComponent extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            locality: '',
-            ordering: 'desc',
-            limit: 10
+            locality: this.props.sortComplaints ? this.props.sortComplaints.locality : '',
+            ordering: this.props.sortComplaints ? this.props.sortComplaints.ordering : 'desc',
+            limit: this.props.sortComplaints ? this.props.sortComplaints.limit : 10
         };
+
 
         this.handleOnChange = ::this.handleOnChange;
     }
@@ -42,7 +45,7 @@ class ComplaintsViewComponent extends React.Component {
             <div>{
                 this.props.complaints &&
                 <div>
-                    <ComplaintsSortComponent handleOnChange={this.handleOnChange}  /> 
+                    <ComplaintsSortComponent handleOnChange={this.handleOnChange} ordering={this.state.ordering} locality={this.state.locality} limit={this.state.limit}   /> 
                     <dl> {
                           this.props.complaints.map((x, i) =>
                             <ComplaintViewComponent key={i} author={x.author} avatarUrl={x.avatarUrl} title={x.title} content={x.content} locality={x.locality} anon={x.anon} dtTimestamp={x.dtTimestamp} fileUrls={x.fileUrls} />
@@ -67,7 +70,8 @@ class ComplaintsViewComponent extends React.Component {
 function mapStateToProps(state) {
     return {
         complaints: state.complaints,
-        socketConnection: state.socketConnection
+        socketConnection: state.socketConnection,
+        sortComplaints: state.sortComplaints
     }
 }
 

@@ -18786,11 +18786,11 @@ var LocalitiesComponent = function (_React$Component) {
                 return errors[field] && _this2.state.touched[field];
             };
 
-            var localities = [this.props.defaultValue ? this.props.defaultValue : "Select", "Attard", "Balzan", "Birgu", "Birkirkara", "Birżebbuġa", "Bormla", "Dingli", "Fgura", "Furjana", "Gudja", "Għargħur", "Gżira", "Iklin", "Imdina", "Imqabba", "Imsida", "Imġarr", "Isla", "Kalkara", "Lija", "Luqa", "Marsa", "Marsaskala", "Marsaxlokk", "Mellieħa", "Mosta", "Naxxar", "Pembroke", "Pietà", "Qormi", "Qrendi", "Rabat", "Raħal Ġdid (Paola)", "San Pawl il-Bahar", "San Ġiljan", "San Ġwann", "Santa Luċija", "Santa Venera", "Siġġiewi", "Sliema", "Valletta", "Ħal Għaxaq", "Ħal Kirkop", "Ħal Safi", "Ħamrun", "Żabbar", "Żebbuġ", "Żejtun", "Imtarfa", "Swieqi", "Ta' Xbiex", "Xgħajra", "Tarxien", "Żurrieq"];
+            var localities = [this.props.initialValue ? this.props.initialValue : "Select", "Attard", "Balzan", "Birgu", "Birkirkara", "Birżebbuġa", "Bormla", "Dingli", "Fgura", "Furjana", "Gudja", "Għargħur", "Gżira", "Iklin", "Imdina", "Imqabba", "Imsida", "Imġarr", "Isla", "Kalkara", "Lija", "Luqa", "Marsa", "Marsaskala", "Marsaxlokk", "Mellieħa", "Mosta", "Naxxar", "Pembroke", "Pietà", "Qormi", "Qrendi", "Rabat", "Raħal Ġdid (Paola)", "San Pawl il-Bahar", "San Ġiljan", "San Ġwann", "Santa Luċija", "Santa Venera", "Siġġiewi", "Sliema", "Valletta", "Ħal Għaxaq", "Ħal Kirkop", "Ħal Safi", "Ħamrun", "Żabbar", "Żebbuġ", "Żejtun", "Imtarfa", "Swieqi", "Ta' Xbiex", "Xgħajra", "Tarxien", "Żurrieq"];
 
             return _react2.default.createElement(
                 'select',
-                { name: 'locality', className: shouldMarkError('locality') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('locality'), onChange: this.handleOnChange },
+                { name: 'locality', className: shouldMarkError('locality') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('locality'), onChange: this.handleOnChange, value: this.props.value },
                 localities.map(function (e) {
                     return _react2.default.createElement(
                         'option',
@@ -40238,6 +40238,8 @@ var _actionComplaints = __webpack_require__(116);
 
 var _actionJustLoggedOut = __webpack_require__(249);
 
+var _actionSortComplaints = __webpack_require__(440);
+
 var _firebase = __webpack_require__(72);
 
 var _firebase2 = _interopRequireDefault(_firebase);
@@ -40387,6 +40389,7 @@ var NavigationComponent = function (_React$Component) {
       this.props.socketConnection.emit('logout');
       this.props.setActiveUser(null);
       this.props.setComplaints(null);
+      this.props.setSortComplaints(null);
 
       _firebase2.default.auth().signOut().then(function () {
         this.props.setJustLoggedOut(true);
@@ -40416,7 +40419,8 @@ function mapDispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({
     setActiveUser: _actionActiveUser.setActiveUser,
     setComplaints: _actionComplaints.setComplaints,
-    setJustLoggedOut: _actionJustLoggedOut.setJustLoggedOut
+    setJustLoggedOut: _actionJustLoggedOut.setJustLoggedOut,
+    setSortComplaints: _actionSortComplaints.setSortComplaints
   }, dispatch);
 }
 
@@ -57648,6 +57652,8 @@ var _reactRedux = __webpack_require__(14);
 
 var _reducerComplaints = __webpack_require__(84);
 
+var _reducerSortComplaints = __webpack_require__(155);
+
 var _redux = __webpack_require__(13);
 
 var _actionSortComplaints = __webpack_require__(440);
@@ -57675,9 +57681,9 @@ var ComplaintsViewComponent = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ComplaintsViewComponent.__proto__ || Object.getPrototypeOf(ComplaintsViewComponent)).call(this, props));
 
         _this.state = {
-            locality: '',
-            ordering: 'desc',
-            limit: 10
+            locality: _this.props.sortComplaints ? _this.props.sortComplaints.locality : '',
+            ordering: _this.props.sortComplaints ? _this.props.sortComplaints.ordering : 'desc',
+            limit: _this.props.sortComplaints ? _this.props.sortComplaints.limit : 10
         };
 
         _this.handleOnChange = _this.handleOnChange.bind(_this);
@@ -57708,7 +57714,7 @@ var ComplaintsViewComponent = function (_React$Component) {
                 this.props.complaints && _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_ComplaintsSortComponent2.default, { handleOnChange: this.handleOnChange }),
+                    _react2.default.createElement(_ComplaintsSortComponent2.default, { handleOnChange: this.handleOnChange, ordering: this.state.ordering, locality: this.state.locality, limit: this.state.limit }),
                     _react2.default.createElement(
                         'dl',
                         null,
@@ -57740,7 +57746,8 @@ var ComplaintsViewComponent = function (_React$Component) {
 function mapStateToProps(state) {
     return {
         complaints: state.complaints,
-        socketConnection: state.socketConnection
+        socketConnection: state.socketConnection,
+        sortComplaints: state.sortComplaints
     };
 }
 
@@ -61110,6 +61117,8 @@ var _LocalitiesComponent2 = _interopRequireDefault(_LocalitiesComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -61119,15 +61128,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ComplaintsSortComponent = function (_React$Component) {
     _inherits(ComplaintsSortComponent, _React$Component);
 
-    function ComplaintsSortComponent() {
+    function ComplaintsSortComponent(props) {
         _classCallCheck(this, ComplaintsSortComponent);
 
-        var _this = _possibleConstructorReturn(this, (ComplaintsSortComponent.__proto__ || Object.getPrototypeOf(ComplaintsSortComponent)).call(this));
+        var _this = _possibleConstructorReturn(this, (ComplaintsSortComponent.__proto__ || Object.getPrototypeOf(ComplaintsSortComponent)).call(this, props));
 
         _this.state = {
-            locality: '',
-            ordering: 'desc',
-            limit: 10
+            locality: _this.props.locality ? _this.props.locality : '',
+            ordering: _this.props.ordering ? _this.props.ordering : 'desc',
+            limit: _this.props.limit ? _this.props.limit : 10
         };
 
         _this.handleOnChange = _this.handleOnChange.bind(_this);
@@ -61137,8 +61146,7 @@ var ComplaintsSortComponent = function (_React$Component) {
     _createClass(ComplaintsSortComponent, [{
         key: 'handleOnChange',
         value: function handleOnChange(e) {
-            var name = e.target.name;
-            this.setState({ name: e.target.value });
+            this.setState(_defineProperty({}, e.target.name, e.target.value));
             this.props.handleOnChange(e);
         }
     }, {
@@ -61157,7 +61165,7 @@ var ComplaintsSortComponent = function (_React$Component) {
                         'Sort:',
                         _react2.default.createElement(
                             'select',
-                            { name: 'ordering', onChange: this.handleOnChange },
+                            { name: 'ordering', onChange: this.handleOnChange, value: this.state.ordering },
                             _react2.default.createElement(
                                 'option',
                                 { key: 'desc', value: 'desc' },
@@ -61170,11 +61178,11 @@ var ComplaintsSortComponent = function (_React$Component) {
                             )
                         ),
                         'Locality:',
-                        _react2.default.createElement(_LocalitiesComponent2.default, { name: 'locality', handleOnChange: this.handleOnChange, defaultValue: 'All' }),
+                        _react2.default.createElement(_LocalitiesComponent2.default, { name: 'locality', handleOnChange: this.handleOnChange, initialValue: 'All', value: this.state.locality }),
                         'Show:',
                         _react2.default.createElement(
                             'select',
-                            { name: 'limit', onChange: this.handleOnChange },
+                            { name: 'limit', onChange: this.handleOnChange, value: this.state.limit },
                             _react2.default.createElement(
                                 'option',
                                 { key: '10', value: '10' },

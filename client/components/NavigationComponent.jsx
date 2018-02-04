@@ -6,6 +6,8 @@ import { activeUser } from '../reducers/reducer-activeUser';
 import { setActiveUser } from '../actions/action-activeUser';
 import { setComplaints } from '../actions/action-complaints';
 import { setJustLoggedOut } from '../actions/action-justLoggedOut';
+import { setSortComplaints } from '../actions/action-sortComplaints';
+
 import { withRouter } from 'react-router-dom'
 import firebase from 'firebase';
 
@@ -77,6 +79,7 @@ class NavigationComponent extends React.Component {
     this.props.socketConnection.emit('logout');
     this.props.setActiveUser(null);
     this.props.setComplaints(null);
+    this.props.setSortComplaints(null);
 
     firebase.auth().signOut().then(function() {
         this.props.setJustLoggedOut(true);
@@ -103,7 +106,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setActiveUser: setActiveUser,
     setComplaints: setComplaints,
-    setJustLoggedOut: setJustLoggedOut
+    setJustLoggedOut: setJustLoggedOut,
+    setSortComplaints: setSortComplaints
   }, dispatch);
 }
 
