@@ -3,6 +3,7 @@ var session = require('express-session');
 
 var complaintsBL = require('./domainBL/complaintsBL');
 var usersBL = require('./domainBL/usersBL');
+var utilitiesBL = require('./domainBL/utilitiesBL');
 
 module.exports.listen = function(server) {
 
@@ -13,6 +14,8 @@ module.exports.listen = function(server) {
   io.on('connection', function(socket) {
 
     sockets.push(socket);
+
+    socket.emit('localityrec', utilitiesBL.getLocalities());
 
     console.log("just connected:" + socket.id)
 

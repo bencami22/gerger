@@ -3,17 +3,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { activeUser } from '../reducers/reducer-activeUser';
 import { socketConnection } from '../reducers/reducer-socketConnection';
+import { localities } from '../reducers/reducer-localities';
 
 import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 import DropzoneComponent from 'react-dropzone-component';
-import LocalitiesComponent from '../components/LocalitiesComponent.jsx';
+import SelectComponent from '../components/SelectComponent.jsx';
 
 
 class CreateComplaintComponent extends React.Component {
   constructor(props) {
     super(props);
+
+
     this.state = {
+      localities: this.props.localities.map((l) => l.Locality),
       title: '',
       content: '',
       locality: 'Select',
@@ -93,7 +97,7 @@ class CreateComplaintComponent extends React.Component {
             </div>
             <div className="rowArea">
             Locality: 
-            <LocalitiesComponent handleOnChange={this.handleLocalityChange.bind(this)} />
+            <SelectComponent options={this.state.localities} handleOnChange={this.handleLocalityChange.bind(this)} />
             </div>
             <div className="rowArea">
              Post anonymously:
@@ -180,7 +184,8 @@ function validate(title, content, locality) {
 function mapStateToProps(state) {
   return {
     activeUser: state.activeUser,
-    socketConnection: state.socketConnection
+    socketConnection: state.socketConnection,
+    localities: state.localities
   }
 }
 

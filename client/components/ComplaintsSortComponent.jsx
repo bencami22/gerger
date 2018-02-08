@@ -1,15 +1,21 @@
 import React from 'react';
-import LocalitiesComponent from '../components/LocalitiesComponent.jsx';
+import { connect } from 'react-redux';
+import { localities } from '../reducers/reducer-localities';
+
+import SelectComponent from '../components/SelectComponent.jsx';
 
 class ComplaintsSortComponent extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            localities: this.props.localities.map((l) => l.Locality),
             locality: this.props.locality ? this.props.locality : '',
             ordering: this.props.ordering ? this.props.ordering : 'desc',
             limit: this.props.limit ? this.props.limit : 10
         };
+
+        var dtyudd = this.state.localities;
 
         this.handleOnChange = ::this.handleOnChange;
     }
@@ -33,7 +39,7 @@ class ComplaintsSortComponent extends React.Component {
                         <option key="desc" value="desc">Recent first</option>
                         <option key="asc" value="asc">Oldest first</option>
                     </select>
-                    Locality:<LocalitiesComponent name="locality" handleOnChange={this.handleOnChange} initialValue="All" value={this.state.locality} />
+                    Locality:<SelectComponent options={this.state.localities} name="locality" handleOnChange={this.handleOnChange} initialValue="All" value={this.state.locality} />
                     Show:
                     <select name="limit"  onChange={this.handleOnChange} value={this.state.limit}>
                         <option key="10" value="10">10</option> 
@@ -47,5 +53,12 @@ class ComplaintsSortComponent extends React.Component {
 
 }
 
+//passes state into component as a prop
+function mapStateToProps(state) {
+    return {
+        localities: state.localities
+    }
+}
 
-export default ComplaintsSortComponent;
+//this makes it a container, rather than a dumb component.
+export default connect(mapStateToProps)(ComplaintsSortComponent);

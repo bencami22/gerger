@@ -31,25 +31,14 @@ class ComplaintViewComponent extends React.Component {
     return (
 
       <li className="complaint-list">
-      <div>
-       <p>
-        <span className="complaint-list-content"><img style={{'borderRadius': '50%', 'width':'60px'}} src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} /></span>
-        </p>
-         <p>
-        <span className="complaint-list-content">-{formatDate(this.props.dtTimestamp)}</span>
-        </p>
-        <p>
-        <span className="complaint-list-content"> at {this.props.locality}</span>
-        </p>
-        <p>
-        <span className="complaint-list-author">{this.props.anon?"Anon":this.props.author}</span> says <span className="complaint-list-title">"{this.props.title}"</span> 
-        </p>
-        <p>
-        <span className="complaint-list-content">-{this.props.content}</span>
-        </p>
-        <p>
+        <span className="dvComplaintsContainer complaint-list-content">
+        <img style={{'borderRadius': '50%', 'width':'60px'}} src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} />
+        </span>
+        <span className="dvComplaintsContainer complaint-list-content">-{formatDate(this.props.dtTimestamp)}</span>
+        <span className="dvComplaintsContainer complaint-list-author">{this.props.anon?"Anon":this.props.author}</span> says <span className="complaint-list-title">"{this.props.title}"</span> 
+        <span className="dvComplaintsContainer complaint-list-content">-{this.props.content}</span>
+        <span className="dvComplaintsContainer complaint-list-content"> at {this.props.locality}</span>
         <span className="complaint-list-content">{urls}</span>
-        </p>
         <hr/>
          {
           isOpen && (
@@ -68,7 +57,6 @@ class ComplaintViewComponent extends React.Component {
                 }/>
           )
         }
-      </div>
       </li>
 
 

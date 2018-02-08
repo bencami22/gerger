@@ -1,4 +1,13 @@
 var nodemailer = require('nodemailer');
+var fs = require("fs");
+var path = require('path');
+
+
+var localities = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../model/localcouncilsMalta.json')));
+
+exports.getLocalities = function getLocalities() {
+    return localities;
+}
 
 exports.hashPassword = function hashPassword(password) {
     var crypto = require('crypto'),
@@ -20,11 +29,11 @@ exports.sendMail = function sendMail(to, subject, htmlBody) {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user:'gergermalta',
-                pass:'Hello123!'
+                user: 'gergermalta',
+                pass: 'Hello123!'
                 //user: 'hgjduw6272hs@gmail.com',
                 //pass: 'hgjduw6272hs'
-                
+
             }
         });
 

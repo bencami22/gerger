@@ -1,0 +1,681 @@
+[{
+        "LocalCouncilPK": 331,
+        "Locality": "Attard",
+        "LocalCouncilFullName": "ATTARD [Kunsill Lokali ta' Ħ' Attard]",
+        "LocalCouncilNumber": "12",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "attard.lc@gov.mt",
+        "Phone": "21411111"
+    },
+    {
+        "LocalCouncilPK": 332,
+        "Locality": "Balzan",
+        "LocalCouncilName": "BALZAN [Kunsill Lokali ta' Ħal Balzan]",
+        "LocalCouncilNumber": "13",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "balzan.lc@gov.mt",
+        "Phone": "21442323"
+    },
+    {
+        "LocalCouncilPK": 333,
+        "Locality": "Birgu",
+        "LocalCouncilName": "BIRGU [Kunsill Lokali tal-Birgu]",
+        "LocalCouncilNumber": "03",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "birgu.lc@gov.mt",
+        "Phone": "21662166"
+    },
+    {
+        "LocalCouncilPK": 334,
+        "Locality": "Birkirkara",
+        "LocalCouncilName": "BIRKIRKARA [Kunsill Lokali ta' Birkirkara]",
+        "LocalCouncilNumber": "14",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "birkirkara.lc@gov.mt",
+        "Phone": "21442626"
+    },
+    {
+        "LocalCouncilPK": 335,
+        "Locality": "Birżebbuġa",
+        "LocalCouncilName": "BIRŻEBBUĠA [Kunsill Lokali ta' Birżebbuġa]",
+        "LocalCouncilNumber": "15",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "birzebbuga.lc@gov.mt",
+        "Phone": "21650165"
+    },
+    {
+        "LocalCouncilPK": 336,
+        "Locality": "Bormla",
+        "LocalCouncilName": "BORMLA [Kunsill Lokali ta' Bormla]",
+        "LocalCouncilNumber": "05",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "bormla.lc@gov.mt",
+        "Phone": "21663030"
+    },
+    {
+        "LocalCouncilPK": 338,
+        "Locality": "Dingli",
+        "LocalCouncilName": "DINGLI [Kunsill Lokali ta' Ħad-Dingli]",
+        "LocalCouncilNumber": "16",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "dingli.lc@gov.mt",
+        "Phone": "21456060"
+    },
+    {
+        "LocalCouncilPK": 339,
+        "Locality": "Fgura",
+        "LocalCouncilName": "FGURA [Kunsill Lokali tal-Fgura]",
+        "LocalCouncilNumber": "17",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "fgura.lc@gov.mt",
+        "Phone": "21664000"
+    },
+    {
+        "LocalCouncilPK": 340,
+        "Locality": "Furjana",
+        "LocalCouncilName": "FLORIANA [Kunsill Lokali tal-Furjana]",
+        "LocalCouncilNumber": "18",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "floriana.lc@gov.mt",
+        "Phone": "21235523"
+    },
+    {
+        "LocalCouncilPK": 341,
+        "Locality": "Fontana",
+        "LocalCouncilName": "FONTANA [Kunsill Lokali tal-Fontana]",
+        "LocalCouncilNumber": "19",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "fontana.lc@gov.mt",
+        "Phone": "21558877"
+    },
+    {
+        "LocalCouncilPK": 342,
+        "Locality": "Għajnsielem",
+        "LocalCouncilName": "GĦAJNSIELEM [Kunsill Lokali ta' Għajnsielem]",
+        "LocalCouncilNumber": "22",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "ghajnsielem.lc@gov.mt",
+        "Phone": "21561515"
+    },
+    {
+        "LocalCouncilPK": 343,
+        "Locality": "Għarb",
+        "LocalCouncilName": "GHARB [Kunsill Lokali tal-Għarb]",
+        "LocalCouncilNumber": "23",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "gharb.lc@gov.mt",
+        "Phone": "21560556"
+    },
+    {
+        "LocalCouncilPK": 344,
+        "Locality": "Għargħur",
+        "LocalCouncilName": "GĦARGĦUR [Kunsill Lokali ta' Ħal Għargħur]",
+        "LocalCouncilNumber": "24",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "ghargur.lc@gov.mt",
+        "Phone": "21414111"
+    },
+    {
+        "LocalCouncilPK": 345,
+        "Locality": "Għasri",
+        "LocalCouncilName": "GHASRI [Kunsill Lokali tal-Għasri]",
+        "LocalCouncilNumber": "25",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "ghasri.lc@gov.mt",
+        "Phone": "21558686"
+    },
+    {
+        "LocalCouncilPK": 346,
+        "Locality": "Għaxaq",
+        "LocalCouncilName": "GHAXAQ [Kunsill Lokali ta' Ħal Għaxaq]",
+        "LocalCouncilNumber": "26",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "ghaxaq.lc@gov.mt",
+        "Phone": "21664888"
+    },
+    {
+        "LocalCouncilPK": 347,
+        "Locality": "Gudja",
+        "LocalCouncilName": "GUDJA [Kunsill Lokali tal-Gudja]",
+        "LocalCouncilNumber": "20",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "gudja.lc@gov.mt",
+        "Phone": "21672020"
+    },
+    {
+        "LocalCouncilPK": 348,
+        "Locality": "Gżira",
+        "LocalCouncilName": "GŻIRA [Kunsill Lokali tal-Gżira]",
+        "LocalCouncilNumber": "21",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "gzira.lc@gov.mt",
+        "Phone": "21341034"
+    },
+    {
+        "LocalCouncilPK": 349,
+        "Locality": "Ħamrun",
+        "LocalCouncilName": "ĦAMRUN [Kunsill Lokali tal-Ħamrun]",
+        "LocalCouncilNumber": "27",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "hamrun.lc@gov.mt",
+        "Phone": "21222020"
+    },
+    {
+        "LocalCouncilPK": 350,
+        "Locality": "Iklin",
+        "LocalCouncilName": "IKLIN [Kunsill Lokali tal-Iklin]",
+        "LocalCouncilNumber": "28",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "iklin.lc@gov.mt",
+        "Phone": "21416741"
+    },
+    {
+        "LocalCouncilPK": 364,
+        "Locality": "Imġarr",
+        "LocalCouncilName": "IMĠARR [Kunsill Lokali tal-Imġarr]",
+        "LocalCouncilNumber": "38",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mgarr.lc@gov.mt",
+        "Phone": "21520011 "
+    },
+    {
+        "LocalCouncilPK": 366,
+        "Locality": "Imqabba",
+        "LocalCouncilName": "IMQABBA [Kunsill Lokali tal-Imqabba]",
+        "LocalCouncilNumber": "40",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mqabba.lc@gov.mt",
+        "Phone": "21680622"
+    },
+    {
+        "LocalCouncilPK": 399,
+        "Locality": "Imtarfa",
+        "LocalCouncilName": "IMTARFA [Kunsill Lokali tal-Imtarfa]",
+        "LocalCouncilNumber": "68",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mtarfa.lc@gov.mt",
+        "Phone": "21451145"
+    },
+    {
+        "LocalCouncilPK": 351,
+        "Locality": "Isla",
+        "LocalCouncilName": "ISLA [Kunsill Lokali tal-Isla]",
+        "LocalCouncilNumber": "04",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "isla.lc@gov.mt",
+        "Phone": "21662424"
+    },
+    {
+        "LocalCouncilPK": 352,
+        "Locality": "Kalkara",
+        "LocalCouncilName": "KALKARA [Kunsill Lokali tal-Kalkara]",
+        "LocalCouncilNumber": "29",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "kalkara.lc@gov.mt",
+        "Phone": "21665500"
+    },
+    {
+        "LocalCouncilPK": 353,
+        "Locality": "Kerċem",
+        "LocalCouncilName": "KERCEM [Kunsill Lokali ta' Ta' Kerċem]",
+        "LocalCouncilNumber": "30",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "kercem.lc@gov.mt",
+        "Phone": "21563666"
+    },
+    {
+        "LocalCouncilPK": 354,
+        "Locality": "Kirkop",
+        "LocalCouncilName": "KIRKOP [Kunsill Lokali ta' Ħal Kirkop]",
+        "LocalCouncilNumber": "31",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "kirkop.lc@gov.mt",
+        "Phone": "21680099"
+    },
+    {
+        "LocalCouncilPK": 355,
+        "Locality": "Lija",
+        "LocalCouncilName": "LIJA [Kunsill Lokali ta' Ħal-Lija]",
+        "LocalCouncilNumber": "32",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "lija.lc@gov.mt",
+        "Phone": ""
+    },
+    {
+        "LocalCouncilPK": 356,
+        "Locality": "Luqa",
+        "LocalCouncilName": "LUQA [Kunsill Lokali ta' Ħal-Luqa]",
+        "LocalCouncilNumber": "33",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "luqa.lc@gov.mt",
+        "Phone": "21416111"
+    },
+    {
+        "LocalCouncilPK": 358,
+        "Locality": "Marsa",
+        "LocalCouncilName": "MARSA [Kunsill Lokali tal-Marsa]",
+        "LocalCouncilNumber": "34",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "marsa.lc@gov.mt",
+        "Phone": "21220522"
+    },
+    {
+        "LocalCouncilPK": 360,
+        "Locality": "Marsaskala",
+        "LocalCouncilName": "MARSASKALA [Kunsill Lokali ta' Marsaskala]",
+        "LocalCouncilNumber": "35",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "marsaskala.lc@gov.mt",
+        "Phone": "21637171"
+    },
+    {
+        "LocalCouncilPK": 361,
+        "Locality": "Marsaxlokk",
+        "LocalCouncilName": "MARSAXLOKK [Kunsill Lokali ta' Marsaxlokk]",
+        "LocalCouncilNumber": "36",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "marsaxlokk.lc@gov.mt",
+        "Phone": "21652525"
+    },
+    {
+        "LocalCouncilPK": 362,
+        "Locality": "mdina",
+        "LocalCouncilName": "MDINA [Kunsill Lokali tal-Imdina]",
+        "LocalCouncilNumber": "02",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mdina.lc@gov.mt",
+        "Phone": "21450707"
+    },
+    {
+        "LocalCouncilPK": 363,
+        "Locality": "Mellieħa",
+        "LocalCouncilName": "MELLIEHA [Kunsill Lokali tal-Mellieħa]",
+        "LocalCouncilNumber": "37",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mellieha.lc@gov.mt",
+        "Phone": "21521333"
+    },
+    {
+        "LocalCouncilPK": 365,
+        "Locality": "Mosta",
+        "LocalCouncilName": "MOSTA [Kunsill Lokali tal-Mosta]",
+        "LocalCouncilNumber": "39",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "mosta.lc@gov.mt",
+        "Phone": "21416841"
+    },
+    {
+        "LocalCouncilPK": 367,
+        "Locality": "msida",
+        "LocalCouncilName": "MSIDA [Kunsill Lokali tal-Imsida]",
+        "LocalCouncilNumber": "41",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "msida.lc@gov.mt",
+        "Phone": "21334343"
+    },
+    {
+        "LocalCouncilPK": 368,
+        "Locality": "Munxar",
+        "LocalCouncilName": "MUNXAR [Kunsill Lokali tal-Munxar]",
+        "LocalCouncilNumber": "42",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "munxar.lc@gov.mt",
+        "Phone": "21558755"
+    },
+    {
+        "LocalCouncilPK": 369,
+        "Locality": "Nadur",
+        "LocalCouncilName": "NADUR [Kunsill Lokali tan-Nadur]",
+        "LocalCouncilNumber": "43",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "nadur.lc@gov.mt",
+        "Phone": "21558080"
+    },
+    {
+        "LocalCouncilPK": 370,
+        "Locality": "Naxxar",
+        "LocalCouncilName": "NAXXAR [Kunsill Lokali tan-Naxxar]",
+        "LocalCouncilNumber": "44",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "naxxar.lc@gov.mt",
+        "Phone": "21416341"
+    },
+    {
+        "LocalCouncilPK": 371,
+        "Locality": "Paola",
+        "LocalCouncilName": "PAOLA [Kunsill Lokali Paola]",
+        "LocalCouncilNumber": "45",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "paola.lc@gov.mt",
+        "Phone": "21664066"
+    },
+    {
+        "LocalCouncilPK": 372,
+        "Locality": "Pembroke",
+        "LocalCouncilName": "PEMBROKE [Kunsill Lokali Pembroke]",
+        "LocalCouncilNumber": "46",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "pembroke.lc@gov.mt",
+        "Phone": "21372111"
+    },
+    {
+        "LocalCouncilPK": 373,
+        "Locality": "Pietà",
+        "LocalCouncilName": "PIETA [Kunsill Lokali Pietà]",
+        "LocalCouncilNumber": "47",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "pieta.lc@gov.mt",
+        "Phone": "21240404"
+    },
+    {
+        "LocalCouncilPK": 374,
+        "Locality": "Qala",
+        "LocalCouncilName": "QALA [Kunsill Lokali tal-Qala]",
+        "LocalCouncilNumber": "48",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "qala.lc@gov.mt",
+        "Phone": "21552555"
+    },
+    {
+        "LocalCouncilPK": 375,
+        "Locality": "Qormi",
+        "LocalCouncilName": "QORMI [Kunsill Lokali ta' Ħal Qormi]",
+        "LocalCouncilNumber": "06",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "qormi.lc@gov.mt",
+        "Phone": "21440101,"
+    },
+    {
+        "LocalCouncilPK": 376,
+        "Locality": "Qrendi",
+        "LocalCouncilName": "QRENDI [Kunsill Lokali tal-Qrendi]",
+        "LocalCouncilNumber": "49",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "qrendi.lc@gov.mt",
+        "Phone": "21680404"
+    },
+    {
+        "LocalCouncilPK": 378,
+        "Locality": "Rabat, Gozo",
+        "LocalCouncilName": "RABAT [Kunsill Lokali tar-Rabat (Città Victoria)]",
+        "LocalCouncilNumber": "11",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "rabat.gozo.lc@gov.mt",
+        "Phone": "21563344"
+    },
+    {
+        "LocalCouncilPK": 377,
+        "Locality": "Rabat",
+        "LocalCouncilName": "RABAT [Kunsill Lokali tar-Rabat]",
+        "LocalCouncilNumber": "50",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "rabat.malta.lc@gov.mt",
+        "Phone": "21455000"
+    },
+    {
+        "LocalCouncilPK": 379,
+        "Locality": "Safi",
+        "LocalCouncilName": "SAFI [Kunsill Lokali ta'  Ħal Safi]",
+        "LocalCouncilNumber": "51",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "safi.lc@gov.mt",
+        "Phone": "21689168"
+    },
+    {
+        "LocalCouncilPK": 380,
+        "Locality": "San Ġiljan",
+        "LocalCouncilName": "SAN ĠILJAN [Kunsill Lokali ta' San Ġiljan]",
+        "LocalCouncilNumber": "52",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sangiljan.lc@gov.mt",
+        "Phone": "21373111"
+    },
+    {
+        "LocalCouncilPK": 381,
+        "Locality": "San Ġwann",
+        "LocalCouncilName": "SAN ĠWANN [Kunsill Lokali ta' San Ġwann]",
+        "LocalCouncilNumber": "53",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sangwann.lc@gov.mt",
+        "Phone": "21373777"
+    },
+    {
+        "LocalCouncilPK": 382,
+        "Locality": "San Lawrenz",
+        "LocalCouncilName": "SAN LAWRENZ [Kunsill Lokali ta' San Lawrenz]",
+        "LocalCouncilNumber": "54",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sanlawrenz.lc@gov.mt",
+        "Phone": "21563556"
+    },
+    {
+        "LocalCouncilPK": 383,
+        "Locality": "San Pawl il-Baħar",
+        "LocalCouncilName": "SAN PAWL IL-BAĦAR [Kunsill San Pawl il-Baħar]",
+        "LocalCouncilNumber": "55",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sanpawlil-bahar.lc@gov.mt",
+        "Phone": "21585888"
+    },
+    {
+        "LocalCouncilPK": 384,
+        "Locality": "Sannat",
+        "LocalCouncilName": "SANNAT [Kunsill Lokali ta' Ta' Sannat]",
+        "LocalCouncilNumber": "56",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sannat.lc@gov.mt",
+        "Phone": "21554747"
+    },
+    {
+        "LocalCouncilPK": 385,
+        "Locality": "Santa Luċija",
+        "LocalCouncilName": "SANTA LUĊIJA [Kunsill Lokali ta' Santa Luċija]",
+        "LocalCouncilNumber": "57",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "santalucija.lc@gov.mt",
+        "Phone": "21666600"
+    },
+    {
+        "LocalCouncilPK": 386,
+        "Locality": "Santa Venera",
+        "LocalCouncilName": "SANTA VENERA [Kunsill Lokali ta' Santa Venera]",
+        "LocalCouncilNumber": "58",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "santavenera.lc@gov.mt",
+        "Phone": "21491030"
+    },
+    {
+        "LocalCouncilPK": 387,
+        "Locality": "Siġġiewi",
+        "LocalCouncilName": "SIĠĠIEWI [Kunsill Lokali tas-Siġġiewi]",
+        "LocalCouncilNumber": "09",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "siggiewi.lc@gov.mt",
+        "Phone": "21466000"
+    },
+    {
+        "LocalCouncilPK": 388,
+        "Locality": "Sliema]",
+        "LocalCouncilName": "SLIEMA [Kunsill Lokali ta' Tas-Sliema]",
+        "LocalCouncilNumber": "59",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "sliema.lc@gov.mt",
+        "Phone": "21337633"
+    },
+    {
+        "LocalCouncilPK": 389,
+        "Locality": "Swieqi",
+        "LocalCouncilName": "SWIEQI [Kunsill Lokali tas-Swieqi]",
+        "LocalCouncilNumber": "60",
+        "LocalCouncilRegion": "Northern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "swieqi.lc@gov.mt",
+        "Phone": "21373939"
+    },
+    {
+        "LocalCouncilPK": 357,
+        "Locality": "Ta' Xbiex",
+        "LocalCouncilName": "TA' XBIEX [Kunsill Lokali ta' Ta' Xbiex]",
+        "LocalCouncilNumber": "61",
+        "LocalCouncilRegion": "Central Region",
+        "LocalCouncilStatus": "A",
+        "Email": "taxbiex.lc@gov.mt",
+        "Phone": "21338844"
+    },
+    {
+        "LocalCouncilPK": 390,
+        "Locality": "Tarxien",
+        "LocalCouncilName": "TARXIEN [Kunsill Lokali ta' Ħal Tarxien]",
+        "LocalCouncilNumber": "62",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "tarxien.lc@gov.mt",
+        "Phone": "21666688"
+    },
+    {
+        "LocalCouncilPK": 391,
+        "Locality": "Valletta",
+        "LocalCouncilName": "VALLETTA [Kunsill Lokali tal-Belt Valletta]",
+        "LocalCouncilNumber": "01",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "valletta.lc@gov.mt",
+        "Phone": "22479410"
+    },
+    {
+        "LocalCouncilPK": 392,
+        "Locality": "Xagħra",
+        "LocalCouncilName": "XAGĦRA [Kunsill Lokali tax-Xagħra]",
+        "LocalCouncilNumber": "63",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "xaghra.lc@gov.mt",
+        "Phone": "21563737"
+    },
+    {
+        "LocalCouncilPK": 393,
+        "Locality": "Xewkija",
+        "LocalCouncilName": "XEWKIJA [Kunsill Lokali tax-Xewkija]",
+        "LocalCouncilNumber": "64",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "xewkija.lc@gov.mt",
+        "Phone": "21558822"
+    },
+    {
+        "LocalCouncilPK": 359,
+        "Locality": "Xgħajra",
+        "LocalCouncilName": "XGĦAJRA [Kunsill Lokali tax-Xgħajra]",
+        "LocalCouncilNumber": "65",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "xghajra.lc@gov.mt",
+        "Phone": "21693269"
+    },
+    {
+        "LocalCouncilPK": 394,
+        "Locality": "Żabbar",
+        "LocalCouncilName": "ŻABBAR [Kunsill Lokali ta' Ħaż-Żabbar]",
+        "LocalCouncilNumber": "08",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "zabbar.lc@gov.mt",
+        "Phone": "21664466"
+    },
+    {
+        "LocalCouncilPK": 396,
+        "Locality": "Żebbuġ",
+        "LocalCouncilName": "ŻEBBUG [Kunsill Lokali ta' Ħaż-Żebbuġ]",
+        "LocalCouncilNumber": "07",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "zebbug.malta.lc@gov.mt",
+        "Phone": "21411111"
+    },
+    {
+        "LocalCouncilPK": 395,
+        "Locality": "Żebbuġ, Gozo",
+        "LocalCouncilName": "ŻEBBUG GHAWDEX [Kunsill Lokali taż-Żebbuġ]",
+        "LocalCouncilNumber": "66",
+        "LocalCouncilRegion": "Gozo Region",
+        "LocalCouncilStatus": "A",
+        "Email": "zebbug.gozo.lc@gov.mt",
+        "Phone": "21563056"
+    },
+    {
+        "LocalCouncilPK": 397,
+        "Locality": "Żejtun",
+        "LocalCouncilName": "ŻEJTUN [Kunsill Lokali taż-Żejtun]",
+        "LocalCouncilNumber": "10",
+        "LocalCouncilRegion": "South Eastern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "zejtun.lc@gov.mt",
+        "Phone": "21663939"
+    },
+    {
+        "LocalCouncilPK": 398,
+        "Locality": "Żurrieq",
+        "LocalCouncilName": "ŻURRIEQ [Kunsill Lokali taż-Żurrieq]",
+        "LocalCouncilNumber": "67",
+        "LocalCouncilRegion": "Southern Region",
+        "LocalCouncilStatus": "A",
+        "Email": "zurrieq.lc@gov.mt",
+        "Phone": "21689111"
+    }
+]

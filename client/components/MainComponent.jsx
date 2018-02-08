@@ -11,6 +11,7 @@ import { sortComplaints } from '../reducers/reducer-sortComplaints';
 import { setComplaints } from '../actions/action-complaints';
 import { setActiveUser } from '../actions/action-activeUser';
 import { setSocketConnection } from '../actions/action-socketConnection';
+import { setLocalities } from '../actions/action-localities';
 
 import Home from './HomeComponent.jsx';
 import Login from './LoginComponent.jsx';
@@ -69,7 +70,11 @@ class MainComponent extends React.Component {
                 arrayvar.push({ author: complaint.user.firstName, avatarUrl: complaint.user.avatarUrl, title: complaint.title, content: complaint.content, locality: complaint.locality, anon: complaint.anon, dtTimestamp: complaint.dtTimestamp, fileUrls: complaint.fileUrls });
             }
             this.props.setComplaints(arrayvar);
-        }.bind(this))
+        }.bind(this));
+
+        socket.on('localityrec', function(data) {
+            this.props.setLocalities(data);
+        }.bind(this));
     }
 
     render() {
@@ -101,7 +106,7 @@ function mapStateToProps(state) {
 
 // Get actions and pass them as props to to UserList
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setComplaints: setComplaints, setActiveUser: setActiveUser, setSocketConnection: setSocketConnection }, dispatch);
+    return bindActionCreators({ setComplaints: setComplaints, setActiveUser: setActiveUser, setSocketConnection: setSocketConnection, setLocalities: setLocalities }, dispatch);
 }
 
 //this makes it a container, rather than a dumb component.

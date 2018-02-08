@@ -16,7 +16,7 @@ server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() 
   console.log("Server listening at", addr.address + ":" + addr.port);
 });
 
-app.use(cors({ origin: true }))
+app.use(cors({ origin: true }));
 
 app.use(session({
   secret: 'ThisisthesecretusedtosignthesessionIDcookie'
@@ -29,8 +29,8 @@ app.get('*', function(req, res) {
   res.sendfile(path.resolve(__dirname, '../client/public/index.html'));
 });
 
-var storage = multer.memoryStorage()
-var upload = multer({ storage: storage })
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 app.post('/uploadHandler', upload.single('file'), function(req, res, next) {
   if (req.file && req.file.originalname) {
