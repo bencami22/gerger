@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userModel = mongoose.model('User');
-var utiltiesBL = require('./utilitiesBL');
+var utilitiesBL = require('./utilitiesBL');
 var uuid = require('uuid/v1');
 var fs = require('fs');
 var path = require('path');
@@ -12,7 +12,7 @@ exports.authenticate = function authenticate(data, ip) {
         var email = data.email;
         var password = data.password;
 
-        var hashedValue = utiltiesBL.hashPassword(password);
+        var hashedValue = utilitiesBL.hashPassword(password);
 
         userModel.findOne({ email: email }).exec().then(function(userRetrieved) {
 
@@ -72,7 +72,7 @@ exports.authenticateOrCreate = function authenticateOrCreate(data, ip) {
                                                 console.log('Error loading file. err+' + err);
                                             }
                                             else {
-                                                utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
+                                                utilitiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
                                                 resolve(newUser);
                                             }
                                         });
@@ -133,7 +133,7 @@ exports.forgotPassword = function forgotPassword(data, ip) {
                     userRetrieved.resetPasswordTokens.push(resetPasswordToken);
                     userRetrieved.save();
 
-                    utiltiesBL.sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
+                    utilitiesBL.sendMail(userRetrieved.email, 'Reset password', content.replace('[link]', 'https://gerger-bencami.c9users.io/resetpassword?token=' + resetPasswordToken.token));
                     resolve();
                 }
             });
@@ -155,7 +155,7 @@ exports.changePassword = function changePassword(resetPasswordToken, newPassword
                         reject();
                     }
 
-                    userRetrieved.password = utiltiesBL.hashPassword(newPassword);
+                    userRetrieved.password = utilitiesBL.hashPassword(newPassword);
 
                     userRetrieved.save().then(function() {
                         console.log("Change Password for userL" + userRetrieved.email + " was successful");
@@ -184,7 +184,7 @@ exports.registration = function registration(data, ip) {
             newUser.email = data.email;
             newUser.firstName = data.firstName;
             newUser.lastName = data.lastName;
-            newUser.password = utiltiesBL.hashPassword(data.password);
+            newUser.password = utilitiesBL.hashPassword(data.password);
             newUser.role = 'regular';
 
             newUser.save().then(function() {
@@ -195,7 +195,7 @@ exports.registration = function registration(data, ip) {
                         console.log('Error loading file. err+' + err);
                     }
                     else {
-                        utiltiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
+                        utilitiesBL.sendMail(newUser.email, 'Registration Complete', content.replace('[username]', newUser.email));
                         resolve(newUser);
                     }
                 });

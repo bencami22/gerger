@@ -19,8 +19,23 @@ exports.hashPassword = function hashPassword(password) {
     var hashedValue = hash.digest('hex');
     return hashedValue;
 }
+exports.formatDate = function formatDate(dateStr) {
+    var d = new Date(dateStr);
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var date = d.getDate();
+    if (date.toString().length == 1)
+        date = "0" + date;
+    var hour = d.getHours();
+    if (hour.toString().length == 1)
+        hour = "0" + hour;
+    var minute = d.getMinutes();
+    if (minute.toString().length == 1)
+        minute = "0" + minute;
+    return months[d.getMonth()] + " " + " " + date + " " + d.getFullYear();
+    //+ " " + hour + ":" + minute;
 
-exports.sendMail = function sendMail(to, subject, htmlBody) {
+}
+exports.sendMail = function sendMail(to, subject, htmlBody, bcc) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     nodemailer.createTestAccount((err, account) => {
@@ -40,10 +55,12 @@ exports.sendMail = function sendMail(to, subject, htmlBody) {
         // setup email data with unicode symbols
         let mailOptions = {
             from: '"GerGer" <admin@gerger.com>', // sender address
-            to: to, // list of receivers omma separated
+            to: to, // list of receivers comma separated
             subject: subject, // Subject line
             //text: 'Hello world?', // plain text body
-            html: htmlBody // html body
+            html: htmlBody, // html body
+            bcc: bcc
+
         };
 
         // send mail with defined transport object

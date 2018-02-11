@@ -1,6 +1,8 @@
   var mongoose = require('mongoose');
-
+  var utilitiesBL = require('./utilitiesBL');
   var complaintModel = mongoose.model('Complaint');
+  var fs = require('fs');
+  var path = require('path');
 
   exports.sendComplaints = function sendComplaints(socket, ordering, limit, locality) {
     var complaints = [];
@@ -54,9 +56,50 @@
       complaint.fileUrls = complaintToAdd.fileUrls;
 
       complaint.save().then(function(doc) {
-        console.log('Success!');
+        console.log('Complaint saved to db success!');
       }).catch(function(err) {
-        console.log('Error saving to mongoDB! Error:' + err);
+        console.log('Error saving complaint to mongoDB! Error:' + err);
+      });
+
+      fs.readFile(path.resolve(__dirname, '..', './mailtemplates/complaintSubmitted.html'), 'utf8', function(err, content) {
+
+        if (err) {
+          console.log('Error loading file. err+' + err);
+        }
+        else {
+
+          var start, stop;
+          if (complaint.anon) {
+            start = content.indexOf("[Start]")
+            stop = content.indexOf("[Stop]")
+            content = content.replace(content.substr(start, (stop - start) + 7), '');
+          }
+          else {
+            start = content.indexOf("[AnonStart]")
+            stop = content.indexOf("[AnonStop]")
+            content = content.replace(content.substr(start, (stop - start) + 10), '');
+          }
+
+          content = content.replace('[Start]', '');
+          content = content.replace('[Stop]', '');
+          content = content.replace('[AnonStart]', '');
+          content = content.replace('[AnonStop]', '');
+
+          content = content.replace('[FullName]', complaintToAdd.user.firstName + " " + complaintToAdd.lasName);
+          content = content.replace('[FullName]', complaintToAdd.user.firstName + " " + complaintToAdd.lasName);
+          content = content.replace('[Title]', complaint.title);
+          content = content.replace('[Content]', complaint.content);
+          content = content.replace('[Locality]', complaint.locality);
+          content = content.replace('[Timestamp]', utilitiesBL.formatDate(complaint.dtTimestamp));
+          content = content.replace('[UserEmail]', complaintToAdd.user.email);
+
+          utilitiesBL.getLocalities().forEach(function(element) {
+            if (element.Locality === complaint.locality) {
+              //element.Email
+              utilitiesBL.sendMail('gergermalta@gmail.com', 'Complaint submitted', content, 'gergermalta@gmail.com');
+            }
+          });
+        }
       });
 
       var returnData = {
