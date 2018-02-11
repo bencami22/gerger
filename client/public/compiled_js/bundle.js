@@ -18836,7 +18836,7 @@ var SelectComponent = function (_React$Component) {
 
             return _react2.default.createElement(
                 'select',
-                { name: 'selectComp', className: shouldMarkError('selectedOption') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('selectedOption'), onChange: this.handleOnChange, value: this.props.value },
+                { name: this.props.name, className: shouldMarkError('selectedOption') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('selectedOption'), onChange: this.handleOnChange, value: this.props.value },
                 this.state.options.map(function (e) {
                     return _react2.default.createElement(
                         'option',
@@ -57912,8 +57912,7 @@ var ComplaintViewComponent = function (_React$Component) {
         ),
         _react2.default.createElement(
           'span',
-          { className: 'dvComplaintsContainer complaint-list-content' },
-          '-',
+          { className: 'dvComplaintsContainer dateStyle complaint-list-content' },
           formatDate(this.props.dtTimestamp)
         ),
         _react2.default.createElement(
@@ -57978,7 +57977,8 @@ function formatDate(dateStr) {
   if (hour.toString().length == 1) hour = "0" + hour;
   var minute = d.getMinutes();
   if (minute.toString().length == 1) minute = "0" + minute;
-  return date + " " + months[d.getMonth()] + " " + d.getFullYear() + " " + hour + ":" + minute;
+  return months[d.getMonth()] + " " + " " + date + " " + d.getFullYear();
+  //+ " " + hour + ":" + minute;
 }
 exports.default = ComplaintViewComponent;
 

@@ -34,7 +34,7 @@ class ComplaintViewComponent extends React.Component {
         <span className="dvComplaintsContainer complaint-list-content">
         <img style={{'borderRadius': '50%', 'width':'60px'}} src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} />
         </span>
-        <span className="dvComplaintsContainer complaint-list-content">-{formatDate(this.props.dtTimestamp)}</span>
+        <span className="dvComplaintsContainer dateStyle complaint-list-content">{formatDate(this.props.dtTimestamp)}</span>
         <span className="dvComplaintsContainer complaint-list-author">{this.props.anon?"Anon":this.props.author}</span> says <span className="complaint-list-title">"{this.props.title}"</span> 
         <span className="dvComplaintsContainer complaint-list-content">-{this.props.content}</span>
         <span className="dvComplaintsContainer complaint-list-content"> at {this.props.locality}</span>
@@ -77,7 +77,8 @@ function formatDate(dateStr) {
   var minute = d.getMinutes();
   if (minute.toString().length == 1)
     minute = "0" + minute;
-  return date + " " + months[d.getMonth()] + " " + d.getFullYear() + " " + hour + ":" + minute;
+  return months[d.getMonth()] + " " + " " + date + " " + d.getFullYear();
+  //+ " " + hour + ":" + minute;
 
 }
 export default ComplaintViewComponent;

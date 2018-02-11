@@ -43,7 +43,7 @@ class SelectComponent extends React.Component {
 
 
         return (
-            <select name="selectComp" className={shouldMarkError('selectedOption')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('selectedOption')} onChange={this.handleOnChange} value={this.props.value}>
+            <select name={this.props.name} className={shouldMarkError('selectedOption')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('selectedOption')} onChange={this.handleOnChange} value={this.props.value}>
                 {
                    this.state.options.map((e) => {
                                 return <option key={e} value={e} >{e}</option>;

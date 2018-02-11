@@ -40,6 +40,19 @@ body {
     border-radius: $radius;
 }
 
+.dateStyle {
+    width: 50px !important;
+    padding: 10px;
+    height: 70px;
+    overflow: hidden;
+    position: absolute;
+    background-color: #006699;
+    color: white !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+}
+
 
 .homeScrnTitle {
     @include font-size(28px);
