@@ -18837,13 +18837,15 @@ var SelectComponent = function (_React$Component) {
             return _react2.default.createElement(
                 'select',
                 { name: this.props.name, className: shouldMarkError('selectedOption') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('selectedOption'), onChange: this.handleOnChange, value: this.props.value },
+                ' ',
                 this.state.options.map(function (e) {
                     return _react2.default.createElement(
                         'option',
                         { key: e, value: e },
                         e
                     );
-                })
+                }),
+                ' '
             );
         }
     }]);
@@ -57794,12 +57796,12 @@ var ComplaintsViewComponent = function (_React$Component) {
                         'dl',
                         null,
                         ' ',
-                        this.props.complaints.map(function (x, i) {
+                        this.props.complaints && this.props.complaints.map(function (x, i) {
                             return _react2.default.createElement(_ComplaintViewComponent2.default, { key: i, author: x.author, avatarUrl: x.avatarUrl, title: x.title, content: x.content, locality: x.locality, anon: x.anon, dtTimestamp: x.dtTimestamp, fileUrls: x.fileUrls });
                         })
                     )
                 ),
-                this.props.complaints.length == 0 && _react2.default.createElement(
+                (!this.props.complaints || this.props.complaints.length == 0) && _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(

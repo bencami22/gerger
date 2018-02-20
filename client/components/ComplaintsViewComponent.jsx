@@ -47,13 +47,13 @@ class ComplaintsViewComponent extends React.Component {
                 <div>
                     <ComplaintsSortComponent handleOnChange={this.handleOnChange} ordering={this.state.ordering} locality={this.state.locality} limit={this.state.limit}   /> 
                     <dl> {
-                          this.props.complaints.map((x, i) =>
+                          this.props.complaints && this.props.complaints.map((x, i) =>
                             <ComplaintViewComponent key={i} author={x.author} avatarUrl={x.avatarUrl} title={x.title} content={x.content} locality={x.locality} anon={x.anon} dtTimestamp={x.dtTimestamp} fileUrls={x.fileUrls} />
                         )
                     } 
                     </dl>
                 </div>}
-                 {this.props.complaints.length==0 &&
+                 {(!this.props.complaints || this.props.complaints.length==0) &&
                  <div>
                  <p>
                     No results found. Tweak your filters!

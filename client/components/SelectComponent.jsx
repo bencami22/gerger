@@ -2,54 +2,53 @@ import React from 'react';
 import validator from 'validator';
 
 class SelectComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        var options = this.props.options;
-        if (!options) {
-            options = [];
+        constructor(props) {
+            super(props);
+            var options = this.props.options;
+            if (!options) {
+                options = [];
+            }
+
+            options.unshift(this.props.initialValue ? this.props.initialValue : "Select")
+
+            this.state = {
+                options: options,
+                selectedOption: '',
+                touched: {
+                    selectedOption: false
+                }
+            };
+
+            this.handleOnChange = ::this.handleOnChange;
+        };
+
+        handleOnChange(e) {
+            this.setState({ selectedOption: e.target.value });
+            this.props.handleOnChange(e);
         }
 
-        options.unshift(this.props.initialValue ? this.props.initialValue : "Select")
+        handleBlur = (field) => (evt) => {
+            this.setState({
+                touched: { ...this.state.touched, [field]: true },
+            });
+        }
 
-        this.state = {
-            options: options,
-            selectedOption: '',
-            touched: {
-                selectedOption: false
-            }
-        };
+        render() {
 
-        this.handleOnChange = ::this.handleOnChange;
-    };
+                const errors = validate(this.state.selectedOption);
 
-    handleOnChange(e) {
-        this.setState({ selectedOption: e.target.value });
-        this.props.handleOnChange(e);
-    }
-
-    handleBlur = (field) => (evt) => {
-        this.setState({
-            touched: { ...this.state.touched, [field]: true },
-        });
-    }
-
-    render() {
-
-        const errors = validate(this.state.selectedOption);
-
-        const shouldMarkError = (field) => {
-            return errors[field] && (this.state.touched[field]);
-        };
+                const shouldMarkError = (field) => {
+                    return errors[field] && (this.state.touched[field]);
+                };
 
 
-        return (
-            <select name={this.props.name} className={shouldMarkError('selectedOption')?"inputStyle errorTextBox":"inputStyle"} onBlur={this.handleBlur('selectedOption')} onChange={this.handleOnChange} value={this.props.value}>
-                {
-                   this.state.options.map((e) => {
-                                return <option key={e} value={e} >{e}</option>;
-                            })
-                }
-            </select>
+                return (
+                        <select name = {this.props.name} className = { shouldMarkError('selectedOption') ? "inputStyle errorTextBox" : "inputStyle" } onBlur = { this.handleBlur('selectedOption') } onChange = { this.handleOnChange } value = { this.props.value } > {
+                        this.state.options.map((e) => {
+                    return <option key={e} value={e} >{e}</option>;
+                })
+            } <
+            /select>
         );
     };
 
