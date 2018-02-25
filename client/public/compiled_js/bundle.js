@@ -57462,6 +57462,10 @@ var _SelectComponent = __webpack_require__(169);
 
 var _SelectComponent2 = _interopRequireDefault(_SelectComponent);
 
+var _NoAccessComponent = __webpack_require__(451);
+
+var _NoAccessComponent2 = _interopRequireDefault(_NoAccessComponent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57562,48 +57566,52 @@ var CreateComplaintComponent = function (_React$Component) {
       };
 
       return _react2.default.createElement(
-        'form',
-        { id: 'sendComplaint', onSubmit: this.handleSubmit },
-        _react2.default.createElement(
-          'div',
-          { className: 'overallDv' },
+        'div',
+        null,
+        !this.props.activeUser || !this.props.activeUser._id ? _react2.default.createElement(_NoAccessComponent2.default, null) : _react2.default.createElement(
+          'form',
+          { id: 'sendComplaint', onSubmit: this.handleSubmit },
           _react2.default.createElement(
             'div',
-            { className: 'rowArea' },
+            { className: 'overallDv' },
             _react2.default.createElement(
-              'label',
-              { className: 'complaintCreateTitleAlign' },
-              'Title:'
+              'div',
+              { className: 'rowArea' },
+              _react2.default.createElement(
+                'label',
+                { className: 'complaintCreateTitleAlign' },
+                'Title:'
+              ),
+              _react2.default.createElement('input', { className: shouldMarkError('title') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('title'), value: this.state.title, onChange: this.handleTitleChange })
             ),
-            _react2.default.createElement('input', { className: shouldMarkError('title') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('title'), value: this.state.title, onChange: this.handleTitleChange })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'rowArea' },
-            'Content:',
-            _react2.default.createElement('textarea', { cols: '30', rows: '3', className: shouldMarkError('content') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('content'), value: this.state.content, onChange: this.handleContentChange })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'rowArea' },
-            'Locality:',
-            _react2.default.createElement(_SelectComponent2.default, { options: this.state.localities, handleOnChange: this.handleLocalityChange.bind(this) })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'rowArea' },
-            'Post anonymously:',
-            _react2.default.createElement('input', { id: 'checkBox', type: 'checkbox', value: this.state.anon, onChange: this.handleAnonChange })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'rowArea' },
-            _react2.default.createElement(_reactDropzoneComponent2.default, { config: config, eventHandlers: eventHandlers, djsConfig: djsConfig })
-          ),
-          _react2.default.createElement(
-            'button',
-            { type: 'submit', className: 'myButton', onClick: this.handleBlur('submit'), disabled: isDisabled },
-            'Submit'
+            _react2.default.createElement(
+              'div',
+              { className: 'rowArea' },
+              'Content:',
+              _react2.default.createElement('textarea', { cols: '30', rows: '3', className: shouldMarkError('content') ? "inputStyle errorTextBox" : "inputStyle", onBlur: this.handleBlur('content'), value: this.state.content, onChange: this.handleContentChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'rowArea' },
+              'Locality:',
+              _react2.default.createElement(_SelectComponent2.default, { options: this.state.localities, handleOnChange: this.handleLocalityChange.bind(this) })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'rowArea' },
+              'Post anonymously:',
+              _react2.default.createElement('input', { id: 'checkBox', type: 'checkbox', value: this.state.anon, onChange: this.handleAnonChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'rowArea' },
+              _react2.default.createElement(_reactDropzoneComponent2.default, { config: config, eventHandlers: eventHandlers, djsConfig: djsConfig })
+            ),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit', className: 'myButton', onClick: this.handleBlur('submit'), disabled: isDisabled },
+              'Submit'
+            )
           )
         )
       );
@@ -57739,6 +57747,10 @@ var _ComplaintsSortComponent = __webpack_require__(443);
 
 var _ComplaintsSortComponent2 = _interopRequireDefault(_ComplaintsSortComponent);
 
+var _NoAccessComponent = __webpack_require__(451);
+
+var _NoAccessComponent2 = _interopRequireDefault(_NoAccessComponent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57787,7 +57799,7 @@ var ComplaintsViewComponent = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                this.props.complaints && _react2.default.createElement(
+                !this.props.activeUser || !this.props.activeUser._id ? _react2.default.createElement(_NoAccessComponent2.default, null) : this.props.complaints ? _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(_ComplaintsSortComponent2.default, { handleOnChange: this.handleOnChange, ordering: this.state.ordering, locality: this.state.locality, limit: this.state.limit }),
@@ -57799,8 +57811,7 @@ var ComplaintsViewComponent = function (_React$Component) {
                             return _react2.default.createElement(_ComplaintViewComponent2.default, { key: i, author: x.author, avatarUrl: x.avatarUrl, title: x.title, content: x.content, locality: x.locality, anon: x.anon, dtTimestamp: x.dtTimestamp, fileUrls: x.fileUrls });
                         })
                     )
-                ),
-                (!this.props.complaints || this.props.complaints.length == 0) && _react2.default.createElement(
+                ) : (!this.props.complaints || this.props.complaints.length == 0) && _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(
@@ -57823,7 +57834,8 @@ function mapStateToProps(state) {
     return {
         complaints: state.complaints,
         socketConnection: state.socketConnection,
-        sortComplaints: state.sortComplaints
+        sortComplaints: state.sortComplaints,
+        activeUser: state.activeUser
     };
 }
 
@@ -61550,6 +61562,59 @@ module.exports = exports["default"];
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NoAccessComponent = function (_React$Component) {
+    _inherits(NoAccessComponent, _React$Component);
+
+    function NoAccessComponent(props) {
+        _classCallCheck(this, NoAccessComponent);
+
+        return _possibleConstructorReturn(this, (NoAccessComponent.__proto__ || Object.getPrototypeOf(NoAccessComponent)).call(this, props));
+    }
+
+    _createClass(NoAccessComponent, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'You need to login to view this page.'
+            );
+        }
+    }]);
+
+    return NoAccessComponent;
+}(_react2.default.Component);
+
+//A dumb component.
+
+
+exports.default = NoAccessComponent;
 
 /***/ })
 /******/ ]);

@@ -9,6 +9,7 @@ import humane from '../public/compiled_js/humane.min.js'
 import validator from 'validator';
 import DropzoneComponent from 'react-dropzone-component';
 import SelectComponent from '../components/SelectComponent.jsx';
+import NoAccessComponent from '../components/NoAccessComponent.jsx';
 
 
 class CreateComplaintComponent extends React.Component {
@@ -86,7 +87,8 @@ class CreateComplaintComponent extends React.Component {
     };
 
     return (
-
+      <div>
+      {(!this.props.activeUser || !this.props.activeUser._id) ? <NoAccessComponent /> :
       <form id="sendComplaint" onSubmit={this.handleSubmit}>
         <div className="overallDv">
             <div className="rowArea"><label className="complaintCreateTitleAlign">Title:</label> 
@@ -110,7 +112,8 @@ class CreateComplaintComponent extends React.Component {
           </div>
           
         </form>
-
+      }
+        </div>
     );
   }
 

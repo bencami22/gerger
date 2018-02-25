@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { setSortComplaints } from '../actions/action-sortComplaints';
 
 import ComplaintsSortComponent from '../components/ComplaintsSortComponent.jsx';
+import NoAccessComponent from '../components/NoAccessComponent.jsx';
 
 class ComplaintsViewComponent extends React.Component {
     constructor(props) {
@@ -40,8 +41,8 @@ class ComplaintsViewComponent extends React.Component {
 
     render() {
         return (
-            <div>{
-                this.props.complaints &&
+            <div>{(!this.props.activeUser || !this.props.activeUser._id) ? <NoAccessComponent /> :
+                this.props.complaints ?
                 <div>
                     <ComplaintsSortComponent handleOnChange={this.handleOnChange} ordering={this.state.ordering} locality={this.state.locality} limit={this.state.limit}   /> 
                     <dl> {
@@ -50,8 +51,8 @@ class ComplaintsViewComponent extends React.Component {
                         )
                     } 
                     </dl>
-                </div>}
-                 {(!this.props.complaints || this.props.complaints.length==0) &&
+                </div>
+                :(!this.props.complaints || this.props.complaints.length==0) &&
                  <div>
                  <p>
                     No results found. Tweak your filters!
@@ -69,7 +70,8 @@ function mapStateToProps(state) {
     return {
         complaints: state.complaints,
         socketConnection: state.socketConnection,
-        sortComplaints: state.sortComplaints
+        sortComplaints: state.sortComplaints,
+        activeUser: state.activeUser
     }
 }
 
