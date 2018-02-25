@@ -9,13 +9,11 @@ class ComplaintsSortComponent extends React.Component {
         super(props);
 
         this.state = {
-            localities: this.props.localities.map((l) => l.Locality),
+            localities: this.props.localities ? this.props.localities.map((l) => l.Locality) : null,
             locality: this.props.locality ? this.props.locality : '',
             ordering: this.props.ordering ? this.props.ordering : 'desc',
             limit: this.props.limit ? this.props.limit : 10
         };
-
-        var dtyudd = this.state.localities;
 
         this.handleOnChange = ::this.handleOnChange;
     }

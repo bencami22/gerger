@@ -29,7 +29,7 @@ class MainComponent extends React.Component {
 
         this.props.setSocketConnection(socket);
 
-        //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless.
+        //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless. redux-sessionsstorage is in client.js -createPersistentStore
         if (sessionStorage.activeUser != null && (this.props == null || this.props.activeUser == null)) {
             this.props.setActiveUser(JSON.parse(sessionStorage.activeUser));
         }

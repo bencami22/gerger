@@ -19,7 +19,6 @@ class ComplaintsViewComponent extends React.Component {
             limit: this.props.sortComplaints ? this.props.sortComplaints.limit : 10
         };
 
-
         this.handleOnChange = ::this.handleOnChange;
     }
 
@@ -40,7 +39,6 @@ class ComplaintsViewComponent extends React.Component {
     }
 
     render() {
-
         return (
             <div>{
                 this.props.complaints &&

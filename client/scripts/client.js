@@ -9,7 +9,8 @@ import persistState from 'redux-sessionstorage';
 
 const createPersistentStore = compose(
     persistState(["activeUser"], { key: "activeUser" }),
-    persistState(["complaints"], { key: "complaints" }))(createStore)
+    persistState(["complaints"], { key: "complaints" }),
+    persistState(["localities"], { key: "localities" }))(createStore)
 
 
 const store = createPersistentStore(allReducers);

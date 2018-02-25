@@ -6,6 +6,7 @@ import MainComponent from './MainComponent.jsx'
 class AppComponent extends React.Component {
   constructor() {
     super();
+
   }
 
   render() {

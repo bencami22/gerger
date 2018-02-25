@@ -19363,7 +19363,7 @@ var _reduxSessionstorage2 = _interopRequireDefault(_reduxSessionstorage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createPersistentStore = (0, _redux.compose)((0, _reduxSessionstorage2.default)(["activeUser"], { key: "activeUser" }), (0, _reduxSessionstorage2.default)(["complaints"], { key: "complaints" }))(_redux.createStore);
+var createPersistentStore = (0, _redux.compose)((0, _reduxSessionstorage2.default)(["activeUser"], { key: "activeUser" }), (0, _reduxSessionstorage2.default)(["complaints"], { key: "complaints" }), (0, _reduxSessionstorage2.default)(["localities"], { key: "localities" }))(_redux.createStore);
 
 var store = createPersistentStore(_reducers2.default);
 
@@ -53837,7 +53837,7 @@ var MainComponent = function (_React$Component) {
 
         _this.props.setSocketConnection(socket);
 
-        //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless.
+        //because of redux-sessionstorage "sessionStorage.activeUser!=null" is redundant, but leaving it there anyway as should be harmless. redux-sessionsstorage is in client.js -createPersistentStore
         if (sessionStorage.activeUser != null && (_this.props == null || _this.props.activeUser == null)) {
             _this.props.setActiveUser(JSON.parse(sessionStorage.activeUser));
         }
@@ -57784,7 +57784,6 @@ var ComplaintsViewComponent = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-
             return _react2.default.createElement(
                 'div',
                 null,
@@ -61170,15 +61169,13 @@ var ComplaintsSortComponent = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ComplaintsSortComponent.__proto__ || Object.getPrototypeOf(ComplaintsSortComponent)).call(this, props));
 
         _this.state = {
-            localities: _this.props.localities.map(function (l) {
+            localities: _this.props.localities ? _this.props.localities.map(function (l) {
                 return l.Locality;
-            }),
+            }) : null,
             locality: _this.props.locality ? _this.props.locality : '',
             ordering: _this.props.ordering ? _this.props.ordering : 'desc',
             limit: _this.props.limit ? _this.props.limit : 10
         };
-
-        var dtyudd = _this.state.localities;
 
         _this.handleOnChange = _this.handleOnChange.bind(_this);
         return _this;
