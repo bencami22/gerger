@@ -33,13 +33,13 @@ class ComplaintsSortComponent extends React.Component {
                 <div className="overallDv"> 
                  <div className="rowArea" >
                     Sort:
-                    <select name="ordering" onChange={this.handleOnChange} value={this.state.ordering}>
+                    <select className="sortDdl sortItems" name="ordering" onChange={this.handleOnChange} value={this.state.ordering}>
                         <option key="desc" value="desc">Recent first</option>
                         <option key="asc" value="asc">Oldest first</option>
                     </select>
                     Locality:<SelectComponent options={this.state.localities} name="locality" handleOnChange={this.handleOnChange} initialValue="All" value={this.state.locality} />
                     Show:
-                    <select name="limit"  onChange={this.handleOnChange} value={this.state.limit}>
+                    <select className="sortDdl showItems" name="limit"  onChange={this.handleOnChange} value={this.state.limit}>
                         <option key="10" value="10">10</option> 
                         <option key="50" value="50">50</option>  
                         <option key="100" value="100">100</option>  

@@ -21,7 +21,7 @@ class ComplaintViewComponent extends React.Component {
         urls.push(<img id={i} 
         onClick={() => this.setState({ isOpen: true
    //     , photoIndex: i 
-        })} src={this.props.fileUrls[i]} style={{width:'40px'}} />);
+        })} src={this.props.fileUrls[i]} />);
       }
 
     }
@@ -30,7 +30,7 @@ class ComplaintViewComponent extends React.Component {
 
     return (
 
-      <li className="complaint-list">
+      /*<li className="complaint-list">
         <span className="dvComplaintsContainer complaint-list-content">
         <img style={{'borderRadius': '50%', 'width':'60px'}} src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} />
         </span>
@@ -39,10 +39,23 @@ class ComplaintViewComponent extends React.Component {
         <span className="dvComplaintsContainer complaint-list-content">-{this.props.content}</span>
         <span className="dvComplaintsContainer complaint-list-content"> at {this.props.locality}</span>
         <span className="complaint-list-content">{urls}</span>
-        <hr/>
-         {
-          isOpen && (
-            <Lightbox
+        <hr/>*/
+      <li className="complaint-list">
+        	<div className="ovComplaintsDv">
+        	  <div style={{'float':'left', 'position':'relative', 'marginTop':'5%'}}>
+        	      <div className="dateStyle">{formatDate(this.props.dtTimestamp)}</div>
+                <img className="imgAnon" src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} />
+                <div className="localityDv"><i className="material-icons">location_on</i>{this.props.locality}</div>
+            </div>
+            <div className="complaintOv">
+                <p className="complaintTitle"> "{this.props.title}"</p>
+                <div className="complaintContent">{this.props.content}  <a className="anonDv">-by {this.props.anon?"Anon":this.props.author}</a></div>
+                <div className="extraImg">{urls}</div>
+            </div>
+            
+      {
+        isOpen && (
+          <Lightbox
                 mainSrc={this.props.fileUrls[photoIndex]}
                 nextSrc={this.props.fileUrls[(photoIndex + 1) % this.props.fileUrls.length]}
                 prevSrc={this.props.fileUrls[(photoIndex + this.props.fileUrls.length - 1) % this.props.fileUrls.length]}
@@ -55,8 +68,9 @@ class ComplaintViewComponent extends React.Component {
                       photoIndex: (photoIndex + 1) % this.props.fileUrls.length,
                    })
                 }/>
-          )
-        }
+        )
+      } 
+      </div>
       </li>
 
 
