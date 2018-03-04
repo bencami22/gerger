@@ -2,12 +2,16 @@ import React from 'react'
 
 const HomeComponent = () => (
   <div className="overallDv">
-    <div className="homeScrnTitle"><p style={{ marginTop:'0px'}}>Gerger</p><p style={{marginTop:'-20px',marginBottom:'1px'}}><img src="https://i.imgur.com/XpMyjdG.png" style={{width:'130px'}} /></p></div>
+    <div className="homeScrnTitle"><h1>Gerger</h1>
+    <p style={{marginTop:'-20px',marginBottom:'1px'}}><img src="https://i.imgur.com/XpMyjdG.png" style={{width:'130px'}} /></p>
+    <h2 style={{fontSize:'1em'}}>Malta & Gozo Local Council Complaint Portal</h2>
+    </div>
     <p style={{fontWeight:"bold"}}>How it works</p>
  
    <p className="alignTextLeft">Want to speak out loud on an issue that has been bothering you but your local council doesn't seem to be helping?</p>
    <p className="alignTextLeft">Share your complaint publically, and we will also forward it to the local council for you.</p>
    <p className="alignTextLeft">Choose to do it publically or anonymously.</p>
+  
   
     
     <p style={{fontWeight:"bold"}}>Rules:</p>

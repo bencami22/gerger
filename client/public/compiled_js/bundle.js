@@ -54046,14 +54046,19 @@ var HomeComponent = function HomeComponent() {
       "div",
       { className: "homeScrnTitle" },
       _react2.default.createElement(
-        "p",
-        { style: { marginTop: '0px' } },
+        "h1",
+        null,
         "Gerger"
       ),
       _react2.default.createElement(
         "p",
         { style: { marginTop: '-20px', marginBottom: '1px' } },
         _react2.default.createElement("img", { src: "https://i.imgur.com/XpMyjdG.png", style: { width: '130px' } })
+      ),
+      _react2.default.createElement(
+        "h2",
+        { style: { fontSize: '1em' } },
+        "Malta & Gozo Local Council Complaint Portal"
       )
     ),
     _react2.default.createElement(
