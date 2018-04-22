@@ -44,17 +44,14 @@ exports.sendMail = function sendMail(to, subject, htmlBody, bcc) {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'gergermalta',
-                pass: 'Hello123!'
-                //user: 'hgjduw6272hs@gmail.com',
-                //pass: 'hgjduw6272hs'
-
+                user: process.env.gmailuser,
+                pass: process.env.gmailpassword
             }
         });
 
         // setup email data with unicode symbols
         let mailOptions = {
-            from: '"GerGer" <admin@gerger.com>', // sender address
+            from: '"GerGer" <admin@gergermalta.com>', // sender address
             to: to, // list of receivers comma separated
             subject: subject, // Subject line
             //text: 'Hello world?', // plain text body

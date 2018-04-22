@@ -342,7 +342,46 @@ img {
   text-decoration: none;
   cursor: pointer; }
 
+.ovDv {
+  float: left;
+  position: relative;
+  margin-top: 5%; }
+
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1020px) {
   .modal-content {
-    width: 100%; } }
+    width: 100%; }
+  img {
+    width: 100%; }
+  nav li {
+    font-size: 25px; }
+  .overallDv {
+    width: 100%;
+    font-size: 21px; }
+  .showItems {
+    width: 57px; }
+  .ovComplaintsDv {
+    margin-left: 0px;
+    width: 100%; }
+  .ovDv {
+    float: none;
+    margin: 0 auto; }
+  .localityDv {
+    margin: 0 auto; }
+  .dateStyle {
+    margin: 0 auto;
+    margin-top: 2%;
+    float: none; }
+  .imgAnon {
+    margin-left: 0px;
+    margin: 0 auto;
+    margin-top: 2%; }
+  .complaintOv {
+    float: none;
+    width: 100%; }
+  .complaintTitle {
+    text-align: center;
+    font-size: 23px; }
+  .complaintContent {
+    text-align: center;
+    font-size: 20px; } }

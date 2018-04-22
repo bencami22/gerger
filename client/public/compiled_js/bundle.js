@@ -40441,6 +40441,24 @@ var NavigationComponent = function (_React$Component) {
                     { to: '/forgotpassword' },
                     'Forgot Password'
                   )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/complaints/create' },
+                    'Create a complaint'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/complaints' },
+                    'View all'
+                  )
                 )
               ),
               this.props.activeUser != null && this.props.activeUser.role == 'regular' && _react2.default.createElement(
@@ -57834,6 +57852,14 @@ var ComplaintsViewComponent = function (_React$Component) {
         };
 
         _this.handleOnChange = _this.handleOnChange.bind(_this);
+
+        var sortComplaintsSettings = {
+            ordering: _this.state.ordering,
+            locality: _this.state.locality,
+            limit: parseInt(_this.state.limit)
+        };
+        _this.props.setSortComplaints(sortComplaintsSettings);
+        _this.props.socketConnection.emit('GetComplaints', sortComplaintsSettings);
         return _this;
     }
 
@@ -57857,7 +57883,8 @@ var ComplaintsViewComponent = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                !this.props.activeUser || !this.props.activeUser._id ? _react2.default.createElement(_NoAccessComponent2.default, null) : this.props.complaints ? _react2.default.createElement(
+                /*(!this.props.activeUser || !this.props.activeUser._id) ? <NoAccessComponent /> :*/
+                this.props.complaints ? _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(_ComplaintsSortComponent2.default, { handleOnChange: this.handleOnChange, ordering: this.state.ordering, locality: this.state.locality, limit: this.state.limit }),
@@ -57993,7 +58020,7 @@ var ComplaintViewComponent = function (_React$Component) {
             { className: 'ovComplaintsDv' },
             _react2.default.createElement(
               'div',
-              { style: { 'float': 'left', 'position': 'relative', 'marginTop': '5%' } },
+              { className: 'ovDv' },
               _react2.default.createElement(
                 'div',
                 { className: 'dateStyle' },

@@ -21,6 +21,14 @@ class ComplaintsViewComponent extends React.Component {
         };
 
         this.handleOnChange = ::this.handleOnChange;
+
+        var sortComplaintsSettings = {
+            ordering: this.state.ordering,
+            locality: this.state.locality,
+            limit: parseInt(this.state.limit)
+        };
+        this.props.setSortComplaints(sortComplaintsSettings);
+        this.props.socketConnection.emit('GetComplaints', sortComplaintsSettings);
     }
 
     handleOnChange(e) {
@@ -41,7 +49,7 @@ class ComplaintsViewComponent extends React.Component {
 
     render() {
         return (
-            <div>{(!this.props.activeUser || !this.props.activeUser._id) ? <NoAccessComponent /> :
+            <div>{/*(!this.props.activeUser || !this.props.activeUser._id) ? <NoAccessComponent /> :*/
                 this.props.complaints ?
                 <div>
                     <ComplaintsSortComponent handleOnChange={this.handleOnChange} ordering={this.state.ordering} locality={this.state.locality} limit={this.state.limit}   /> 

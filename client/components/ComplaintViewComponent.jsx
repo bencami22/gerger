@@ -42,7 +42,7 @@ class ComplaintViewComponent extends React.Component {
         <hr/>*/
       <li className="complaint-list">
         	<div className="ovComplaintsDv">
-        	  <div style={{'float':'left', 'position':'relative', 'marginTop':'5%'}}>
+        	  <div className="ovDv">
         	      <div className="dateStyle">{formatDate(this.props.dtTimestamp)}</div>
                 <img className="imgAnon" src={this.props.anon?anonAvatarUrl:(this.props.avatarUrl?this.props.avatarUrl:anonAvatarUrl)} />
                 <div className="localityDv"><i className="material-icons">location_on</i>{this.props.locality}</div>

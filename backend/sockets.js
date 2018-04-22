@@ -50,7 +50,6 @@ module.exports.listen = function(server) {
           if (result) {
             console.log("User Authenticated:" + result);
             session.username = result.username;
-            complaintsBL.sendComplaints(socket, 'desc', 10);
           }
           callback(result);
         })
@@ -66,7 +65,6 @@ module.exports.listen = function(server) {
           if (result) {
             console.log("User Authenticated:" + result);
             session.username = result.username;
-            complaintsBL.sendComplaints(socket, 'desc', 10);
           }
           callback(result);
         })

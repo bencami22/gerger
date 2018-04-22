@@ -2,11 +2,7 @@
 var mongoose = require('mongoose');
 
 // Build the connection string 
-var dbURI = process.env.dbConnString || 'mongodb://admin:Hello123!@cluster0-shard-00-00-f9wb8.mongodb.net:27017,cluster0-shard-00-01-f9wb8.mongodb.net:27017,cluster0-shard-00-02-f9wb8.mongodb.net:27017/ComplaintsDB?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
-
-//LIVE
-//'mongodb://gergeruser:yYLrMA8xKFmy8rlt@gergercluster-shard-00-00-bczjh.mongodb.net:27017,gergercluster-shard-00-01-bczjh.mongodb.net:27017,gergercluster-shard-00-02-bczjh.mongodb.net:27017/ComplaintsDB?ssl=true&replicaSet=gergercluster-shard-0&authSource=admin';
-
+var dbURI = process.env.dbConnString;
 
 // Create the database connection 
 mongoose.connect(dbURI);

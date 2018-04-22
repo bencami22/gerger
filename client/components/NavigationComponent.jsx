@@ -46,6 +46,8 @@ class NavigationComponent extends React.Component {
                       <li><Link to='/login'>Login</Link></li>
                       <li><Link to='/register'>Register</Link></li>
                       <li><Link to='/forgotpassword'>Forgot Password</Link></li>
+                      <li><Link to='/complaints/create'>Create a complaint</Link></li>
+                      <li><Link to='/complaints'>View all</Link></li>
                     </span>
                   )
                   }
