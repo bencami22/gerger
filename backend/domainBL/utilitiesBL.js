@@ -42,16 +42,24 @@ exports.sendMail = function sendMail(to, subject, htmlBody, bcc) {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            service: 'gmail',
+
+            //service: 'gmail',
+            //auth: {
+            //   user: process.env.gmailuser,
+            //    pass: process.env.gmailpassword
+            //}
+            host: 'smtp.zoho.com',
+            port: 587,
+            secure: true,
             auth: {
-                user: process.env.gmailuser,
-                pass: process.env.gmailpassword
+                user: process.env.infoemailuser,
+                pass: process.env.infoemailpassword
             }
         });
 
         // setup email data with unicode symbols
         let mailOptions = {
-            from: '"GerGer" <admin@gergermalta.com>', // sender address
+            from: '"GerGer" <info@gergermalta.com>', // sender address
             to: to, // list of receivers comma separated
             subject: subject, // Subject line
             //text: 'Hello world?', // plain text body
